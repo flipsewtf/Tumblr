@@ -1,7 +1,7 @@
 <!----------------------------------------------------
 
     TUMBLR THEME: Everlong - © Flipse / @altindie
-    - Version 1.0.2
+    - Version 1.0.5
     
     RELEASED:   06 May 2023
     UPDATED:    15 May 2023
@@ -662,7 +662,7 @@ img.post_media_photo.image,
 article iframe,
 article img {
     max-width: 100%;
-    max-height: initial;
+    height: auto;
 }
 /* ------------  blockquotes */
 .post-content blockquote {
@@ -1378,7 +1378,8 @@ span.toggle::after {
 
 <section>
 
-{block:Posts}
+{block:posts inlineMediaWidth="1280" inlineNestedMediaWidth="1280"}
+	
     <article id="post-{PostID}" class="{posttype}-post posts boxframe">
         <div class="post-content"> 
     
