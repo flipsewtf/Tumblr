@@ -1,10 +1,10 @@
 <!----------------------------------------------------
 
     TUMBLR THEME: Everlong - © Flipse / @altindie
-    - Version 1.0.5
+    - Version 1.2.0
     
     RELEASED:   06 May 2023
-    UPDATED:    15 May 2023
+    UPDATED:    24 July 2023
     
     CREDITS:            altindie.tumblr.com/credit
     TERMS OF USE:       altindie.tumblr.com/themes
@@ -1035,6 +1035,84 @@ p.npf_chat {
     font-family: inherit!important;
 }
 /* -------------------------------------  audio */
+.audio-container {
+    border-bottom: 1px solid rgba(var(--c-border));
+    margin-bottom: -1px;
+}
+.audio-wrap {
+    gap: var(--gap2);
+    justify-content: space-between;
+    flex-wrap: nowrap;
+    overflow: hidden;
+    background-color: rgba(var(--c-bg2));
+    border-bottom: 1px solid rgba(var(--c-border));
+}
+.audio-play-info {
+    flex-wrap: nowrap;
+    gap: var(--gap2);
+    padding: var(--gap2);
+}
+.album-art img {
+    display: block;
+    width: 100px;
+    height: 100px;
+    min-width: 100px;
+    object-fit: cover;
+    object-position: center;
+}
+.audio_info {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    line-height: 1.5;
+    padding: var(--gap2);
+}
+.trackname {
+    font-size: 1.25em;
+    font-weight: 700;
+    line-height: 1.5;
+}
+.audio-container .has-image .audio_player {
+
+}
+.custom_audio_buttons svg {
+    display: flex;
+    fill: rgba(var(--c-text));
+    cursor: pointer;
+    stroke-width: 1;
+    width: 16px;
+    height: 16px;
+}
+.custom_audio_error_icon svg {
+    cursor: initial;
+}
+.audio-bar {
+    display: flex;
+    align-items: center;
+    background-color: rgba(var(--c-bg2));
+    padding: var(--gap2);
+    gap: var(--gap2);
+}
+.custom_audio_seekbar {
+    height: 10px;
+    width: 100%;
+    overflow: hidden;
+    background: rgba(var(--c-bg1));
+    cursor: pointer;
+    border-radius: var(--round1);
+    border: 1px solid rgba(var(--c-border));
+}
+.custom_audio_seekbar_progress {
+    width: 0;
+    height: 100%;
+    background: rgba(var(--c-text));
+}
+.custom_audio_time_left {
+    flex: none;
+}
+.custom_audio_time_left::before {
+    content : "-";
+}
 .spotify_audio_player, article iframe[src*='soundcloud'] {
     max-height: 170px;
     border: 0;
@@ -1045,6 +1123,33 @@ p.npf_chat {
 iframe.tumblr_audio_player {
     max-height: 85px!important;
     margin-bottom: -2px;
+}
+
+.tmblr-full>.audio-caption {
+    background-color: rgba(var(--c-bg2));
+    overflow: hidden;
+    margin: 0;
+    border-bottom: 1px solid rgba(var(--c-border));
+    border-top: 1px solid rgba(var(--c-border));
+    margin-top: -1px;
+}
+.tmblr-full>.audio-caption .audio-details {
+    padding: var(--gap3);
+}
+.tmblr-full>.audio-caption .album-cover {
+    width: 100px;
+    height: 100px;
+    object-fit: cover;
+}
+.tmblr-full>.audio-caption .title {
+    font-size: 1.25em;
+}
+.tmblr-full>.audio-caption .album, .tmblr-full>.audio-caption .artist {
+    font-size: 1em;
+}
+.tmblr-full>audio {
+    margin: var(--gap2);
+    width: calc(100% - var(--gap2) * 2);
 }
 /* -------------------------------------  link */
 div.npf-link-block {
@@ -1115,6 +1220,24 @@ div.npf-link-block .bottom .site-name {
     text-transform: uppercase;
 }
 /* -------------------------------------  top right corner */
+
+.bottom-corner {
+    position: fixed;
+    bottom: var(--gap2);
+    right: var(--gap2);
+}
+.corner-icon {
+    cursor: pointer;
+    padding: 8px;
+    border-radius: var(--round1);
+    background-color: rgba(var(--c-bg1));
+}
+.corner-icon svg {
+    stroke: rgba(var(--c-text));
+    stroke-width: 1.5;
+    width: 18px;
+    height: 18px;
+}
 .top-corner {
     gap: var(--gap1);
     flex-direction: column;
@@ -1220,7 +1343,7 @@ span.toggle::after {
     position: absolute;
     left: 2px;
     top: 2px;
-    transition: all cubic-bezier(0.4, 0, 1, 1) 0.15s!important;
+    transition: transform 700ms cubic-bezier(.26,2,.46,.71)!important;
     width: 12px;
     height: 12px;
     transform: var(--mode-transform);
@@ -1438,7 +1561,35 @@ span.toggle::after {
             {/block:Video}
     
             {block:Audio}
-                {AudioEmbed-640}
+                {block:AudioPlayer}
+                {AudioPlayer}
+                <div class="audio-container">
+        	        <div class="audio-wrap flex align-center">
+        		        <div class="audio_info">
+        			        {block:TrackName}
+        			        <div class="trackname">{TrackName}</div>
+        			        {/block:TrackName}
+        			        {block:Artist}
+        			        <div class="artist">{Artist}</div>
+        			        {/block:Artist}
+        		        </div>
+
+        		        {block:AlbumArt}
+        		        <div class="album-art">
+        			        <img src="{AlbumArtURL}"/>
+        		        </div>
+        		        {/block:AlbumArt}
+        	        </div>
+        	        
+        	        <div class="audio-bar">
+        	            <div class="audio_player">
+            			    <span class="custom_audio_buttons"></span>
+            		    </div>
+        	            <span class="custom_audio_time_left"></span>
+        	            <div class="custom_audio_seekbar rounded"></div>
+                    </div>
+                </div>
+                {/block:AudioPlayer}
             {/block:Audio}
 
             {block:Answer}
@@ -1651,6 +1802,13 @@ span.toggle::after {
         </button>
 	{/block:ifDarkMode}
 </div>
+
+<div class="bottom-corner">
+    <div id="scroll-to-top"  title="scroll to top">
+            <span class="corner-icon flex"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M18.0701 9.57L12.0001 3.5L5.93005 9.57" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round" /><path d="M12 20.4999V3.66992" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round" /></svg></span>
+    </div>
+</div>
+
 <!-- jQuery -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 <!-- IFRAMES: responsive -->
@@ -1665,6 +1823,8 @@ span.toggle::after {
 <script src="https://unpkg.com/@phosphor-icons/web"></script>
 <!-- smooth scroll -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/smoothscroll/1.4.1/SmoothScroll.min.js"></script>
+<!-- AUDIO: legacy -->
+<script src="https://cdn.jsdelivr.net/gh/annasthms/customaudio@latest/customaudio.min.js"></script>
 <script>
 $(document).ready(function () {
     $(".photo-slideshow").pxuPhotoset({
@@ -1707,6 +1867,18 @@ $(document).ready(function () {
         event.preventDefault();
     });
     {/block:IndexPage}
+    
+    $(window).scroll(function(){
+        if ($(this).scrollTop() > 100) {
+            $('#scroll-to-top').fadeIn(0);
+        } else {
+            $('#scroll-to-top').fadeOut(0);
+        }
+    });
+    $('#scroll-to-top').click(function(){
+        $('html, body').animate({scrollTop : 0},800);
+        return false;
+    });
 });
 
 // legacy audio
@@ -1727,6 +1899,24 @@ function flexFrame() {
 $(document).ready(flexFrame);
 
 ////////////////// vanilla js
+
+// audioplayer
+customAudio({
+    post: "article",
+    wrappers: {
+        audio: ".custom_audio_wrapper",
+        buttons: ".custom_audio_buttons",
+        duration: ".custom_audio_duration",
+        timeCurrent: ".custom_audio_current_time",
+        timeLeft: ".custom_audio_time_left",
+        seekbar: ".custom_audio_seekbar",
+    },
+    default: false,
+    pauseAll: true,
+    playButton: "<svg xmlns='http://www.w3.org/2000/svg' version='1.1' xmlns:xlink='http://www.w3.org/1999/xlink' width='512' height='512' x='0' y='0' viewBox='0 0 512 512' xml:space='preserve'><g><path fill-rule='evenodd' d='M468.8 235.007 67.441 3.277A24.2 24.2 0 0 0 55.354-.008h-.07A24.247 24.247 0 0 0 43.19 3.279a24 24 0 0 0-12.11 20.992v463.456a24.186 24.186 0 0 0 36.36 20.994L468.8 276.99a24.238 24.238 0 0 0 0-41.983z'></path></g></svg>",
+    pauseButton: "<svg xmlns='http://www.w3.org/2000/svg' version='1.1' xmlns:xlink='http://www.w3.org/1999/xlink' width='512' height='512' x='0' y='0' viewBox='0 0 47.607 47.607' xml:space='preserve' class=''><g><path d='M17.991 40.976a6.631 6.631 0 0 1-13.262 0V6.631a6.631 6.631 0 0 1 13.262 0v34.345zM42.877 40.976a6.631 6.631 0 0 1-13.262 0V6.631a6.631 6.631 0 0 1 13.262 0v34.345z'></path></g></svg>",
+    hideInfoIfError: true,
+});
 
 // tooltip
 tippy(".post-icons.lide", {
