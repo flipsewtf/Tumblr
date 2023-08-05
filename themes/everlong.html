@@ -1,10 +1,10 @@
 <!----------------------------------------------------
 
     TUMBLR THEME: Everlong - © Flipse / @altindie
-    - Version 1.2.1
+    - Version 1.2.2
     
     RELEASED:   06 May 2023
-    UPDATED:    03 august 2023
+    UPDATED:    05 august 2023
     
     CREDITS:            altindie.tumblr.com/credit
     TERMS OF USE:       altindie.tumblr.com/themes
@@ -55,6 +55,17 @@
 <meta name="select:Blog Layout" content="left" title="left sidebar">
 <meta name="select:Blog Layout" content="right" title="right sidebar">
 
+<meta name="select:Post width" content="350px" title="350px"/>
+<meta name="select:Post width" content="400px" title="400px"/>
+<meta name="select:Post width" content="450px" title="450px"/>
+<meta name="select:Post width" content="500px" title="500px"/>
+<meta name="select:Post width" content="540px" title="540px"/>
+
+<meta name="select:Photoset gutter" content="1px" title="1px"/>
+<meta name="select:Photoset gutter" content="2px" title="2px"/>
+<meta name="select:Photoset gutter" content="3px" title="3px"/>
+<meta name="select:Photoset gutter" content="4px" title="4px"/>
+
 <meta name="select:Sidebar image size" content="100px" title="100px">
 <meta name="select:Sidebar image size" content="150px" title="150px">
 <meta name="select:Sidebar image size" content="200px" title="200px">
@@ -71,12 +82,6 @@
 <meta name="select:Font size" content="15px"/>
 <meta name="select:Font size" content="17px"/>
 <meta name="select:Font size" content="18px"/>
-
-<meta name="select:Post width" content="350px" title="350px"/>
-<meta name="select:Post width" content="400px" title="400px"/>
-<meta name="select:Post width" content="450px" title="450px"/>
-<meta name="select:Post width" content="500px" title="500px"/>
-<meta name="select:Post width" content="540px" title="540px"/>
 
 <meta name="select:Post info" content="post-icons" title="icons">
 <meta name="select:Post info" content="post-text" title="text">
@@ -664,6 +669,20 @@ article iframe,
 article img {
     max-width: 100%;
     height: auto;
+}
+
+.post-content div.npf_row {
+    margin-bottom: calc({select:Photoset gutter} - 4px);
+}
+.post-content div.npf_row:last-child {
+    margin-bottom: 0;
+}
+
+.post-content div.npf_row .npf_col {
+    margin-right: calc({select:Photoset gutter} - 4px); 
+}
+.post-content div.npf_row .npf_col:last-child {
+    margin-right: 0;
 }
 /* ------------  blockquotes */
 .post-content blockquote {
@@ -1831,7 +1850,7 @@ $(document).ready(function () {
     $(".photo-slideshow").pxuPhotoset({
         lightbox: true,
         rounded: false,
-        gutter: "4px",
+        gutter: "{select:Photoset gutter}",
         borderRadius: "0px",
         photoset: ".photo-slideshow",
         photoWrap: ".photo-data",
