@@ -4,7 +4,7 @@
     - Version 1.0.3
     
     RELEASED:   02 August 2023
-    UPDATED:    05 August 2023
+    UPDATED:    12 August 2023
     
     CREDITS:            altindie.tumblr.com/credit
     TERMS OF USE:       altindie.tumblr.com/themes
@@ -761,7 +761,6 @@ img.post_media_photo.image,
 .tmblr-embed iframe{
     width: 100%;
 }
-article iframe,
 article img {
     max-width: 100%;
     height: auto;
@@ -1060,7 +1059,21 @@ a.more_notes_link {
     border-radius: var(--round1);
     background-color: rgba(var(--c-bg2));
 }
-
+/* -------------------------------------  video */
+.video {
+    width: 100%;
+    height: auto;
+    aspect-ratio: 16/9;
+}
+.tumblr_video_container {
+    width: 100%!important;
+    height: auto!important;
+}
+article iframe {
+    max-width: 100%;
+    aspect-ratio: 16/9;
+    height: auto;
+}
 /* -------------------------------------  poll */
 .poll-post .poll-question {
     font-size: calc(var(--font-size) + 3px)!important;
@@ -2074,8 +2087,6 @@ button.sb-close {
 
 <!-- jQuery -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.0/jquery.min.js"></script>
-<!-- IFRAMES: responsive -->
-<script src="https://flipsewtf.github.io/Tumblr/scripts/flexframes.min.js"></script>
 <!-- PHOTOSETS: pxu -->
 <script src="https://static.tumblr.com/yxfeliq/hHwojmt8m/bctphotoset.min.js"></script>
 <!-- TOOLTIP: tippy.js -->
@@ -2156,16 +2167,6 @@ $(document).ready(function () {
         else if (noteCount >= 1000) $(this).text((noteCount / 1000).toFixed(1) + 'k notes');
     });
 });
-
-// video
-function flexFrame() {
-    $(".caption").each(function () {
-        $(this).find("iframe").wrap("<div class='iframe-flex'></div>");
-        flexibleFrames($(".iframe-flex"));
-    });
-    flexibleFrames($(".video"));
-}
-$(document).ready(flexFrame);
 
 ////////////////////////////////////// vanilla js
 
