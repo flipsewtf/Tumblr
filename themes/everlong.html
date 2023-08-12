@@ -1,10 +1,10 @@
 <!----------------------------------------------------
 
     TUMBLR THEME: Everlong - © Flipse / @altindie
-    - Version 1.2.2
+    - Version 1.3.0
     
     RELEASED:   06 May 2023
-    UPDATED:    05 august 2023
+    UPDATED:    10 august 2023
     
     CREDITS:            altindie.tumblr.com/credit
     TERMS OF USE:       altindie.tumblr.com/themes
@@ -665,7 +665,6 @@ img.post_media_photo.image,
 .tmblr-embed iframe{
     width: 100%;
 }
-article iframe,
 article img {
     max-width: 100%;
     height: auto;
@@ -958,6 +957,21 @@ a.more_notes_link {
     border-radius: var(--round1);
     border: 1px solid rgba(var(--c-border));
     background-color: rgba(var(--c-bg1));
+}
+/* -------------------------------------  video */
+.video {
+    width: 100%;
+    height: auto;
+    aspect-ratio: 16/9;
+}
+.tumblr_video_container {
+    width: 100%!important;
+    height: auto!important;
+}
+article iframe {
+    max-width: 100%;
+    aspect-ratio: 16/9;
+    height: auto;
 }
 
 /* -------------------------------------  poll */
@@ -1831,8 +1845,6 @@ span.toggle::after {
 
 <!-- jQuery -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-<!-- IFRAMES: responsive -->
-<script src="https://flipsewtf.github.io/Tumblr/scripts/flexframes.min.js"></script>
 <!-- PHOTOSETS: pxu -->
 <script src="https://static.tumblr.com/yxfeliq/hHwojmt8m/bctphotoset.min.js"></script>
 <!-- TOOLTIP: tippy.js -->
@@ -1860,8 +1872,7 @@ $(document).ready(function () {
     {block:ifHideTumblrControls}
     // tumblr controls
     $(".controls").click(function () {
-        $(".tmblr-iframe").toggleClass("active");
-        $(".line-container").toggleClass("active");
+        $(".tmblr-iframe, .line-container").toggleClass("active");
     });
     {/block:ifHideTumblrControls}
     
@@ -1882,8 +1893,9 @@ $(document).ready(function () {
     {block:IndexPage}
     // toggle tags
     $(".toggle-tags").click(function (event) {
-        $(this).closest("article").find(".tags-container").slideToggle(500);
-        $(this).closest("article").find(".toggle-tags").toggleClass("active");
+        const $article = $(this).closest("article");
+        $article.find(".tags-container").slideToggle(500);
+        $(this).toggleClass("active");
         event.preventDefault();
     });
     {/block:IndexPage}
@@ -1900,23 +1912,6 @@ $(document).ready(function () {
         return false;
     });
 });
-
-// legacy audio
-$("iframe.tumblr_audio_player").on("load", function () {
-    let head = $("iframe.tumblr_audio_player").contents().find("head");
-    let css = "<style>.audio-player { background: #ebebeb6e; color: #3a3a3a  !important;} .audio-player .audio-info .track-artist { color: #3a3a3a !important;}</style>";
-    $(head).append(css);
-});
-
-// video
-function flexFrame() {
-    $(".caption").each(function () {
-        $(this).find("iframe").wrap("<div class='iframe-flex'></div>");
-        flexibleFrames($(".iframe-flex"));
-    });
-    flexibleFrames($(".video"));
-}
-$(document).ready(flexFrame);
 
 ////////////////// vanilla js
 
