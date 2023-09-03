@@ -2,14 +2,14 @@
 <html lang="en" {block:ifDarkMode}data-theme="light"{/block:ifDarkMode}>
 <!----------------------------------------------------
 
-    TUMBLR THEME:  Flutter - © Flipse / @altindie
-    - Version 1.0.0
+    TUMBLR THEME:  Flutter - © Flipse / @mournstera
+    - Version 1.0.2
     
     RELEASED:   15 March 2023
-    UPDATED:    -
+    UPDATED:    03 September 2023
     
-    CREDITS:            altindie.tumblr.com/credit
-    TERMS OF USE:       altindie.tumblr.com/themes
+    CREDITS:            mournstera.tumblr.com/credit
+    TERMS OF USE:       mournstera.tumblr.com/themes
                         - Please read before you install this theme.
  
 ----------------------------------------------------->  
@@ -1160,7 +1160,7 @@ a.more_notes_link {
 	padding: 8px var(--gap1) !important;
 	font-weight: 500 !important;
 	margin-bottom: 6px !important;
-	border: 1px solid rgba(var(--c-border));
+	border: 1px solid rgba(var(--c-border))!important;
 }
 /* -------------------------------------  POST-TYPE: text / npf */
 a.read_more {
@@ -1350,6 +1350,29 @@ iframe.soundcloud_audio_player {
 }
 .spotify_audio_player {
     max-height: 152px!important;
+}
+.tmblr-full > .audio-caption {
+    background-color: rgba(var(--c-bg2));
+    overflow: hidden;
+    border-radius: var(--round);
+    margin: var(--gap2) 0;
+    border: 1px solid rgba(var(--c-border));
+}
+.tmblr-full > .audio-caption .audio-details {
+    padding: var(--gap3);
+    width: 100%;
+}
+.tmblr-full > .audio-caption .album-cover {
+    width: 100px;
+    height: 100px;
+    object-fit: cover;
+}
+.tmblr-full > .audio-caption .title {
+    font-size: 1.25em;
+}
+.tmblr-full > .audio-caption .album,
+.tmblr-full > .audio-caption .artist {
+    font-size: 1em;
 }
 /* -------------------------------------  POST-TYPE: video */
 .video {
@@ -1697,7 +1720,7 @@ button.controls,
             {block:ifArchiveLinkTitle}
             <a href="/archive">{text:Archive Link Title}</a>
             {/block:ifArchiveLinkTitle}
-            <a class="mobile" href="https://altindie.tumblr.com">theme credit</a>
+            <a class="mobile" href="https://mournstera.tumblr.com">theme credit</a>
             <form class="search flex" action="/search" method="get">
             <button class="search" aria-label="click to search" type="submit">
                 <i icon-name="search"></i>
@@ -2179,7 +2202,7 @@ button.controls,
     <div class="scroll-to-top corner-icons" title="scroll to top" type="button">
         <i icon-name="chevron-up"></i>
     </div>
-    <a class="credit corner-icons" target="_blank" title="Theme by @altindie" href="https://altindie.tumblr.com">
+    <a class="credit corner-icons" target="_blank" title="Theme by @mournstera" href="https://mournstera.tumblr.com">
         <i icon-name="at-sign"></i>
     </a>
 </div>
