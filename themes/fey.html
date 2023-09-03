@@ -3,14 +3,14 @@
  
 <!----------------------------------------------------
 
-    TUMBLR THEME: Fey © Flipse / @altindie
-    - Version 1.0.0
+    TUMBLR THEME: Fey © Flipse / @mournstera
+    - Version 1.0.3
     
     RELEASED:   11 January 2023
-    UPDATED:    -
+    UPDATED:    03 September 2023
     
-    CREDITS:            altindie.tumblr.com/credit
-    TERMS OF USE:       altindie.tumblr.com/themes
+    CREDITS:            mournstera.tumblr.com/credit
+    TERMS OF USE:       mournstera.tumblr.com/themes
                         - Please read before you install this theme.
 
 ----------------------------------------------------->  
@@ -1569,6 +1569,46 @@ iframe.soundcloud_audio_player {
 .spotify_audio_player {
     max-height: 152px!important;
 }
+
+.tmblr-full > .audio-caption {
+    background-color: rgba(var(--c-bg2));
+    overflow: hidden;
+    border-radius: var(--round);
+    margin: var(--gap2) 0;
+    border: 1px solid rgba(var(--c-border));
+}
+.tmblr-full > .audio-caption .audio-details {
+    padding: var(--gap3);
+    width: 100%;
+}
+.tmblr-full > .audio-caption .album-cover {
+    width: 100px;
+    height: 100px;
+    object-fit: cover;
+}
+.tmblr-full > .audio-caption .title {
+    font-size: 1.25em;
+}
+.tmblr-full > .audio-caption .album,
+.tmblr-full > .audio-caption .artist {
+    font-size: 1em;
+}
+
+.poll-post .poll-question {
+    font-size: calc(var(--font-size) + 3px) !important;
+    font-weight: 600 !important;
+}
+.poll-post a.poll-row {
+    background-color: rgba(var(--c-bg2)) !important;
+    color: rgba(var(--c-text)) !important;
+    line-height: inherit !important;
+    font-size: var(--font-size) !important;
+    border-radius: var(--rounder) !important;
+    padding: 8px var(--gap1) !important;
+    font-weight: 500 !important;
+    margin-bottom: 6px !important;
+    border: 1px solid rgba(var(--c-border))!important;
+}
 /* -------------------------------------  POST-TYPE: video */
 .video {
     overflow: hidden;
@@ -1994,7 +2034,7 @@ button#controls,
                 {block:ifArchiveLinkTitle}
                 <li><a href="/archive">{text:Archive Link Title}</a></li>
                 {/block:ifArchiveLinkTitle}
-                <li class="mobile-only"><a href="https://altindie.tumblr.com">theme credit</a></li>
+                <li class="mobile-only"><a href="https://mournstera.tumblr.com">theme credit</a></li>
                 </ul>
             </nav>
             
@@ -2672,7 +2712,7 @@ button#controls,
     </button>
 	
 	<button id="credit" type="button">
-	    <a target="_blank" title="Theme by @altindie" href="https://altindie.tumblr.com">
+	    <a target="_blank" title="Theme by @mournstera" href="https://mournstera.tumblr.com">
             <i icon-name="at-sign"></i>
         </a>
 	</button>
