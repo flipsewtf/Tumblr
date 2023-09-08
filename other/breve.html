@@ -1,0 +1,168 @@
+<!----------------------------------------------------
+
+    REDIRECT TUMBLR THEME: Breve
+     
+    © Flipse / @mournstera (previously @altindie)
+    
+    TERMS OF USE: mournstera.tumblr.com/themes
+
+-----------------------------------------------------> 
+<!DOCTYPE html>
+<html lang="en"> 
+
+<head>
+<title>{name} >> {text:New URL name}</title>
+<link rel="shortcut icon" href="{Favicon}"/>
+<link rel="alternate" type="application/rss+xml" href="{RSS}"/>
+{block:Description}
+<meta name="description" content="{MetaDescription}"/>
+{/block:Description}
+{NewPostStyles}
+<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1">
+
+<meta name="color:Background" content="#ffffff"/> 
+<meta name="color:Text" content="#535353"/> 
+<meta name="color:Link" content="#bdc5db"/>
+<meta name="color:Border" content="#e9e9e9"/> 
+
+<meta name="select:Font size" content="12px"/>
+<meta name="select:Font size" content="13px"/>
+<meta name="select:Font size" content="14px"/>
+<meta name="select:Font size" content="15px"/>
+<meta name="select:Font size" content="17px"/>
+<meta name="select:Font size" content="18px"/>
+
+<meta name="text:Title"  content="changed url"/>
+<meta name="text:Subtitle"  content="you're now being redirected to"/>
+<meta name="text:New URL name"  content="new-url-name"/>
+
+<link rel="preconnect" href="https://fonts.gstatic.com">
+<link href="https://fonts.googleapis.com/css2?family=Karla:ital,wght@0,200;0,300;0,400;0,500;0,600;0,700;0,800;1,400&display=swap" rel="stylesheet">
+
+<script src="https://unpkg.com/@phosphor-icons/web"></script>
+
+<script>
+setTimeout(redirectTumblr, 3000);
+
+function redirectTumblr() {
+    location.replace('https://{text:New URL name}.tumblr.com' + location.pathname);
+} 
+</script>
+    
+    
+<style>
+
+body {
+    font-family: 'Karla', sans-serif;
+    font-size: {select:Font size};
+    color: {color:Text};
+    background: {color:Background};
+    height: 100%;
+    margin: 0;
+}
+
+a {
+    color: {color:Link};
+    text-decoration: none;
+    padding-bottom: 1px;
+    border-bottom: 3px solid {color:Border};
+}
+}
+
+a:hover {
+    color: #363636;
+}
+
+@-webkit-keyframes spin {
+    100% {
+        -webkit-transform: rotate(360deg);
+    }
+}
+
+@-moz-keyframes spin {
+    100% {
+        -moz-transform: rotate(360deg);
+    }
+}
+
+@keyframes spin {
+    100% {
+        -webkit-transform: rotate(360deg);
+        transform: rotate(360deg);
+    }
+}
+
+.container {
+    display: flex;
+    justify-content: center;
+    height: 100vh;
+    align-items: center;
+    flex-direction: column;
+}
+
+.spin {
+    animation: spin 1.8s ease-in-out infinite;
+    font-size: 50px;
+    display: flex;
+    color: #bdc5db;
+    margin-bottom: 25px;
+}
+
+.wrap {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    max-width: 540px;
+}
+
+.title {
+    font-size: calc({select:Font size} + 12px);
+    font-weight: 700;
+    margin-bottom:6px;
+}
+
+.subtitle {
+    margin-bottom: 10px;
+    font-weight: 400;
+    opacity:0.7;
+}
+
+.thelink {
+    font-size: calc({select:Font size} + 15px);
+    font-weight: 700;
+    letter-spacing: 1px;
+}
+
+.credit {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    font-size: 20px;
+}
+.credit a {
+    border-bottom: 0;
+    padding-bottom: 0;
+    display: flex;
+}
+</style>
+
+</head>
+
+<body>
+
+<div class="container">
+    <div class="wrap">
+        <div class="spin"><i class="ph ph-spinner"></i></div>
+        <div class="title">{text:Title}</div>
+        <div class="subtitle">{text:Subtitle}</div>
+        <div class="thelink">
+            <a href="https://{text:New URL name}.tumblr.com/">{text:New URL name}</a>
+        </div>
+    </div>
+</div>
+
+<div class="credit"><a href="https://mournstera.tumblr.com/"><i class="ph ph-at"></i></a></div>
+</body>
+
+</html>
