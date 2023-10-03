@@ -141,7 +141,7 @@
     --gutter: {select:Photoset gutter};
     --sb-width: 230px;
     --side-width: 250px;
-    --photo-corners: 0;
+    --photo-corners: 0px;
     --sb-icon: 60px;
     --line-height: 1.8;
     --gap1: 1.2rem;
@@ -719,7 +719,8 @@ article .caption p:last-of-type {
     padding: var(--text-margin-small) var(--text-margin-small) 0 var(--text-margin-small);
 }
 .reblog-header img {
-    max-width: 2em;
+    width: 2em;
+    min-width: 2em;
     height: auto;
     border-radius: var(--round1);
 }
@@ -764,7 +765,6 @@ article img {
     max-width: 100%;
     height: auto;
 }
-
 .post-content div.npf_row {
     margin-bottom: calc(var(--gutter) - 4px);
 }
@@ -778,7 +778,6 @@ article img {
 .post-content div.npf_row .npf_col:last-child {
     margin-right: 0;
 }
-
 .npf_row:only-of-type,
 .legacy-photoset,
 .legacy-photo img,
@@ -787,20 +786,13 @@ article img {
     border-radius: var(--photo-corners);
     overflow:hidden;
 }
-.npf_row:only-of-type,
-.legacy-photoset,
-.npf-photos {
-    max-width: fit-content;
-}
-
 .npf-photos:has(+figure) {
-    border-radius: var(--photo-corners) var(--photo-corners) 0 0; 
+    border-radius: 0; 
 }
 .npf-photos + figure {
     margin-top: var(--gutter);
     overflow: hidden;
-    max-width: fit-content;
-    border-radius: 0 0 var(--photo-corners) var(--photo-corners);
+    border-radius: 0;
 }
 /* ------------  blockquotes */
 .post-content blockquote {
