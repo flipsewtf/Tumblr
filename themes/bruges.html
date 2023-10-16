@@ -4,10 +4,10 @@
 <!----------------------------------------------------
 
     TUMBLR THEME:  Bruges © Flipse / @mournstera
-    - Version 1.0.3
+    - Version 1.4.0
     
     RELEASED:   17 February 2023
-    UPDATED:    03 September 2023
+    UPDATED:    15 October 2023
     
     CREDITS:            mournstera.tumblr.com/credit
     TERMS OF USE:       mournstera.tumblr.com/themes
@@ -117,6 +117,8 @@
 <link href="https://static.tumblr.com/qudkd6d/OcDnl99gb/style.css" rel="stylesheet" type="text/css"/>
 <!-- TOOLTIP: tippy.js scale -->
 <link rel="stylesheet" href="https://unpkg.com/tippy.js@6/animations/scale-subtle.css">
+<!-- AUDIO: npf @glenthemes -->
+<link href="//tmblr-npf-audio.gitlab.io/s/base.css" rel="stylesheet">
 <!-- Google font -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -144,6 +146,7 @@
     --spacing: 15px;
     --NPF-Caption-Spacing:18px;
     --NPF-Image-Spacing:{select:Photoset gutter};
+    --NPF-Audio-Image-Size: 85px;
 
 {block:ifRoundContentCorners}
     --round: 0.55em;
@@ -166,6 +169,7 @@
     --c-border: {RGBcolor:Borders};
     --c-acc1: {RGBcolor:Accent 1};
     --c-acc2: {RGBcolor:Accent 2};
+    --NPF-Audio-Buttons-Color: rgba({color:Text});
 }
 
 {block:ifDarkMode}
@@ -182,6 +186,7 @@ html[data-theme='dark'] {
     --c-border: {RGBcolor:Dark mode Borders};
     --c-acc1: {RGBcolor:Dark mode Accent 1};
     --c-acc2: {RGBcolor:Dark mode Accent 2};
+    --NPF-Audio-Buttons-Color: rgba({color:Dark mode Text});
 }
 html.theme-transition,
 html.theme-transition *,
@@ -1193,123 +1198,77 @@ p.npf_chat {
     font-family: inherit!important;
 }
 /* -------------------------------------  POST-TYPE: audio */
-.audio-container {
-    border: 1px solid rgba(var(--c-border));
-    overflow: hidden;
-    border-radius: var(--rounder);
-    background-color: rgba(var(--c-bg2));
-}
-.audio-wrap {
-    overflow: hidden;
-    padding: var(--gap2);
-    display: grid;
-    gap: var(--gap2);
-    justify-content: space-between;
-    grid-template-columns: auto 1fr auto;
-    align-items: center;
-}
-.album-art {
-    width: 80px;
-    height: 80px;
-}
-.album-art img {
-    display: block;
-    width: 80px;
-    height: 80px;
-    min-width: 80px;
-    object-fit: cover;
-    object-position: center;
-    border-radius: var(--circle);
-}
-.audio_info {
-    display: flex;
-    flex-direction: column;
-    width: 100%;
-    line-height: 1.5;
-}
-.trackname {
-    font-weight: 700;
-    line-height: 1.4;
-    font-size: calc(var(--font-size) + 3px);
-}
-.artist {
-    color: rgba(var(--c-text));
-    line-height: 1.4;
-}
-.audio-container .has-image .audio_player {
-
-}
 .custom_audio_buttons svg {
     display: flex;
-    stroke: rgba(var(--c-acc1));
+    fill: rgba(var(--c-text));
     cursor: pointer;
     stroke-width: 1;
-    width: 35px;
-    height: 35px;
+    width: 1.6em;
+    height: 1.6em;
 }
 .custom_audio_error_icon svg {
     cursor: initial;
 }
 .audio-bar {
-    display: flex;
-    gap: 10px;
-    flex-direction: row;
-    flex-wrap: nowrap;
-    align-items: center;
-    align-content: center;
-    border-top: 1px solid rgba(var(--c-border));
-    padding: var(--gap1);
-    cursor: pointer;
+    display:none;
 }
-.custom_audio_seekbar {
-    height: 10px;
+.spotify_audio_player, article iframe[src*='soundcloud'] {
+    max-height: 170px;
+    border: 0;
+    padding-bottom: 0;
     width: 100%;
-    overflow: hidden;
-    background: rgba(var(--c-bg1));
-    cursor: pointer;
-    border-radius: var(--round);
-    border: 1px solid rgba(var(--c-border));
 }
-.custom_audio_seekbar_progress {
-    width: 0;
-    height: 100%;
-    background: rgba(var(--c-acc1));
+figure iframe.bandcamp_audio_player {
+    max-height: 120px;
+    border: 0;
+    padding-bottom: 0;
+    width: 100%;
 }
-.custom_audio_time_left {
-    flex: none;
-}
-.custom_audio_time_left::before {
-    content : "-";
+iframe.tumblr_audio_player {
+    max-height: 85px!important;
+    margin-bottom: -2px;
 }
 
-iframe.soundcloud_audio_player {
-    height: 120px!important;
-}
-.spotify_audio_player {
-    max-height: 152px!important;
-}
-.tmblr-full > .audio-caption {
-    background-color: rgba(var(--c-bg2));
+.npf-audio-wrapper {
     overflow: hidden;
-    border-radius: var(--round);
-    margin: var(--gap2) 0;
+    display: flex;
+    align-items: center;
+}
+.npf-audio-background {
+    display: flex;
+    align-items: center;
+    gap: var(--gap2);
+    overflow: hidden;
     border: 1px solid rgba(var(--c-border));
-}
-.tmblr-full  >.audio-caption .audio-details {
+    background-color: rgba(var(--c-bg2));
     padding: var(--gap2);
-    width: calc(100% - 120px);
+    border-radius: var(--round);
+    flex: 1;
+    height: var(--NPF-Audio-Image-Size);
+    box-sizing: border-box;
 }
-.tmblr-full > .audio-caption .album-cover {
-    width: 120px!important;
-    height: 120px!important;
+.npf-audio-buttons {
+    margin-right: 0;
+    width: 1.6em;
+    height: 1.6em;
+    line-height: 0;
+    flex-shrink: 0;
+    cursor: pointer;
+}
+.npf-audio-image {
+    margin-left: var(--gap2);
+    border-radius: var(--round);
+    width: var(--NPF-Audio-Image-Size)!important;
+    height: var(--NPF-Audio-Image-Size)!important;
     object-fit: cover;
+    flex-shrink: 0;
 }
-.tmblr-full > .audio-caption .title {
-    font-size: 1.25em;
+.npf-audio-details {
+    line-height: 1.4;
 }
-.tmblr-full > .audio-caption .album,
-.tmblr-full > .audio-caption .artist {
-    font-size: 1em;
+span.npf-audio-title {
+    font-size: 1.1em;
+    font-weight: 700;
 }
 /* -------------------------------------  POST-TYPE: video */
 .video {
@@ -1897,35 +1856,36 @@ button.controls,
         {/block:Video}
 
 
-<!-- audio  -->
+        <!-- audio  -->
         {block:Audio}
-        {block:AudioPlayer}
-        {AudioPlayer}
-        <div class="audio-container">
-	        <div class="audio-wrap">
-		        <div class="audio_player">
-			        <span class="custom_audio_buttons"></span>
-		        </div>
-		        <div class="audio_info">
-			        {block:TrackName}
-			        <div class="trackname">{TrackName}</div>
-			        {/block:TrackName}
-			        {block:Artist}
-			        <div class="artist">{Artist}</div>
-			        {/block:Artist}
-		        </div>
-		        {block:AlbumArt}
-		        <div class="album-art">
-			        <img class="circle" src="{AlbumArtURL}"/>
-		        </div>
-		        {/block:AlbumArt}
-	        </div>
-	        <div class="audio-bar">
-	            <span class="custom_audio_time_left"></span>
-	            <div class="custom_audio_seekbar rounded"></div>
-            </div>
-        </div>
-        {/block:AudioPlayer}
+            {block:AudioPlayer}
+            {AudioPlayer}
+            <figcaption class="npf-audio-wrapper">
+                <div class="npf-audio-background">
+                    <div class="audio_player">
+        			    <span class="custom_audio_buttons"></span>
+        		    </div>
+        	        <div class="npf-audio-details">
+        		        {block:TrackName}
+        		        <span class="npf-audio-title">{TrackName}</span>
+        		        {/block:TrackName}
+        		        {block:Artist}
+        		        <span class="npf-audio-artist">{Artist}</span>
+        		        {/block:Artist}
+        	        </div>
+                </div>
+                
+                {block:AlbumArt}
+        		        <img class="npf-audio-image" src="{AlbumArtURL}"/>
+        	    {/block:AlbumArt}
+                
+                <div class="audio-bar">
+                    <span class="custom_audio_time_left"></span>
+                    <div class="custom_audio_seekbar rounded"></div>
+                </div>
+                
+            </figcaption>
+            {/block:AudioPlayer}
         {/block:Audio}
 
         {block:Answer}
@@ -2291,7 +2251,8 @@ button.controls,
 <!-- ICONS: phosphor --><script src="https://unpkg.com/phosphor-icons"></script>
 <!-- ICONS: Lucide --><script src="https://unpkg.com/lucide@latest"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/smoothscroll/1.4.1/SmoothScroll.min.js"></script>
-
+<!-- AUDIO: npf @glenthemes -->
+<script src="//tmblr-npf-audio.gitlab.io/s/init.js"></script>
 <script>
 ////////////////// jquery dependant 
 
@@ -2385,7 +2346,18 @@ Array.from(NoteCount).forEach((element) => {
     }
 });
 
-// audioplayer
+// audioplayer npf
+tumblr_npf_audio({
+    emptyTitleText: "",
+    emptyArtistText: "",
+    emptyAlbumText: "",
+    
+    titleLabel: "",
+    artistLabel: "",
+    albumLabel: ""
+});
+
+// audioplayer legacy
 customAudio({
     post: ".entry",
     wrappers: {
@@ -2398,9 +2370,8 @@ customAudio({
     },
     default: false,
     pauseAll: true,
-    playButton: "<svg width='24' height='24' viewBox='0 0 24 24' fill='none' xmlns='http://www.w3.org/2000/svg'><path d='M4 11.9999V8.43989C4 4.01989 7.13 2.2099 10.96 4.4199L14.05 6.1999L17.14 7.9799C20.97 10.1899 20.97 13.8099 17.14 16.0199L14.05 17.7999L10.96 19.5799C7.13 21.7899 4 19.9799 4 15.5599V11.9999Z' stroke-miterlimit='10' stroke-linecap='round' stroke-linejoin='round'/></svg>",
-    pauseButton: "<svg width='24' height='24' viewBox='0 0 24 24' fill='none' xmlns='http://www.w3.org/2000/svg'><path d='M10.65 19.11V4.89C10.65 3.54 10.08 3 8.64 3H5.01C3.57 3 3 3.54 3 4.89V19.11C3 20.46 3.57 21 5.01 21H8.64C10.08 21 10.65 20.46 10.65 19.11Z' stroke-linecap='round' stroke-linejoin='round'/><path d='M21 19.11V4.89C21 3.54 20.43 3 18.99 3H15.36C13.93 3 13.35 3.54 13.35 4.89V19.11C13.35 20.46 13.92 21 15.36 21H18.99C20.43 21 21 20.46 21 19.11Z' stroke-linecap='round' stroke-linejoin='round'/></svg>",
-    errorIcon: "<svg width='24' height='24' viewBox='0 0 24 24' fill='none' xmlns='http://www.w3.org/2000/svg'><path d='M2 10.1595V14.1595C2 16.1595 3 17.1595 5 17.1595H6.43C6.8 17.1595 7.17 17.2695 7.49 17.4595L10.41 19.2895C12.93 20.8695 15 19.7195 15 16.7495V7.56946C15 4.58946 12.93 3.44946 10.41 5.02946L7.49 6.85946C7.17 7.04946 6.8 7.15946 6.43 7.15946H5C3 7.15946 2 8.15946 2 10.1595Z'/><path d='M22 14.1194L18.04 10.1594' stroke-miterlimit='10' stroke-linecap='round' stroke-linejoin='round'/><path d='M21.96 10.1995L18 14.1595' stroke-miterlimit='10' stroke-linecap='round' stroke-linejoin='round'/></svg>",
+    playButton: "<svg xmlns='http://www.w3.org/2000/svg' version='1.1' xmlns:xlink='http://www.w3.org/1999/xlink' width='512' height='512' x='0' y='0' viewBox='0 0 512 512' xml:space='preserve'><g><path fill-rule='evenodd' d='M468.8 235.007 67.441 3.277A24.2 24.2 0 0 0 55.354-.008h-.07A24.247 24.247 0 0 0 43.19 3.279a24 24 0 0 0-12.11 20.992v463.456a24.186 24.186 0 0 0 36.36 20.994L468.8 276.99a24.238 24.238 0 0 0 0-41.983z'></path></g></svg>",
+    pauseButton: "<svg xmlns='http://www.w3.org/2000/svg' version='1.1' xmlns:xlink='http://www.w3.org/1999/xlink' width='512' height='512' x='0' y='0' viewBox='0 0 47.607 47.607' xml:space='preserve' class=''><g><path d='M17.991 40.976a6.631 6.631 0 0 1-13.262 0V6.631a6.631 6.631 0 0 1 13.262 0v34.345zM42.877 40.976a6.631 6.631 0 0 1-13.262 0V6.631a6.631 6.631 0 0 1 13.262 0v34.345z'></path></g></svg>",
     hideInfoIfError: true,
 });
 
