@@ -760,23 +760,19 @@ p:empty {
     cursor: pointer;
 }
 figure.tmblr-full:is(:not(:last-of-type)) {
-    margin-bottom:4px;
+    margin-bottom: var(--gutter);
 }
 figure:is(:not(:last-of-type)) {
-    margin-bottom:4px;
+    margin-bottom: var(--gutter);
 }
 article img {
 	display: block;
 }
-img.post_media_photo.image,
-.tmblr-embed iframe{
-    width: 100%;
-}
+article iframe,
 article img {
     max-width: 100%;
     height: auto;
 }
-
 .post-content div.npf_row {
     margin-bottom: calc(var(--gutter) - 4px);
 }
@@ -797,14 +793,22 @@ article img {
 .more_photoset {
     border-radius: var(--photo-corners);
     overflow:hidden;
+    margin: auto;
 }
+.npf_row:only-of-type,
+.legacy-photoset,
+.npf-photos {
+    max-width: fit-content;
+}
+
 .npf-photos:has(+figure) {
-    border-radius: 0; 
+    border-radius: var(--photo-corners) var(--photo-corners) 0 0; 
 }
 .npf-photos + figure {
-    margin-top: var(--gutter);
     overflow: hidden;
-    border-radius: 0;
+    max-width: fit-content;
+    border-radius: 0 0 var(--photo-corners) var(--photo-corners);
+    margin: var(--gutter) auto auto;
 }
 /* ------------  blockquotes */
 .post-content blockquote {
