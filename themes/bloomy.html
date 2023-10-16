@@ -1,10 +1,10 @@
 <!----------------------------------------------------
 
     TUMBLR THEME:  Bloomy - © Flipse / @mournstera (previously @altindie)
-    - Version 1.0.1
+    - Version 1.1.0
     
     RELEASED:   01 October 2023
-    UPDATED:    03 October 2023
+    UPDATED:    16 October 2023
     
     CREDITS:            mournstera.tumblr.com/credit
     TERMS OF USE:       mournstera.tumblr.com/themes 
@@ -127,6 +127,8 @@
 <link href="https://static.tumblr.com/qudkd6d/OcDnl99gb/style.css" rel="stylesheet" type="text/css"/>
 <!-- TOOLTIP: tippy.js scale -->
 <link rel="stylesheet" href="https://unpkg.com/tippy.js@6/animations/scale-subtle.css">
+<!-- AUDIO: npf @glenthemes -->
+<link href="//tmblr-npf-audio.gitlab.io/s/base.css" rel="stylesheet">
 <!-- Google font -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -162,6 +164,7 @@
     --round4: 1.7rem;
     --circle: 100%;
 {/block:ifRoundContentCorners}
+    --NPF-Audio-Image-Size: 85px;
 }
 :root{block:ifDarkMode}, html[data-theme='light']{/block:ifDarkMode} {
     --mode-transform: translateY(0px);
@@ -177,6 +180,8 @@
     --c-shadow: {RGBcolor:Shadow};
     --gradient-1: {RGBcolor:Gradient 1};
     --gradient-2: {RGBcolor:Gradient 2};
+    --NPF-Audio-Buttons-Color: rgba({color:Text});
+    --NPF-Audio-Buttons-Color: rgba({color:Dark mode Text});
 }
 {block:ifDarkMode}
 html[data-theme='dark'] {
@@ -1166,77 +1171,19 @@ p.npf_chat {
     font-family: inherit!important;
 }
 /* -------------------------------------  audio */
-.audio-container {
-    overflow: hidden;
-    border-radius: var(--round3);
-    border: 1px solid rgba(var(--c-border));
-    margin: var(--text-margin-small);
-}
-.audio-wrap {
-    justify-content: space-between;
-    overflow: hidden;
-    background-color: rgba(var(--c-bg1));
-}
-.album-art img {
-    display: block;
-    width: 120px;
-    height: 120px;
-    min-width: 120px;
-    object-fit: cover;
-    object-position: center;
-}
-.audio_info {
-    display: flex;
-    flex-direction: column;
-    width: 100%;
-    line-height: 1.5;
-    padding: var(--gap2);
-}
-.trackname {
-    font-size: 1.25em;
-    font-weight: 700;
-    line-height: 1.5;
-}
-.audio-container .has-image .audio_player {
-}
 .custom_audio_buttons svg {
     display: flex;
     fill: rgba(var(--c-text));
     cursor: pointer;
     stroke-width: 1;
-    width: 16px;
-    height: 16px;
+    width: 1.6em;
+    height: 1.6em;
 }
 .custom_audio_error_icon svg {
     cursor: initial;
 }
 .audio-bar {
-    display: flex;
-    align-items: center;
-    background-color: rgba(var(--c-bg1));
-    padding: var(--gap2);
-    gap: var(--gap2);
-    border-top: 1px solid rgba(var(--c-border));
-}
-.custom_audio_seekbar {
-    height: 10px;
-    width: 100%;
-    overflow: hidden;
-    background: rgba(var(--c-bg2));
-    cursor: pointer;
-    border-radius: var(--round1);
-    border: 1px solid rgba(var(--c-border));
-}
-.custom_audio_seekbar_progress {
-    width: 0;
-    height: 100%;
-    background: rgba(var(--c-text));
-}
-.custom_audio_time_left {
-    flex: none;
-}
-.custom_audio_time_left::before {
-    content : "-";
+    display:none;
 }
 .spotify_audio_player, article iframe[src*='soundcloud'] {
     max-height: 170px;
@@ -1254,32 +1201,47 @@ iframe.tumblr_audio_player {
     max-height: 85px!important;
     margin-bottom: -2px;
 }
-
-.tmblr-full>.audio-caption {
-    background-color: rgba(var(--c-bg1));
-    margin: var(--text-margin-big) var(--text-margin-small);
+.npf-audio-wrapper {
     overflow: hidden;
-    border-radius: var(--round3);
+    display: flex;
+    align-items: center;
+    margin: var(--gap1);
+}
+.npf-audio-background {
+    display: flex;
+    align-items: center;
+    gap: var(--gap2);
+    overflow: hidden;
     border: 1px solid rgba(var(--c-border));
-}
-.tmblr-full>.audio-caption .audio-details {
+    background-color: rgba(var(--c-bg1));
     padding: var(--gap2);
-    width: calc(100% - 120px);
+    border-radius: var(--round1);
+    flex: 1;
+    height: var(--NPF-Audio-Image-Size);
+    box-sizing: border-box;
 }
-.tmblr-full>.audio-caption .album-cover {
-    width: 120px;
-    height: 120px;
+.npf-audio-buttons {
+    margin-right: 0;
+    width: 1.6em;
+    height: 1.6em;
+    line-height: 0;
+    flex-shrink: 0;
+    cursor: pointer;
+}
+.npf-audio-image {
+    margin-left: var(--gap2);
+    border-radius: var(--round1);
+    width: var(--NPF-Audio-Image-Size)!important;
+    height: var(--NPF-Audio-Image-Size)!important;
     object-fit: cover;
+    flex-shrink: 0;
 }
-.tmblr-full>.audio-caption .title {
-    font-size: 1.25em;
+.npf-audio-details {
+    line-height: 1.4;
 }
-.tmblr-full>.audio-caption .album, .tmblr-full>.audio-caption .artist {
-    font-size: 1em;
-}
-.tmblr-full>audio {
-    margin: var(--gap1) 0;
-    width: 100%;
+span.npf-audio-title {
+    font-size: 1.1em;
+    font-weight: 700;
 }
 /* -------------------------------------  link */
 div.npf-link-block {
@@ -1689,32 +1651,31 @@ span.toggle::after {
             {block:Audio}
                 {block:AudioPlayer}
                 {AudioPlayer}
-                <div class="audio-container">
-        	        <div class="audio-wrap flex gap2 align-center">
-        		        <div class="audio_info">
-        			        {block:TrackName}
-        			        <div class="trackname">{TrackName}</div>
-        			        {/block:TrackName}
-        			        {block:Artist}
-        			        <div class="artist">{Artist}</div>
-        			        {/block:Artist}
-        		        </div>
-
-        		        {block:AlbumArt}
-        		        <div class="album-art">
-        			        <img src="{AlbumArtURL}"/>
-        		        </div>
-        		        {/block:AlbumArt}
-        	        </div>
-        	        
-        	        <div class="audio-bar">
+                <figcaption class="npf-audio-wrapper">
+        	        <div class="npf-audio-background">
         	            <div class="audio_player">
             			    <span class="custom_audio_buttons"></span>
             		    </div>
+        		        <div class="npf-audio-details">
+        			        {block:TrackName}
+        			        <span class="npf-audio-title">{TrackName}</span>
+        			        {/block:TrackName}
+        			        {block:Artist}
+        			        <span class="npf-audio-artist">{Artist}</span>
+        			        {/block:Artist}
+        		        </div>
+        	        </div>
+        	        
+        	        {block:AlbumArt}
+        			        <img class="npf-audio-image" src="{AlbumArtURL}"/>
+        		    {/block:AlbumArt}
+        	        
+        	        <div class="audio-bar">
         	            <span class="custom_audio_time_left"></span>
         	            <div class="custom_audio_seekbar rounded"></div>
                     </div>
-                </div>
+                    
+                </figcaption>
                 {/block:AudioPlayer}
             {/block:Audio}
 
@@ -1951,6 +1912,8 @@ span.toggle::after {
 <script src="https://cdn.jsdelivr.net/gh/annasthms/customaudio@latest/customaudio.min.js"></script>
 <!-- ICONS: phosphor -->
 <script src="https://unpkg.com/@phosphor-icons/web"></script>
+<!-- AUDIO: npf @glenthemes -->
+<script src="//tmblr-npf-audio.gitlab.io/s/init.js"></script>
 
 <script>
 
@@ -2011,7 +1974,18 @@ $(document).ready(function () {
 
 ////////////////////////////////////// vanilla js
 
-// audioplayer
+// audioplayer npf
+tumblr_npf_audio({
+    emptyTitleText: "",
+    emptyArtistText: "",
+    emptyAlbumText: "",
+    
+    titleLabel: "",
+    artistLabel: "",
+    albumLabel: ""
+});
+
+// audioplayer legacy
 customAudio({
     post: "article",
     wrappers: {
