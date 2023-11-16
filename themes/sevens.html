@@ -1031,21 +1031,6 @@ a.more_notes_link {
     display: block;
     font-weight: 500;
 }
-/* -------------------------------------  video */
-.video {
-    width: 100%;
-    height: auto;
-    aspect-ratio: 16/9;
-}
-.tumblr_video_container {
-    width: 100%!important;
-    height: auto!important;
-}
-article iframe {
-    max-width: 100%;
-    aspect-ratio: 16/9;
-    height: auto;
-}
 /* -------------------------------------  poll */
 .poll-post a.poll-row {
     color: rgba(var(--c-text));
@@ -1151,20 +1136,33 @@ p.npf_chat span.label {
 p.npf_chat {
     font-family: inherit!important;
 }
-/* -------------------------------------  audio */
-.custom_audio_buttons svg {
-    display: flex;
-    fill: rgba(var(--c-text));
-    cursor: pointer;
-    stroke-width: 1;
-    width: 1.6em;
-    height: 1.6em;
+/* -------------------------------------  video */
+article iframe {
+    max-width: 100%;
+    aspect-ratio: 16/9;
+    height: auto;
 }
-.custom_audio_error_icon svg {
-    cursor: initial;
+.video {
+    width: 100%;
+    height: auto;
+    aspect-ratio: 16/9;
 }
-.audio-bar {
-    display:none;
+.video:has(iframe.bandcamp_audio_player) {
+    max-height: 120px!important;
+    aspect-ratio: auto;
+}
+.video:has(.spotify_audio_player) {
+    max-height: 160px!important;
+    aspect-ratio: auto;
+}
+.video:has(iframe.soundcloud_audio_player) {
+    max-height: 160px!important;
+    aspect-ratio: auto;
+}
+iframe.soundcloud_audio_player
+.tumblr_video_container {
+    width: 100%!important;
+    height: auto!important;
 }
 .spotify_audio_player, article iframe[src*='soundcloud'] {
     max-height: 170px;
@@ -1182,6 +1180,22 @@ iframe.tumblr_audio_player {
     max-height: 85px!important;
     margin-bottom: -2px;
 }
+/* -------------------------------------  audio */
+.custom_audio_buttons svg {
+    display: flex;
+    fill: rgba(var(--c-text));
+    cursor: pointer;
+    stroke-width: 1;
+    width: 1.6em;
+    height: 1.6em;
+}
+.custom_audio_error_icon svg {
+    cursor: initial;
+}
+.audio-bar {
+    display:none;
+}
+
 
 .npf-audio-wrapper {
     overflow: hidden;
