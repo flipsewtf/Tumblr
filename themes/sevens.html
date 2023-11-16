@@ -1,10 +1,10 @@
 <!----------------------------------------------------
 
     TUMBLR THEME: Sevens - © Flipse / @mournstera
-    - Version 1.0.0
+    - Version 1.0.1
     
     RELEASED:   16 November 2023
-    UPDATED:    -
+    UPDATED:    16 November 2023
     
     CREDITS:            mournstera.tumblr.com/credit
     TERMS OF USE:       mournstera.tumblr.com/themes  
@@ -1626,7 +1626,7 @@ span.activity-icon {
                     {/block:ifToggleLabel}
                 </nav>
         
-                    
+                {block:ifToggleLabel}
                 <nav class="menu-2 flex">
                     {block:HasPages}
                         {block:Pages}
@@ -1641,6 +1641,8 @@ span.activity-icon {
                     <a href="/submit">{SubmitLabel}</a>
                     {/block:SubmissionsEnabled}
                 </nav>
+                {/block:ifToggleLabel}
+                
                 
             </div>
         </div>
