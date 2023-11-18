@@ -1,10 +1,10 @@
 <!----------------------------------------------------
 
     TUMBLR THEME: Sevens - © Flipse / @mournstera
-    - Version 1.0.1
+    - Version 1.0.2
     
     RELEASED:   16 November 2023
-    UPDATED:    16 November 2023
+    UPDATED:    18 November 2023
     
     CREDITS:            mournstera.tumblr.com/credit
     TERMS OF USE:       mournstera.tumblr.com/themes  
@@ -1137,48 +1137,28 @@ p.npf_chat {
     font-family: inherit!important;
 }
 /* -------------------------------------  video */
-article iframe {
+article iframe:not(iframe.bandcamp_audio_player,.spotify_audio_player, iframe.soundcloud_audio_player) {
     max-width: 100%;
     aspect-ratio: 16/9;
     height: auto;
 }
-.video {
-    width: 100%;
-    height: auto;
-    aspect-ratio: 16/9;
-}
-.video:has(iframe.bandcamp_audio_player) {
-    max-height: 120px!important;
-    aspect-ratio: auto;
-}
-.video:has(.spotify_audio_player) {
-    max-height: 160px!important;
-    aspect-ratio: auto;
-}
-.video:has(iframe.soundcloud_audio_player) {
-    max-height: 160px!important;
-    aspect-ratio: auto;
-}
-iframe.soundcloud_audio_player
+iframe.soundcloud_audio_player,
 .tumblr_video_container {
     width: 100%!important;
     height: auto!important;
 }
-.spotify_audio_player, article iframe[src*='soundcloud'] {
-    max-height: 170px;
-    border: 0;
-    padding-bottom: 0;
+figure iframe.spotify_audio_player,
+iframe.spotify_audio_player {
+    max-height: 90px;
+    width: 100%;
+} 
+article iframe[src*='soundcloud'] {
+    max-height: 130px;
     width: 100%;
 }
 figure iframe.bandcamp_audio_player {
     max-height: 120px;
-    border: 0;
-    padding-bottom: 0;
     width: 100%;
-}
-iframe.tumblr_audio_player {
-    max-height: 85px!important;
-    margin-bottom: -2px;
 }
 /* -------------------------------------  audio */
 .custom_audio_buttons svg {
