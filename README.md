@@ -8,4 +8,4 @@ Here you will find Tumblr themes by altindie.tumblr.com, created from 2023 and o
 - **scripts:** just where I host stuff.
 
 ## Copyright
-All work by altindie is protected by a Attribution-NonCommercial-NoDerivatives 4.0 International license. Please see my full Terms Of Use at [mournstera.tumblr.com/themes](https://mournstera.tumblr.com/themes) before installing any of my themes.
+All work by Mournstera is protected by a Attribution-NonCommercial-NoDerivatives 4.0 International license. Please see my full Terms Of Use at [mournstera.tumblr.com/themes](https://mournstera.tumblr.com/themes) before installing any of my themes.
