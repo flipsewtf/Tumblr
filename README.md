@@ -1,5 +1,5 @@
 # Tumblr themes
-Here you will find Tumblr themes by altindie.tumblr.com, created from 2023 and onwards. For older themes, see my work at my previous GitHub account [here](https://github.com/flipsecph/themes).
+Here you will find Tumblr themes by/from mournstera.tumblr.com, created from 2023 and onwards. For older themes, see my work at my previous GitHub account [here](https://github.com/flipsecph/themes).
 
 ## Folders
 - **other:** redirect themes and misc.
