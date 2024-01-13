@@ -970,51 +970,27 @@ span#note-counter {
     font-size: 1.6em;
 }
 ol.notes {
+    margin: var(--gap2) 0 0;
+    padding: 0;
     display: flex;
     gap: var(--gap1);
     flex-direction: column;
-    margin: var(--gap1) 0 0;
 }
 ol.notes li {
-    position: relative;
-    line-height: 1;
-    display: flex;
-    gap: 8px;
-    align-items: center;
-}
-ol.notes img {
-    display: none;
-}
-ol.notes li.reblog::before, ol.notes li.like::before {
-    font-family: 'phosphor';
-    font-size: 1.6em;
-}
-ol.notes li.reblog::before {
-    content: '\facf';
-}
-ol.notes li.like::before {
-    content: '\f462';
-}
-ol.notes li.original_post:before {
-    content: '\f613';
-}
-ol.notes li.like:hover::before,
-ol.notes li.reblog:hover::before {
-    color: var(--c-acc1);
-}
-ol.notes li .action {
     display: inline-block;
-}
-.more_notes_link_container {
-    border: 0!important;
-    justify-content: center;
-}
-
-.more_notes_link_container::before {
-	display: none !important;
-}
-ol.notes li blockquote {
     width: 100%;
+    line-height: 1.7;
+}
+a.avatar_frame {
+    display: inline-flex;
+    position: absolute;
+}
+ol.notes li span.action {
+    padding-left: var(--gap2);
+}
+ol.notes li img.avatar {
+    width: 2em;
+    border-radius: var(--round);
 }
 /* -------------------------------------  pagination */
 nav#pagination {
@@ -1026,6 +1002,8 @@ nav#pagination ul {
     flex-direction: row;
     gap: var(--gap2);
     margin: 0;
+    padding: 0;
+    list-style: none;
     align-items: center;
     justify-content: space-evenly;
     margin-top: var(--gap-post-margin);
