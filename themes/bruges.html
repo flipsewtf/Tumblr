@@ -249,7 +249,6 @@ p, blockquote, h2 {
     margin: 1em 0;
 }
 
-
 p:first-child {
     margin-top: 0;
 }
@@ -1002,6 +1001,7 @@ ol.notes {
     gap: var(--gap2);
     flex-direction: column;
     margin: var(--gap3) 0 0;
+    padding: 0;
 }
 ol.notes li {
     display: inline-block;
@@ -2097,12 +2097,6 @@ button.controls,
             </a>
         </li>
     </ul>
-
-    
-    
-    
-    
-    
 </nav>
 {/block:Pagination}
 
@@ -2173,6 +2167,8 @@ button.controls,
 <!-- TOOLTIP: tippy.js --><script src="https://unpkg.com/@popperjs/core@2"></script>
 <!-- TOOLTIP: tippy.js--><script src="https://unpkg.com/tippy.js@6"></script>
 <!-- ICONS: Lucide --><script src="https://unpkg.com/lucide@latest"></script>
+<!-- ICONS: phosphor -->
+<script src="https://unpkg.com/phosphor-icons"></script>
 <script>
 ////////////////// jquery dependant 
 
@@ -2237,16 +2233,6 @@ $(".scroll-to-top").click(function () {
     return false;
 });
 
-// video
-function flexFrame() {
-    $(".text-container, .caption").each(function () {
-        $(this).find("iframe").wrap("<div class='iframe-flex'></div>");
-        flexibleFrames($(".iframe-flex"));
-    });
-    flexibleFrames($(".video"));
-}
-$(document).ready(flexFrame);
-
 ////////////////// vanilla js
     
 // icons
@@ -2290,15 +2276,6 @@ tippy("[title]", {
         return title;
     },
 });
-// no redirect
-function noHrefLi() {
-    var linkSet = document.querySelectorAll('a[href*="href.li/?"]');
-    Array.prototype.forEach.call(linkSet, function (el, i) {
-        var theLink = linkSet[i].getAttribute("href").split("href.li/?")[1];
-        linkSet[i].setAttribute("href", theLink);
-    });
-}
-noHrefLi();
 
 {block:ifDarkMode}
 // toggle dark/light
