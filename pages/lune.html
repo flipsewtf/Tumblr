@@ -1,0 +1,643 @@
+<!DOCTYPE html>
+<html lang="en">
+<!-------------------------------------------
+
+    TUMBLR THEME: Lune - © Flipse / @altindie
+    - Version 1.0.0
+    
+    RELEASED: 07 March 2022
+    UPDATED:  -
+    
+    CREDITS:            altindie.tumblr.com/credit
+    TERMS OF USE:       altindie.tumblr.com/themes
+
+--------------------------------------------> 
+<head> 
+<title>{title}: tag page</title> 
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="shortcut icon" href="{Favicon}">
+<link rel="alternate" type="application/rss+xml" href="{RSS}">
+{block:Description}<meta name="description" content="{MetaDescription}" />{/block:Description}
+<link rel="stylesheet" href="//glenthemes.github.io/iconsax/style.css"> 
+<link rel="stylesheet" href="https://unpkg.com/tippy.js@6/animations/scale-subtle.css">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+
+
+
+<!-- Google font -->
+<link href="https://fonts.googleapis.com/css2?family=Karla:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400;1,500;1,600;1,700;1,800&display=swap" rel="stylesheet">
+
+<style>
+
+/*---------------here you edit colours, font-size, etc. here------------------*/
+:root {
+    
+    --font-size: 12px;
+    --icon-shape: 100%; /* ie. 0px for square or 5px for rounded */
+    
+    --color-text: #6e6e6e;
+    --color-link: #959595;
+    --color-background: #ffffff;
+    --color-background-post: #fcfcfc;
+    --color-border: #ededed;
+    --color-accent: #c9d1e9;
+    --color-icons: #6e6e6e;
+    
+/* if you want sharp corners, change these 3 to 0px each */    
+    --corners-round: 5px;
+    --corners-rounded: 8px;
+    --corners-circle: 100%;
+    
+/* if you wanna change the font, remember to change it in the <head> */
+    --font-family: 'Karla', sans-serif;
+}
+
+/*  don't touch */
+:root { 
+    --post-width: 460px;
+    --sidebar-width:180px;
+    --spacing: 20px;
+    --sidebar-icon-size: 65px;
+    --sidebar-icon-padding: 3px;
+    --gap-xl: 130px;
+    --gap-large: 60px;
+    --gap-medium: 30px;
+    --gap-vertical:90px;
+    --gap-horizontal:80px;
+    --button-margin: 14px;
+    --button-gap:14px;
+    --Iconsax-Size:12px;
+    --Iconsax-Color: #6e6e6e;
+}
+*,*::before,*::after {
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+    -moz-osx-font-smoothing: grayscale;
+    box-sizing: border-box;
+}
+* {
+    margin: 0;
+}
+.tmblr-iframe-pushdown {
+    padding-top: 0!important;
+}
+html {
+    height: 100%;
+    scrollbar-width: thin;
+}
+body {
+    height: 100%;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+    overflow-x: hidden;
+}
+button,
+textarea,
+select {
+    font: inherit;
+}
+button {
+    outline: none;
+    border: 0;
+    background: transparent;
+    padding: 0;
+    display: inherit;
+}
+input{
+    font: inherit;
+    border: none;
+    outline: 0;
+    padding: 0;
+    background-color: transparent;
+}
+p,h1,h2,h3,h4,h5,h6 {
+    overflow-wrap: break-word;
+}
+ul,ol {
+    list-style: none;
+    padding: 0;
+}
+p,ul,ol,blockquote,h2 {
+    margin: 1em 0;
+}
+p:first-child {
+    margin-top: 0;
+}
+p:last-child {
+    margin-bottom: 0;
+}
+body{
+    font-family:var(--font-family);
+    font-size: var(--font-size);
+    color: var(--color-text);
+    background-color: var(--color-background);
+    line-height: 1;
+    font-weight: 400;
+}
+
+a {
+    color:var(--color-link);
+    text-decoration: none;
+    transition: all 0.2s ease;
+}
+a:hover {
+    color: var(--color-accent);
+    transition: all 0.2s ease;
+}
+main#container {
+    display: grid;
+    margin: 0 auto;
+    padding: var(--gap-vertical) 0;
+    justify-content: center;
+    gap: var(--gap-vertical) var(--gap-horizontal);
+}
+main#container.header {
+    width: var(--post-width);
+    grid-template-areas: "aside" "post";
+}
+main#container.sidebar {
+    width: calc( var(--post-width) + var(--sidebar-width) + var(--gap-horizontal) );
+    grid-template-areas: "aside post";
+    grid-template-columns: var(--sidebar-width) var(--post-width);
+}
+aside#sidebar {
+    grid-area: aside;
+}
+main#container.sidebar aside#sidebar{
+    display: flex;
+    gap: var(--gap-medium);
+    flex-direction: column;
+    align-items: center;
+    
+}
+main#container.header aside#sidebar {
+    display: grid;
+    gap: 16px var(--gap-medium);
+    grid-template-areas: "header-icon header-menu header-search"
+        "header-desc header-desc header-desc ";
+    align-items: center;
+    justify-content: start;
+    justify-items: center;
+    border-bottom: 1px solid var(--color-border);
+    padding-bottom: var(--gap-medium);
+}
+#sidebar-icon {
+    grid-area: header-icon;
+    display: flex;
+    width: var(--sidebar-icon-size);
+    height: var(--sidebar-icon-size);
+    min-width: var(--sidebar-icon-size);
+    padding: var(--sidebar-icon-padding);
+	border-radius: var(--icon-shape);
+    overflow: hidden;
+    border: 1px solid var(--color-border);
+    align-items: flex-end;
+    justify-content: flex-end;
+}
+#sidebar-icon:hover {
+    border-color: var(--color-accent);
+}
+#sidebar-icon img {
+	border-radius: var(--icon-shape);
+    width: calc( var(--sidebar-icon-size) - var(--sidebar-icon-padding) - var(--sidebar-icon-padding) - 2px );
+    height: calc( var(--sidebar-icon-size) - var(--sidebar-icon-padding) - var(--sidebar-icon-padding) - 2px );
+    display: flex;
+    overflow: hidden;
+}
+nav#menu {
+    grid-area: header-menu;
+}
+nav#menu ul {
+    gap: 10px;
+    margin: 0;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    align-items: center;
+    flex-direction: row;
+}
+nav#menu li a {
+    color: var(--color-text);
+}
+nav#menu li a:hover {
+    color: var(--color-accent);
+}
+form#search {
+    grid-area: header-search;
+    display: flex;
+    flex-direction: row;
+    gap: 0;
+    border: 1px solid var(--color-border);
+    background-color: var(--color-background);
+    overflow: hidden;
+}
+form#search button {
+    cursor: pointer;
+    padding: 5px 10px;
+    background-color: var(--color-background-post);
+}
+form#search button svg {
+    width: calc( var(--font-size) + 5px);
+    height: auto;
+    display: flex;
+    fill: var(--color-icons);
+}
+form#search:hover button svg {
+    fill: var(--color-accent);
+}
+form#search label {
+    width: 100%;
+    border-left: 1px solid var(--color-border);
+}
+form#search input {
+    width: 100%;
+    color: var(--color-text);
+    padding: 6px 10px;
+}
+form#search input::placeholder {
+    padding:0px!important;
+    color: var(--color-text);
+    opacity: 1;
+}
+form#search input::-webkit-input-placeholder {
+    color: var(--color-text);
+}
+form#search input::-moz-placeholder {
+    color: var(--color-text);
+    opacity: 1;
+}
+#description {
+    grid-area: header-desc;
+    line-height: 1.4;
+}
+ #description a {
+    padding-bottom: 2px;
+    margin: 0 3px;
+    border-bottom: 1px solid var(--color-border);
+}
+/* -------------------------------------  posts */
+section#content {
+    grid-area: post;
+    display: flex;
+    gap: var(--gap-large);
+    flex-direction: column;
+}
+article.post h2 {
+    margin-top: 0;
+    font-size: calc(var(--font-size) + 3px);
+}
+section#content.buttons a {
+    display:block;
+    padding: 6px 7px;
+    background-color: var(--color-background-post);
+    border: 1px solid var(--color-border);
+    border-radius: var(--corners-round);
+}
+section#content.underline a {
+    display: block;
+    padding-bottom: 4px;
+    margin: 0 3px;
+    border-bottom: 1px solid var(--color-border);
+}
+section#content.underline a:hover {
+    color:var(--color-accent);
+}
+nav.tags {
+    display: flex;
+    gap: var(--spacing);
+    flex-direction: row;
+    flex-wrap: wrap;
+}
+#top, #bottom {
+    display: flex;
+    gap: var(--button-gap);
+    flex-direction: column;
+    align-items: flex-end;
+}
+.corner-icon{
+    cursor: pointer;
+    padding: 6px;
+    background-color: var(--color-background-post);
+    border: 1px solid var(--color-border);
+    border-radius: var(--corners-round);
+}
+#top svg, #bottom svg {
+    --Iconsax-Color: var(--color-icons);
+    width: calc( var(--font-size) + 6px);
+    height: auto;
+    min-width: 17px;
+    min-height: 17px;
+}
+#top{
+    position: fixed;
+    top: var(--button-margin);
+    right: var(--button-margin);
+}
+iframe.tmblr-iframe, .tmblr-iframe {
+    filter: var(--tumblr-controls-filter);
+    z-index: 9!important;
+    top: calc( var(--font-size) + 0px)!important;
+    right: 42px!important;
+    opacity: 0;
+    visibility: hidden;
+    transform: scale(0.75);
+    transform-origin: 100% 0;
+    transition: all 0.3s ease;
+}
+.tmblr-iframe.active {
+    opacity: 1;
+    visibility: visible;
+    top: calc( var(--font-size) + 0px)!important;
+    right: 62px!important;
+}
+#spin {
+    display: flex;
+    transition: all 0.3s ease;
+}
+.spin-active{
+    transform: rotate(-30deg);
+}
+button#theme-toggle .light-on{
+    display: var(--light-on);
+}
+button#theme-toggle .light-off{
+    display: var(--light-off); 
+}
+#bottom{
+    position: fixed;
+    bottom: var(--button-margin);
+    right: var(--button-margin);
+}
+#bottom a {
+    display: inherit;
+}
+#bottom a#scroll-to-top {
+    z-index:2;
+}
+#bottom a#credit {
+    padding: 4px;
+}
+#bottom a#credit svg {
+    stroke: var(--color-icons);
+    stroke-width: 1;
+    width: calc( var(--font-size) + 10px);
+    height: calc( var(--font-size) + 10px);
+    min-width: 21px;
+    min-height: 21px;
+    transition: all 0.4s ease;
+}
+#bottom a#credit:hover svg {
+    transform: rotate(-360deg);
+}
+::-moz-selection {
+    background-color: var(--color-accent);
+    color:var(--color-text);
+}
+::selection {
+    background-color: var(--color-accent);
+    color:var(--color-text); 
+}
+.tippy-box[data-theme~='rstylr'] {
+    font-size:var(--font-size);
+    text-align:center;
+    font-weight:500;
+    color: var(--color-text);
+    background-color: var(--color-background-post);
+    border: 1px solid var(--color-border);
+    text-transform: lowercase;
+    margin: 15px;
+    z-index: 10;
+    border-radius: var(--corners-round);
+}
+::-webkit-scrollbar {
+    width: 10px;
+    background-color: var(--color-background);
+}
+::-webkit-scrollbar-thumb {
+    background: var(--color-accent);
+    border-radius: var(--corners-round);
+}
+::-webkit-scrollbar-track {
+    background-color: var(--color-background);
+}
+.tmblr-iframe--gdpr-banner,
+.tmblr-iframe--app-cta-button,
+.gdpr-banner {
+    display: none !important;
+}
+.round {
+    border-radius:var(--corners-round);
+}
+.rounded {
+    border-radius:var(--corners-rounded);
+}
+.circle {
+    border-radius:var(--corners-circle);
+}
+/* responsive css */
+@media only screen and (max-width: 720px ) {
+main#container.sidebar {
+    width: 100vw;
+    grid-template-areas: "aside"
+        "post";
+    grid-template-columns: none;
+}
+main#container.header {
+    width: 100vw;
+}
+main#container.header aside#sidebar {
+    display: flex;
+    gap: var(--gap-medium);
+    flex-direction: column;
+    align-items: center;
+}
+section#content,
+aside#sidebar {
+    width: 84vw;
+}
+}
+/* mobile */
+@media only screen and (max-width: 420px ) {
+button#controls,
+.iframe-controls--phone-mobile,
+.tmblr-iframe,
+.iframe-container{
+    display: none !important; 
+}
+}
+</style>
+</head>
+<body>
+
+
+
+
+<!--------------------------HEADER OR SIDEBAR --------------------------------->
+    
+<!-- Replace the word 'sidebar' below, with
+'header' for a (you've got it), header. -->
+
+<main id="container" class="sidebar">
+
+
+
+<aside id="sidebar">
+<div id="sidebar-icon">
+
+<!------------------------------SIBAR ICON -----------------------------------
+replace the URL of the icon with one of your own -->
+
+<img src="https://static.tumblr.com/diajl5m/mNbr8dmko/389884_original.png"/>
+
+</div>
+    
+<nav id="menu" class="round" aria-label="primary navigation">
+    <ul>
+
+<!---------------------------NAVIGATION LINKS --------------------------------->
+        <li><a href="{BlogURL}">home</a></li>
+        <li><a href="/ask">message</a></li>
+        <li><a href="/archive">archive</a></li>
+        
+    </ul>
+</nav>
+
+<form id="search" class="rounded" action="/search" method="get"><button aria-label="click to search" type="submit"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path fill-rule="evenodd" d="M2.75 11a8.25 8.25 0 1116.5 0 8.25 8.25 0 01-16.5 0zM11 1.25c-5.385 0-9.75 4.365-9.75 9.75s4.365 9.75 9.75 9.75a9.712 9.712 0 006.344-2.346l3.126 3.126a.75.75 0 101.06-1.06l-3.126-3.126A9.712 9.712 0 0020.75 11c0-5.385-4.365-9.75-9.75-9.75z"></path></svg></button><label aria-label="search blog"><input type="text" class="rounded" name="q" value="{SearchQuery}" placeholder="search blog" autocomplete="off"/></label></form>
+
+
+
+<!----------------------------DESCRIPTION TEXT -------------------------------->
+<div id="description">
+Here you can have a small description text. This is <a href="#">a link</a>.
+</div>
+
+</aside>
+
+<!------------------------------TAGS -------------------------------------
+
+ Here's where you edit the tags section. -->
+    
+<!-- Replace the word 'buttons' below, with 'underline' for a different link effect on the tags. -->
+<section id="content" class="buttons">
+
+<!-- COPY LINK SECTION FROM HERE -->
+<article class="post">
+<h2>Blue</h2><!-- this line is the title -->
+    <nav class="tags">
+        <a href="/tagged/">Pale blue</a>
+        <a href="/tagged/">Turquoise</a>
+        <a href="/tagged/">Aero blue</a>
+        <a href="/tagged/">Ocean Blue</a>
+        <a href="/tagged/">Air superiority blue</a>
+        <a href="/tagged/">Aqua</a>
+        <a href="/tagged/">Azure</a>
+        <a href="/tagged/">Bright navy blue</a>
+        <a href="/tagged/">Blue jeans</a>
+        <a href="/tagged/">Blue yonder</a>
+    </nav>
+</article>
+<!-- ... TO HERE -->
+
+<!-- COPY LINK SECTION FROM HERE -->
+<article class="post">
+<h2>Pink</h2><!-- this line is the title -->
+    <nav class="tags">
+        <a href="/tagged/">Infrared</a>
+        <a href="/tagged/">International orange</a>
+        <a href="/tagged/">Indian red</a>
+        <a href="/tagged/">Irresistible</a>
+    </nav>
+</article>
+<!-- ... TO HERE -->
+
+        
+
+<!-- COPY LINK SECTION FROM HERE -->
+<article class="post">
+<h2>Gold</h2><!-- this line is the title -->
+    <nav class="tags">
+        <a href="/tagged/">Golden web</a>
+        <a href="/tagged/">Goldenrod</a>
+        <a href="/tagged/">Golden poppy</a>
+        <a href="/tagged/">Gold (Crayola)</a>
+        <a href="/tagged/">Gold metallic</a>
+        <a href="/tagged/">Golden yellow</a>
+    </nav>
+</article>
+<!-- ... TO HERE -->
+
+
+
+
+
+</section>
+</main>
+
+
+
+
+
+
+
+<!-- DO NOT TOUCH FROM HERE AND BELOW -->
+<div id="top">
+	<button id="controls" class="corner-icon round" title="tumblr controls" aria-label="open tumblr controls" type="button">
+		<span id="spin"><i class="iconsax" icon-name="setting-1"></i></span>
+	</button>
+</div>
+
+<div id="bottom">
+    <a id="scroll-to-top" class="corner-icon round" title="scroll to top" onclick="scrollUp();return false;"><i class="iconsax" icon-name="chevron-up"></i></a>
+    <a id="credit" class="corner-icon round" target="_blank" aria-label="Link to theme-maker @altindie blog" title="Theme by @altindie" href="https://altindie.tumblr.com">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M12 20C16.4183 20 20 16.4183 20 12C20 7.58172 16.4183 4 12 4C7.58172 4 4 7.58172 4 12C4 16.4183 7.58172 20 12 20Z" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round" /><path d="M17.0002 5.59977C19.0101 5.26987 20.5139 5.531 21.0527 6.46423C22.1573 8.3774 18.7877 12.3908 13.5265 15.4283C8.26524 18.4659 3.10475 19.3774 2.00018 17.4642C1.36987 16.3725 2.1965 14.5969 4.00018 12.7089" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round" />
+        </svg>
+    </a>
+</div>
+<!-- right content end--> 
+
+<!-- jQuery --><script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<!-- TOOLTIP: tippy.js --><script src="https://unpkg.com/@popperjs/core@2"></script>
+<!-- TOOLTIP: tippy.js--><script src="https://unpkg.com/tippy.js@6"></script>
+<!-- ICONS: iconsax --><script src="//glenthemes.github.io/iconsax/geticons.js"></script>
+<!-- ICONS: phosphor --><script src="https://unpkg.com/phosphor-icons"></script>
+
+<script>
+////////////////// jquery dependant
+
+// tumblr controls
+$("#controls").click(function () {
+    $(".tmblr-iframe").toggleClass("active");
+    $("#spin").toggleClass("spin-active");
+});
+
+////////////////// vanilla js
+
+// tooltip
+tippy("[title]", {
+    theme: "rstylr",
+    arrow: false,
+    animation: "scale-subtle",
+    followCursor: true,
+    placement: "top",
+    touch: 'hold',
+    content(reference) {
+        const title = reference.getAttribute("title");
+        reference.removeAttribute("title");
+        return title;
+    },
+});
+
+// scroll to top
+var timeOut;
+function scrollUp() {
+    if (document.body.scrollTop != 0 || document.documentElement.scrollTop != 0) {
+        window.scrollBy(0, -50);
+        timeOut = setTimeout("scrollUp()", 6);
+    } else clearTimeout(timeOut);
+}
+</script>
+</body>
+</html>
