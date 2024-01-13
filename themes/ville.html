@@ -1014,6 +1014,9 @@ img.answer-user-icon {
 }
 /* -------------------------------------  notes */
 ol.notes {
+    list-style: none;
+    margin: 0;
+    padding: 0;
     border-top: 1px solid var(--color-border);
     padding-top: var(--gap-large);
     margin-top: var(--gap-large);
@@ -1890,16 +1893,6 @@ tippy("[title]", {
         return title;
     },
 });
-
-// no redirect
-function noHrefLi() {
-    var linkSet = document.querySelectorAll('a[href*="href.li/?"]');
-    Array.prototype.forEach.call(linkSet, function (el, i) {
-        var theLink = linkSet[i].getAttribute("href").split("href.li/?")[1];
-        linkSet[i].setAttribute("href", theLink);
-    });
-}
-noHrefLi();
 
 // scroll to top
 var timeOut;
