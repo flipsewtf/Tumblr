@@ -1,0 +1,907 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+
+<!-------------------------------------------
+
+    TUMBLR THEME: Barlows - © Flipse / @altindie
+    - Version 1.0.0
+    
+    RELEASED: 24 August 2022
+    UPDATED: -
+    
+    CREDITS:            altindie.tumblr.com/credit
+    TERMS OF USE:       altindie.tumblr.com/themes
+
+-------------------------------------------->
+
+<head> 
+<title>{Title}: tag page</title> 
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="shortcut icon" href="{Favicon}">
+<link rel="alternate" type="application/rss+xml" href="{RSS}">
+<meta name="description" content="{MetaDescription}"/>
+
+<script>
+    const storedTheme = localStorage.getItem("theme") || (window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light");
+    if (storedTheme) document.documentElement.setAttribute("data-theme", storedTheme); 
+</script>
+
+
+<!-- TOOLTIP: tippy.js scale --><link rel="stylesheet" href="https://unpkg.com/tippy.js@6/animations/scale-subtle.css">
+
+<!-- Google font -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet"> 
+<style>
+/* -------------------------------------  root */
+:root { 
+    --font-family: 'Inter', sans-serif;
+    --font-size: 11px; /* font-size */
+    --line-height: 1.9;
+    --corners-rounded: 8px; /* set to 0px if you want sharp corners */
+    --corners-circle: 100%;
+    --gap-top-bottom: 80px;
+    --gap-large: 40px;
+    --gap-medium: 20px;
+    --button-margin: 15px;
+    --button-gap:12px;
+}
+:root, html[data-theme='light'] {
+    --light-on: flex;
+    --light-off: none;
+    --tumblr-controls-filter: invert(100%) hue-rotate(180deg);
+    --sb-image-light: flex;
+    --sb-image-dark: none;
+    --color-text: #303030;  /* text color */
+    --color-link: #b0b0b0; /* links color */
+    --color-bg: #ffffff;
+    --color-bg-post: #f9f9f9; /* container background color */
+    --color-border: #ededed; /* border color */
+    --color-accent-1: #adc5e7; /* accent + link-hover color */
+}
+html[data-theme='dark'] {
+    --light-on: none;
+    --light-off: flex;
+    --tumblr-controls-filter: invert(0%);
+    --sb-image-light: none;
+    --sb-image-dark: flex;
+    --color-text: #fcfcfc; /* dark mode text color */
+    --color-link: #b1b1b1; /* dark mode links color */
+    --color-bg: #181818;
+    --color-bg-post: #2a2a2a; /* dark mode container background color */
+    --color-border: #3b3b3b; /* dark mode border color */
+    --color-accent-1: #adc5e7; /* dark mode accent + link-hover color */
+}
+html.theme-transition,
+html.theme-transition *,
+html.theme-transition *:before,
+html.theme-transition *:after {
+  transition: 0.0s !important;
+  transition-delay: 0 !important;
+}
+
+/* -------------------------------------  css resets */
+*,*::before,*::after {
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+    -moz-osx-font-smoothing: grayscale;
+    box-sizing: border-box;
+}
+* {
+    margin: 0;
+}
+.tmblr-iframe-pushdown {
+    padding-top: 0!important;
+}
+html {
+    height: 100%;
+    scrollbar-width: thin; /*scrollbar moz */
+}
+body {
+    height: 100%;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+    overflow-x: hidden;
+}
+button,
+textarea,
+select {
+    font: inherit;
+}
+button {
+    outline: none;
+    border: 0;
+    background: transparent;
+    padding: 0;
+    display: inherit;
+}
+input{
+    font: inherit;
+    border: none;
+    outline: 0;
+    padding: 0;
+    background-color: transparent;
+}
+p,h1,h2,h3,h4,h5,h6 {
+    overflow-wrap: break-word;
+}
+ul,ol {
+    list-style: none;
+    padding: 0;
+}
+p,ul,ol,blockquote,h2 {
+    margin: 1em 0;
+}
+p:first-child {
+    margin-top: 0;
+}
+p:last-child {
+    margin-bottom: 0.1em;
+}
+/* -------------------------------------  basics */
+body{
+    font-family:var(--font-family);
+    font-size: var(--font-size);
+    color: var(--color-text);
+    background-color: var(--color-bg);
+    line-height: 1;
+    font-weight: 400;
+}
+a {
+    color:var(--color-link);
+    text-decoration: none;
+    transition: all 0.2s ease;
+}
+a:hover {
+    color: var(--color-accent-1);
+    transition: all 0.2s ease;
+}
+#page-container {
+  min-height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+/* -------------------------------------  container */
+#container-outer {
+    margin: 0 auto;
+    padding: var(--gap-top-bottom) 0;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+main#container {
+    display: grid;
+    gap: var(--gap-top-bottom);
+
+    width: 600px;
+    grid-template-areas: "aside" "tags";
+}
+aside#sidebar {
+    grid-area: aside;
+    display: flex;
+    gap: var(--gap-medium);
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+}
+#sb-line {
+    width: 40px;
+    height: 1px;
+    background-color: var(--color-border);
+    display: block;
+}
+nav#menu ul {
+	margin: 0;
+	display: flex;
+	gap: 12px;
+	flex-wrap: wrap;
+	flex-direction: row;
+	align-content: center;
+	align-items: center;
+	justify-content: flex-start;
+}
+nav#menu ul li {
+	display: flex;
+	flex-direction: column;
+	gap: 3px;
+}
+nav#menu ul li a {
+    cursor: pointer;
+    display: inherit;
+	color: var(--color-text);
+    transition: all 0.3s ease;
+}
+nav#menu ul li a:hover {
+	color: var(--color-accent-1);
+    transition: all 0.3s ease;
+}
+/* search */
+form#search {
+    display: flex;
+    flex-direction: row;
+    gap: 12px;
+    align-items: center;
+    justify-content: space-between;
+    border: 1px solid var(--color-border);
+    border-radius: var(--corners-rounded);
+    overflow: hidden;
+    padding-right: 8px;
+}
+form#search button#search {
+    cursor: pointer;
+    font-size: calc(var(--font-size) + 4px);
+    color: var(--color-text);
+    background-color: var(--color-bg-post);
+    padding: 8px;
+    border-right: 1px solid var(--color-border);
+}
+form#search:hover button#search {
+    color: var(--color-accent-1);
+}
+form#search label {
+    width: 100%;
+}
+form#search input {
+    width: 100%;
+    color: var(--color-text);
+}
+form#search input::placeholder {
+    padding:0px!important;
+    color: var(--color-text);
+    opacity: 1;
+}
+form#search input::-webkit-input-placeholder {
+    color: var(--color-text);
+}
+form#search input::-moz-placeholder {
+    color: var(--color-text);
+    opacity: 1;
+}
+/* -------------------------------------  posts */
+section#content {
+    grid-area: tags;
+    width: 100%;
+}
+.accordion {
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+}
+.section {
+
+}
+.section .heading {
+    cursor: pointer;
+    display: flex;
+    gap: var(--gap-medium);
+    align-items: center;
+    justify-content: space-between;
+}
+.section .heading span.title {
+    font-size: var(--font-size);
+}
+.section.active .heading span.title {
+    font-weight: 700;
+    font-size: calc(var(--font-size) + 1px);
+}
+.heading span.icon {
+    display: inherit;
+    padding: 5px;
+}
+.heading span.icon span.icon-inside {
+	display: inherit;
+	color: var(--color-text);
+	font-size: calc(var(--font-size) + 3px);
+	transition: transform 400ms ease;
+}
+.section.active .heading span.icon-inside  {
+    transform: rotate(-90deg);
+    color: var(--color-accent-1);
+}
+article.container {
+    display: none;
+}
+h2 {
+    margin: 0 0 15px 0;
+    font-size: var(--font-size);
+    font-weight: 700;
+}
+.tags {
+    counter-reset: nav;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+}
+.tags a {
+    display: block;
+    margin-bottom: 15px;
+}
+.tags a::before {
+    content: "" counter(nav, decimal-leading-zero) ". ";
+    counter-increment: nav;
+    color: var(--color-text);
+    font-weight: 500;
+    margin-right: 3px;
+}
+/* theme 1 */
+section#content.theme-1 #accordion {
+    gap: 0;
+    border: 1px solid var(--color-border);
+    border-radius: var(--corners-rounded);
+}
+section#content.theme-1 .section {
+    border-bottom: 1px solid var(--color-border);
+}
+section#content.theme-1 .section:last-of-type {
+    border-bottom: 0;
+}
+section#content.theme-1 .section .heading {
+    padding: var(--gap-medium);
+}
+section#content.theme-1 article.container {
+    background-color: var(--color-bg-post);
+    padding: var(--gap-medium) var(--gap-medium) 5px;
+    border-top: 1px solid var(--color-border);
+}
+section#content.theme-1 .tags+.tags {
+    margin-top: 5px;
+    border-top: 1px solid var(--color-border);
+    padding-top: var(--gap-medium);
+}
+
+/* theme 2 */
+section#content.theme-2 #accordion {
+    gap: var(--gap-medium);
+}
+section#content.theme-2 .heading span.icon {
+    border: 1px solid var(--color-border);
+    border-radius: var(--corners-circle);
+    padding: 6px;
+}
+section#content.theme-2 article.container {
+    margin-top: var(--gap-medium);
+}
+
+section#content.theme-2 .tags {
+    padding: var(--gap-medium) var(--gap-medium) 5px;
+    border: 1px solid var(--color-border);
+    border-radius: var(--corners-rounded);
+    background-color: var(--color-bg-post);
+}
+section#content.theme-2 .tags+.tags {
+    margin-top: var(--gap-medium);
+}
+/* theme 3 */
+section#content.theme-3 #accordion {
+    gap: var(--gap-medium);
+}
+section#content.theme-3 .section {
+    border: 1px solid var(--color-border);
+    border-radius: var(--corners-rounded);
+}
+section#content.theme-3 .section .heading {
+    padding: var(--gap-medium);
+}
+section#content.theme-3 .tags+.tags {
+
+}
+section#content.theme-3 .tags {
+    padding: var(--gap-medium) var(--gap-medium) 5px;
+}
+
+/* -------------------------------------  corners content */
+.corner-icon {
+    cursor: pointer;
+    padding: 8px;
+    border-radius: var(--corners-rounded);
+    background-color: var(--color-bg);
+}
+.corner-icon:hover {
+    background-color: var(--color-bg-post);
+}
+
+.corner-icon svg {
+    stroke: var(--color-text);
+    stroke-width: 1.5;
+    width: 18px;
+    height: 18px;
+}
+#top, #bottom {
+    display: flex;
+    gap: var(--button-gap);
+    flex-direction: column;
+    align-items: flex-end;
+}
+#top {
+    position: fixed;
+    top: var(--button-margin);
+    right: var(--button-margin);
+}
+/* tumblr controls */
+button#controls {
+
+}
+iframe.tmblr-iframe, .tmblr-iframe {
+    filter: var(--tumblr-controls-filter);
+    z-index: 9!important;
+    top: 10px;
+    right: 52px!important;
+    opacity: 0;
+    visibility: hidden;
+    transform: scale(0.75);
+    transform-origin: 100% 0;
+    transition: all 0.3s ease;
+}
+.tmblr-iframe.active {
+    opacity: 1;
+    visibility: visible;
+}
+#spin {
+    display: flex;
+    transition: all 0.3s ease;
+}
+#spin.active {
+    transform: rotate(-40deg);
+}
+
+/* bottom */
+#bottom {
+    position: fixed;
+    bottom: var(--button-margin);
+    right: var(--button-margin);
+}
+#bottom a {
+    display: inherit;
+    color: var(--color-text);
+    z-index:2;
+}
+/* theme-toggle */
+button.theme-toggle.res {
+    display:none;
+ 
+}
+button.theme-toggle .light-on{
+    display: var(--light-on);
+}
+button.theme-toggle .light-off{
+    display: var(--light-off); 
+}
+#scroll-to-top {
+    display:none;
+}
+#scroll-to-top span {
+    display:flex;
+}
+#bottom a#credit span {
+    display:flex;
+    transition: all 0.4s ease;
+}
+#bottom a#credit:hover span {
+    transform: rotate(-360deg);
+}
+/* ------------------------------------- selection */
+::-moz-selection {
+    background-color: var(--color-accent-1);
+    color:var(--color-text);
+}
+::selection {
+    background-color: var(--color-accent-1);
+    color:var(--color-text); 
+}
+/* ------------------------------------- tooltips */
+.tippy-box[data-theme~='rstylr'] {
+    font-size:var(--font-size);
+    text-align:center;
+    font-weight:500;
+    color: var(--color-bg);
+    background-color: var(--color-text);
+    text-transform: lowercase;
+    margin: 15px;
+    z-index: 10;
+    border-radius: 4px;
+}
+/* ------------------------------------- scrollbar */
+::-webkit-scrollbar {
+    width: 13px;
+    background-color: var(--color-bg);
+}
+::-webkit-scrollbar-thumb {
+    background: var(--color-text);
+}
+::-webkit-scrollbar-track {
+    background-color: var(--color-border);
+    border: 6px solid var(--color-bg);
+}
+/*   tumblr banners */
+.tmblr-iframe--gdpr-banner, .tmblr-iframe--app-cta-button, .gdpr-banner {
+    display: none !important;
+}
+/* -------------------------------------  responsive css */
+/* mobile */
+@media only screen and (max-width: 610px ) {
+
+main#container {
+    width: 80vw;
+    justify-content: center;
+    justify-items: center;
+}
+#sb-line,
+button#controls,
+.album-art,
+.iframe-controls--phone-mobile,
+.tmblr-iframe--app-cta-button {
+    display: none !important; 
+}
+}
+
+</style>
+</head>
+<body>
+<div id="page-container">
+<div id="container-outer">
+
+
+<main id="container">
+
+<aside id="sidebar">
+
+    <nav id="menu" aria-label="primary navigation">
+        <ul>
+
+<!---------------------------------------------------------------------
+you can change or add links here. each line is a link.
+-´-------------------------------------------------------------------->
+            <li><a href="{BlogURL}">home</a></li>
+            <li><a href="/ask">message</a></li>
+            <li><a href="https://tumblr.com/dashboard">dashboard</a></li>
+        </ul>
+    </nav>
+    <div id="sb-line"></div>
+    <form id="search" action="/search" method="get">
+        <button id="search" aria-label="click to search" type="submit">
+            <i class="ph-magnifying-glass"></i>
+        </button>
+        <label aria-label="search blog">
+            <input type="text" name="q" value="{SearchQuery}" placeholder="search" autocomplete="off" />
+        </label>
+    </form>
+    
+</aside>
+
+<!---------------------------------------------------------------------
+For a different style/theme, change "theme-1" below, to either
+theme-2 or theme-3
+-´-------------------------------------------------------------------->
+<section id="content" class="theme-1">
+
+
+
+<div id="accordion" class="accordion">
+
+
+
+<!-- section of tags: COPY FROM HERE.. -->
+    <div class="section">
+        <div class="heading">
+        <!-- The line below is the tags title  -->
+            <span class="title">tags title 1</span>
+            <span class="icon">
+                <span class="icon-inside">
+                    <i class="ph-caret-left-bold"></i>
+                </span>
+            </span>
+        </div>
+        <article class="container">
+        
+        <!-- if you're using sub-groups: COPY FROM HERE... -->
+            <div class="tags">
+            <!-- the Line below is s sub-title: <h2>sub title</h2>
+            You can delete it if you don't need it -->
+                <h2>sub title</h2>
+                <a href="/tagged/">Pale blue</a>
+                <a href="/tagged/">Turquoise</a>
+                <a href="/tagged/">Aero blue</a>
+                <a href="/tagged/">Ocean Blue</a>
+                <a href="/tagged/">Air superiority blue</a>
+                <a href="/tagged/">Bright navy blue</a>
+                <a href="/tagged/">Blue jeans</a>
+                <a href="/tagged/">Blue yonder</a>
+                <a href="/tagged/">Aqua</a>
+                <a href="/tagged/">Azure</a>
+            </div>
+            <!-- if you're using sub-groups: TO HERE... -->
+            
+            <!-- if you're using sub-groups: COPY FROM HERE... -->
+            <div class="tags">
+                <h2>sub title</h2>
+                <a href="/tagged/">Azure</a>
+                <a href="/tagged/">Bright navy blue</a>
+                <a href="/tagged/">Blue jeans</a>
+                <a href="/tagged/">Blue yonder</a>
+            </div>
+            <!-- if you're using sub-groups: TO HERE... -->
+            
+            <!-- if you're using sub-groups: COPY FROM HERE... -->
+            <div class="tags">
+                <h2>sub title</h2>
+                <a href="/tagged/">Azure</a>
+                <a href="/tagged/">Bright navy blue</a>
+                <a href="/tagged/">Blue jeans</a>
+                <a href="/tagged/">Blue yonder</a>
+            </div>
+            <!-- if you're using sub-groups: TO HERE... -->
+        </article>
+    </div>
+<!--section of tags:  ...TO HERE -->
+
+
+
+<!-- section of tags: COPY FROM HERE.. -->
+    <div class="section">
+        <div class="heading">
+        <!-- The line below is the tags title  -->
+            <span class="title">tags title 2</span>
+            <span class="icon">
+                <span class="icon-inside">
+                    <i class="ph-caret-left-bold"></i>
+                </span>
+            </span>
+        </div>
+        <article class="container">
+            <div class="tags">
+                <a href="/tagged/">Infrared</a>
+                <a href="/tagged/">International orange</a>
+                <a href="/tagged/">Indian red</a>
+                <a href="/tagged/">Irresistible</a>
+                <a href="/tagged/">Infrared</a>
+                <a href="/tagged/">International orange</a>
+                <a href="/tagged/">Indian red</a>
+                <a href="/tagged/">Irresistible</a>
+            </div>
+        </article>
+    </div>
+<!--section of tags:  ...TO HERE -->
+
+
+
+<!-- section of tags: COPY FROM HERE.. -->
+    <div class="section">
+        <div class="heading">
+        <!-- The line below is the tags title  -->
+            <span class="title">tags title 3</span>
+            <span class="icon">
+                <span class="icon-inside">
+                    <i class="ph-caret-left-bold"></i>
+                </span>
+            </span>
+        </div>
+        <article class="container">
+            <div class="tags">
+                <a href="/tagged/">Golden web</a>
+                <a href="/tagged/">Goldenrod</a>
+                <a href="/tagged/">Golden poppy</a>
+                <a href="/tagged/">Gold (Crayola)</a>
+                <a href="/tagged/">Gold metallic</a>
+                <a href="/tagged/">Golden yellow</a>
+            </div>
+        </article>
+    </div>
+<!--section of tags:  ...TO HERE -->
+
+
+<!-- section of tags: COPY FROM HERE.. -->
+    <div class="section">
+        <div class="heading">
+        <!-- The line below is the tags title  -->
+            <span class="title">tags title 4</span>
+            <span class="icon">
+                <span class="icon-inside">
+                    <i class="ph-caret-left-bold"></i>
+                </span>
+            </span>
+        </div>
+        <article class="container">
+            <div class="tags">
+                <h2>sub title</h2>
+                <a href="/tagged/">Golden web</a>
+                <a href="/tagged/">Goldenrod</a>
+                <a href="/tagged/">Golden poppy</a>
+                <a href="/tagged/">Gold (Crayola)</a>
+                <a href="/tagged/">Gold metallic</a>
+                <a href="/tagged/">Golden yellow</a>
+            </div>
+            <div class="tags">
+                <h2>sub title</h2>
+                <a href="/tagged/">Azure</a>
+                <a href="/tagged/">Bright navy blue</a>
+                <a href="/tagged/">Blue jeans</a>
+                <a href="/tagged/">Blue yonder</a>
+            </div>
+        </article>
+    </div>
+<!--section of tags:  ...TO HERE -->
+
+
+
+
+
+
+<!------------------------------------------------------------------------
+DO NOT TOUCH FROM HERE AND BEYOND
+-------------------------------------------------------------------------->
+
+</div>
+</section>
+</main>
+
+
+</div> <!-- end #container-outer -->
+</div> <!-- end #paige-container -->
+
+<!-- right-content -->
+<div id="top">
+	<button id="controls" class="corner-icon" title="tumblr controls" aria-label="open tumblr controls" type="button">
+		<span id="spin">
+		    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M12 15C13.6569 15 15 13.6569 15 12C15 10.3431 13.6569 9 12 9C10.3431 9 9 10.3431 9 12C9 13.6569 10.3431 15 12 15Z" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round" />
+                <path d="M2 12.8799V11.1199C2 10.0799 2.85 9.21994 3.9 9.21994C5.71 9.21994 6.45 7.93994 5.54 6.36994C5.02 5.46994 5.33 4.29994 6.24 3.77994L7.97 2.78994C8.76 2.31994 9.78 2.59994 10.25 3.38994L10.36 3.57994C11.26 5.14994 12.74 5.14994 13.65 3.57994L13.76 3.38994C14.23 2.59994 15.25 2.31994 16.04 2.78994L17.77 3.77994C18.68 4.29994 18.99 5.46994 18.47 6.36994C17.56 7.93994 18.3 9.21994 20.11 9.21994C21.15 9.21994 22.01 10.0699 22.01 11.1199V12.8799C22.01 13.9199 21.16 14.7799 20.11 14.7799C18.3 14.7799 17.56 16.0599 18.47 17.6299C18.99 18.5399 18.68 19.6999 17.77 20.2199L16.04 21.2099C15.25 21.6799 14.23 21.3999 13.76 20.6099L13.65 20.4199C12.75 18.8499 11.27 18.8499 10.36 20.4199L10.25 20.6099C9.78 21.3999 8.76 21.6799 7.97 21.2099L6.24 20.2199C5.33 19.6999 5.02 18.5299 5.54 17.6299C6.45 16.0599 5.71 14.7799 3.9 14.7799C2.85 14.7799 2 13.9199 2 12.8799Z" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round" />
+            </svg>
+		</span>
+	</button>
+</div>
+
+<div id="bottom">
+    <div id="scroll-to-top" class="corner-icon" title="scroll to top">
+        <span>
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M18.0701 9.57L12.0001 3.5L5.93005 9.57" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round" />
+                <path d="M12 20.4999V3.66992" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round" />
+            </svg>
+        </span>
+    </div>
+    
+	<button class="theme-toggle" aria-label="toggle dark mode" type="button">
+		<span class="light-on corner-icon" title="toggle dark mode">
+		    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
+                <circle cx="12" cy="12" r="5"></circle>
+                <line x1="12" y1="1" x2="12" y2="3"></line>
+                <line x1="12" y1="21" x2="12" y2="23"></line>
+                <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                <line x1="1" y1="12" x2="3" y2="12"></line>
+                <line x1="21" y1="12" x2="23" y2="12"></line>
+                <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+            </svg>
+		</span>
+		
+        <span class="light-off corner-icon" title="toggle light mode">
+		    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
+		        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+            </svg>
+        </span>
+	</button>
+    <a id="credit" class="corner-icon" target="_blank" title="Theme by @altindie" href="https://altindie.tumblr.com">
+        <span>
+<svg xmlns="http://www.w3.org/2000/svg" width="192" height="192" viewBox="0 0 256 256">
+    <polyline points="64 88 16 128 64 168" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="16"></polyline>
+    <polyline points="192 88 240 128 192 168" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="16"></polyline>
+    <line x1="160" y1="40" x2="96" y2="216" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="16"></line>
+</svg>
+        </span>
+    </a>
+</div>
+<!-- right content end--> 
+
+<!-- jQuery -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<!-- TOOLTIP: tippy.js -->
+<script src="https://unpkg.com/@popperjs/core@2"></script>
+<!-- TOOLTIP: tippy.js-->
+<script src="https://unpkg.com/tippy.js@6"></script>
+<!-- ICONS: phosphor -->
+<script src="https://unpkg.com/phosphor-icons"></script>
+
+<script>
+
+// scroll to top
+$(document).ready(function(){
+    $(window).scroll(function(){
+        if ($(this).scrollTop() > 100) {
+            $('#scroll-to-top').fadeIn(0);
+        } else {
+            $('#scroll-to-top').fadeOut(0);
+        }
+    });
+    $('#scroll-to-top').click(function(){
+        $('html, body').animate({scrollTop : 0},800);
+        return false;
+    });
+});
+
+// tumblr controls
+$("#controls").click(function () {
+    $(".tmblr-iframe").toggleClass("active");
+    $("#spin").toggleClass("active");
+});
+
+// accordion faq
+$(function () {
+    const Accordion = function (el, multiple) {
+        this.el = el || {};
+        this.multiple = multiple || false;
+
+        const links = this.el.find(".heading");
+        links.on(
+            "click",
+            {
+                el: this.el,
+                multiple: this.multiple,
+            },
+            this.dropdown
+        );
+    };
+
+    Accordion.prototype.dropdown = function (e) {
+        let $el = e.data.el;
+        ($this = $(this)), ($next = $this.next());
+
+        $next.slideToggle();
+        $this.parent().toggleClass("active");
+
+        if (!e.data.multiple) {
+            $el.find("article.container").not($next).slideUp().parent().removeClass("active");
+        }
+    };
+
+    const accordion = new Accordion($("#accordion"), false);
+});
+
+////////////////// vanilla js
+
+
+// tooltip
+tippy("[title]", {
+    theme: "rstylr",
+    arrow: false,
+    animation: "scale-subtle",
+    followCursor: true,
+    placement: "top",
+    touch: 'hold',
+    content(reference) {
+        const title = reference.getAttribute("title");
+        reference.removeAttribute("title");
+        return title;
+    },
+});
+
+// toggle dark/light
+const btns = document.querySelectorAll(".theme-toggle");
+
+btns.forEach(btn => {
+  btn.addEventListener('click', function() {
+    document.documentElement.classList.add("theme-transition");
+
+    let currentTheme = document.documentElement.getAttribute("data-theme");
+    let targetTheme = "light";
+
+    if (currentTheme === "light") {
+        targetTheme = "dark";
+    }
+
+    window.setTimeout(function () {
+        document.documentElement.classList.remove("theme-transition");
+    }, 50);
+
+    document.documentElement.setAttribute("data-theme", targetTheme);
+    localStorage.setItem("theme", targetTheme);
+  });
+});
+
+</script>
+</body>
+</html>
