@@ -593,6 +593,8 @@ nav#pagi-container {
 }
 ul.pagi {
     margin: 0;
+    padding: 0;
+    list-style: none;
     gap: var(--gap2);
     justify-content: space-between;
     width: 100%;
@@ -2115,6 +2117,8 @@ button.controls,
 <script src="https://unpkg.com/tippy.js@6"></script>
 <!-- ICONS: Lucide -->
 <script src="https://unpkg.com/lucide@latest"></script>
+<!-- ICONS: phosphor -->
+<script src="https://unpkg.com/phosphor-icons"></script>
 <script>
 ////////////////// jquery dependant 
 
@@ -2225,15 +2229,6 @@ tippy("[title]", {
         return title;
     },
 });
-// no redirect
-function noHrefLi() {
-    var linkSet = document.querySelectorAll('a[href*="href.li/?"]');
-    Array.prototype.forEach.call(linkSet, function (el, i) {
-        var theLink = linkSet[i].getAttribute("href").split("href.li/?")[1];
-        linkSet[i].setAttribute("href", theLink);
-    });
-}
-noHrefLi();
 
 {block:ifDarkMode}
 // toggle dark/light
