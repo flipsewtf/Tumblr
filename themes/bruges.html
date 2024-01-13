@@ -1170,6 +1170,35 @@ p.npf_quote {
 p.npf_chat {
     font-family: inherit!important;
 }
+/* -------------------------------------  video /audio responsiveness */
+article iframe:not(iframe.bandcamp_audio_player,.spotify_audio_player, iframe.soundcloud_audio_player, iframe.tumblr_audio_player) {
+    max-width: 100%;
+    aspect-ratio: 16/9;
+    height: auto;
+}
+iframe.soundcloud_audio_player,
+.tumblr_video_container {
+    width: 100%!important;
+    height: auto!important;
+}
+figure iframe.spotify_audio_player,
+iframe.spotify_audio_player {
+    max-height: 90px;
+    width: 100%;
+}
+article iframe[src*='soundcloud'] {
+    max-height: 130px;
+    width: 100%;
+}
+figure iframe.bandcamp_audio_player {
+    max-height: 120px;
+    width: 100%;
+}
+iframe.tumblr_audio_player {
+    max-height: 85px;
+    width: 100%;
+}
+
 /* -------------------------------------  POST TYPE: audio */
 .audio_player {
     max-height: 31px;
@@ -1189,18 +1218,6 @@ p.npf_chat {
 .tmblr-full>.audio-caption .album-cover {
     width: 85px!important;
     height: 85px!important;
-}
-/* -------------------------------------  POST-TYPE: video */
-.video {
-    overflow: hidden;
-    position: relative;
-} 
-.video.resized {
-    overflow: hidden;
-    display: flex;
-}
-video {
-    display: inherit;
 }
 /* -------------------------------------  POST-TYPE: ask */
 /* question */
@@ -2149,21 +2166,13 @@ button.controls,
 
 <!-- jQuery -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-<!-- IFRAMES: responsive -->
-<script src="https://flipsewtf.github.io/Tumblr/scripts/flexframes.min.js"></script>
 <!-- PHOTOSETS: npf images fix -->
 <script src="//npf-images-v3.github.io/script.js"></script>
 <!-- PHOTOSETS: pxu -->
 <script src="https://static.tumblr.com/yxfeliq/hHwojmt8m/bctphotoset.min.js"></script>
-<!-- PHOTOSETS: pxu -->
-<script src="https://cdn.jsdelivr.net/gh/boscoxvi/npfphotosets/npfphotosets.js"></script>
 <!-- TOOLTIP: tippy.js --><script src="https://unpkg.com/@popperjs/core@2"></script>
 <!-- TOOLTIP: tippy.js--><script src="https://unpkg.com/tippy.js@6"></script>
-<!-- ICONS: phosphor --><script src="https://unpkg.com/phosphor-icons"></script>
 <!-- ICONS: Lucide --><script src="https://unpkg.com/lucide@latest"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/smoothscroll/1.4.1/SmoothScroll.min.js"></script>
-<!-- AUDIO: npf @glenthemes -->
-<script src="//tmblr-npf-audio.gitlab.io/s/init.js"></script>
 <script>
 ////////////////// jquery dependant 
 
