@@ -1,10 +1,10 @@
 <!----------------------------------------------------
 
     TUMBLR THEME: Everlong - © Flipse / @mournstera
-    - Version 1.5.0
+    - Version 1.5.2
     
     RELEASED:   06 May 2023
-    UPDATED:    16 October 2023
+    UPDATED:    14 January 2024
     
     CREDITS:            mournstera.tumblr.com/credit
     TERMS OF USE:       mournstera.tumblr.com/themes
@@ -115,8 +115,6 @@
 <link href="https://static.tumblr.com/qudkd6d/OcDnl99gb/style.css" rel="stylesheet" type="text/css"/>
 <!-- TOOLTIP: tippy.js scale -->
 <link rel="stylesheet" href="https://unpkg.com/tippy.js@6/animations/scale-subtle.css">
-<!-- AUDIO: npf @glenthemes -->
-<link href="//tmblr-npf-audio.gitlab.io/s/base.css" rel="stylesheet">
 <!-- Google font -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -149,7 +147,6 @@
     --round4: 1.8em;  
     --circle: 100%;
 {/block:ifRoundContentCorners}
-    --NPF-Audio-Image-Size: 85px;
 }
 :root{block:ifDarkMode}, html[data-theme='light']{/block:ifDarkMode} {
     --mode-transform: translateX(0px);
@@ -167,7 +164,6 @@
     {block:ifShadows}
     --shadow: 7px 7px 0px 0px rgba({RGBcolor:Shadow});
     {/block:ifShadows}
-    --NPF-Audio-Buttons-Color: rgba({color:Text});
 }
 {block:ifDarkMode}
 html[data-theme='dark'] {
@@ -185,7 +181,6 @@ html[data-theme='dark'] {
     {block:ifShadows}
     --shadow: 7px 7px 0px 0px rgba({RGBcolor:Dark mode Shadow});
     {/block:ifShadows}
-    --NPF-Audio-Buttons-Color: rgba({color:Dark mode Text});
 }
 html.theme-transition,
 html.theme-transition *,
@@ -222,9 +217,7 @@ body {
     font-weight: 400;
 }
 ul, ol {
-    list-style: none;
     padding: 0;
-    margin: 0;
 }
 button,
 textarea,
@@ -544,6 +537,8 @@ nav.pagi-container {
 }
 ul.pagi {
     margin: 0;
+    padding: 0;
+    list-style: none;
     gap: var(--gap3);
     justify-content: space-between;
     width: 100%;
@@ -596,13 +591,24 @@ article {
     line-height: var(--line-height);
 }
 /* -------------------------------------  article, captions etc. */
+article figcaption.audio-caption,
 article h1,
 article h2,
+article h3,
+article ul,
+article ol,
+article pre,
+article blockquote,
 article .caption p,
-.post-content ul,
-.post-content ol,
-.post-content pre {
+article .replies p,
+article .question p {
 	margin: var(--gap2) var(--gap3);
+}
+article ul, article ol {
+    padding-left: var(--gap3);
+}
+article ol li, article ul li {
+    padding-left: var(--gap1);
 }
 article h1 {
     font-size: calc(var(--font-size) + 7px);
@@ -701,38 +707,6 @@ article img {
 :where(.post-content p, .post-content ul, .post-content ol, .post-content blockquote, .updates-container, .sb-description) a {
     border-bottom: 2px solid rgba(var(--c-acc1));
     padding-bottom: 1px;
-}
-/* ------------ ul + ol in posts */
-.post-content ul li {
-    padding-left: calc( var(--gap2) + var(--gap2) + 1px );
-    position: relative;
-} 
-.post-content ul li::before {
-    content: '\e95c';
-    font-family: 'phosphor';
-    font-size: calc( var(--font-size) + 0px);
-    speak: never;
-    position: absolute;
-    left: calc( var(--gap2) - 8px );
-}
-.post-content ul li:hover::before {
-    color: rgba(var(--c-acc1)); 
-}
-.post-content ol {
-    counter-reset: my-count; 
-}
-.post-content ol li {
-    counter-increment: my-count;
-    position: relative;
-    padding-left: calc( var(--gap2) - 5px );
-    margin-left: calc( var(--gap2) + var(--gap2) - 12px );
-}
-.post-content ol li::marker {
-    content: counter(my-count, decimal-leading-zero);
-    display: flex;
-}
-.post-content ol li:hover::marker {
-    color: rgba(var(--c-acc1));
 }
 /* ------------ alt. description */
 .popover.tutorial {
@@ -963,22 +937,6 @@ a.more_notes_link {
     border: 1px solid rgba(var(--c-border));
     background-color: rgba(var(--c-bg1));
 }
-/* -------------------------------------  video */
-.video {
-    width: 100%;
-    height: auto;
-    aspect-ratio: 16/9;
-}
-.tumblr_video_container {
-    width: 100%!important;
-    height: auto!important;
-}
-article iframe {
-    max-width: 100%;
-    aspect-ratio: 16/9;
-    height: auto;
-}
-
 /* -------------------------------------  poll */
 .poll-post .poll-question {
     font-size: calc(var(--font-size) + 3px)!important;
@@ -1006,6 +964,57 @@ a.poll-row p {
 }
 .poll-post .poll-see-results {
     margin-top: 0;
+}
+/* -------------------------------------  video /audio responsiveness */
+article iframe:not(iframe.bandcamp_audio_player,.spotify_audio_player, iframe.soundcloud_audio_player, iframe.tumblr_audio_player) {
+    max-width: 100%;
+    aspect-ratio: 16/9;
+    height: auto;
+}
+iframe.soundcloud_audio_player,
+.tumblr_video_container {
+    width: 100%!important;
+    height: auto!important;
+}
+figure iframe.spotify_audio_player,
+iframe.spotify_audio_player {
+    max-height: 90px;
+    width: 100%;
+}
+article iframe[src*='soundcloud'] {
+    max-height: 130px;
+    width: 100%;
+}
+figure iframe.bandcamp_audio_player {
+    max-height: 120px;
+    width: 100%;
+}
+iframe.tumblr_audio_player {
+    max-height: 85px;
+    width: 100%;
+}
+
+/* -------------------------------------  POST TYPE: audio */
+.audio_player {
+    max-height: 31px;
+}
+.tmblr-full>.audio-caption .album,
+.tmblr-full>.audio-caption .artist {
+    font-size: inherit;
+}
+.tmblr-full>.audio-caption {
+    margin-bottom: var(--gap2);
+}
+.tmblr-full>.audio-caption .audio-details {
+    padding: 0;
+    flex: 1;
+}
+.tmblr-full>.audio-caption .album-cover {
+    flex: none;
+    margin-left: var(--gap2);
+    border-radius: var(--round1);
+    width: 85px!important;
+    height: 85px!important;
 }
 /* -------------------------------------  quote */
 p.npf_quote {
@@ -1072,79 +1081,6 @@ p.npf_chat span.label {
 }
 p.npf_chat {
     font-family: inherit!important;
-}
-/* -------------------------------------  audio */
-.custom_audio_buttons svg {
-    display: flex;
-    fill: rgba(var(--c-text));
-    cursor: pointer;
-    stroke-width: 1;
-    width: 1.6em;
-    height: 1.6em;
-}
-.custom_audio_error_icon svg {
-    cursor: initial;
-}
-.audio-bar {
-    display:none;
-}
-.spotify_audio_player, article iframe[src*='soundcloud'] {
-    max-height: 170px;
-    border: 0;
-    padding-bottom: 0;
-    width: 100%;
-}
-figure iframe.bandcamp_audio_player {
-    max-height: 120px;
-    border: 0;
-    padding-bottom: 0;
-    width: 100%;
-}
-iframe.tumblr_audio_player {
-    max-height: 85px!important;
-    margin-bottom: -2px;
-}
-.npf-audio-wrapper {
-    overflow: hidden;
-    display: flex;
-    align-items: center;
-    margin: var(--gap1);
-}
-.npf-audio-background {
-    display: flex;
-    align-items: center;
-    gap: var(--gap2);
-    overflow: hidden;
-    border: 1px solid rgba(var(--c-border));
-    background-color: rgba(var(--c-bg1));
-    padding: var(--gap2);
-    border-radius: var(--round1);
-    flex: 1;
-    height: var(--NPF-Audio-Image-Size);
-    box-sizing: border-box;
-}
-.npf-audio-buttons {
-    margin-right: 0;
-    width: 1.6em;
-    height: 1.6em;
-    line-height: 0;
-    flex-shrink: 0;
-    cursor: pointer;
-}
-.npf-audio-image {
-    margin-left: var(--gap2);
-    border-radius: var(--round1);
-    width: var(--NPF-Audio-Image-Size)!important;
-    height: var(--NPF-Audio-Image-Size)!important;
-    object-fit: cover;
-    flex-shrink: 0;
-}
-.npf-audio-details {
-    line-height: 1.4;
-}
-span.npf-audio-title {
-    font-size: 1.1em;
-    font-weight: 700;
 }
 /* -------------------------------------  link */
 div.npf-link-block {
@@ -1555,36 +1491,30 @@ span.toggle::after {
                 </div>
             {/block:Video}
     
-            {block:Audio}
-                {block:AudioPlayer}
-                {AudioPlayer}
-                <figcaption class="npf-audio-wrapper">
-        	        <div class="npf-audio-background">
-        	            <div class="audio_player">
-            			    <span class="custom_audio_buttons"></span>
-            		    </div>
-        		        <div class="npf-audio-details">
-        			        {block:TrackName}
-        			        <span class="npf-audio-title">{TrackName}</span>
-        			        {/block:TrackName}
-        			        {block:Artist}
-        			        <span class="npf-audio-artist">{Artist}</span>
-        			        {/block:Artist}
-        		        </div>
-        	        </div>
-        	        
-        	        {block:AlbumArt}
-        			        <img class="npf-audio-image" src="{AlbumArtURL}"/>
-        		    {/block:AlbumArt}
-        	        
-        	        <div class="audio-bar">
-        	            <span class="custom_audio_time_left"></span>
-        	            <div class="custom_audio_seekbar rounded"></div>
-                    </div>
-                    
-                </figcaption>
+        <!-- legacy audio -->
+        {block:Audio}
+            <figure class="tmblr-full">
                 {/block:AudioPlayer}
-            {/block:Audio}
+                    <figcaption class="audio-caption">
+                        <span class="tmblr-audio-meta audio-details">
+                            {block:TrackName}
+                                <span class="tmblr-audio-meta title">{TrackName}</span>
+                            {/block:TrackName}
+                            {block:Artist}
+                                <span class="tmblr-audio-meta artist">{Artist}</span>
+                            {/block:Artist}
+                            {block:Album}
+                                <span class="tmblr-audio-meta album">{TrackName}</span>
+                            {/block:Album}
+                        </span>
+                        {block:AlbumArt}
+                        <img class="album-cover" src="{AlbumArtURL}" alt="image">
+                        {/block:AlbumArt}
+                    </figcaption>
+                    {AudioPlayer}
+                {/block:AudioPlayer}
+            </figure>
+        {/block:Audio}
 
             {block:Answer}
                 <div class="ask-container">
@@ -1813,12 +1743,6 @@ span.toggle::after {
 <script src="https://unpkg.com/tippy.js@6"></script>
 <!-- ICONS: phosphor -->
 <script src="https://unpkg.com/@phosphor-icons/web"></script>
-<!-- smooth scroll -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/smoothscroll/1.4.1/SmoothScroll.min.js"></script>
-<!-- AUDIO: legacy -->
-<script src="https://cdn.jsdelivr.net/gh/annasthms/customaudio@latest/customaudio.min.js"></script>
-<!-- AUDIO: npf @glenthemes -->
-<script src="//tmblr-npf-audio.gitlab.io/s/init.js"></script>
 
 <script>
 $(document).ready(function () {
@@ -1877,35 +1801,6 @@ $(document).ready(function () {
 });
 
 ////////////////// vanilla js
-
-// audioplayer npf
-tumblr_npf_audio({
-    emptyTitleText: "",
-    emptyArtistText: "",
-    emptyAlbumText: "",
-    
-    titleLabel: "",
-    artistLabel: "",
-    albumLabel: ""
-});
-
-// audioplayer legacy
-customAudio({
-    post: "article",
-    wrappers: {
-        audio: ".custom_audio_wrapper",
-        buttons: ".custom_audio_buttons",
-        duration: ".custom_audio_duration",
-        timeCurrent: ".custom_audio_current_time",
-        timeLeft: ".custom_audio_time_left",
-        seekbar: ".custom_audio_seekbar",
-    },
-    default: false,
-    pauseAll: true,
-    playButton: "<svg xmlns='http://www.w3.org/2000/svg' version='1.1' xmlns:xlink='http://www.w3.org/1999/xlink' width='512' height='512' x='0' y='0' viewBox='0 0 512 512' xml:space='preserve'><g><path fill-rule='evenodd' d='M468.8 235.007 67.441 3.277A24.2 24.2 0 0 0 55.354-.008h-.07A24.247 24.247 0 0 0 43.19 3.279a24 24 0 0 0-12.11 20.992v463.456a24.186 24.186 0 0 0 36.36 20.994L468.8 276.99a24.238 24.238 0 0 0 0-41.983z'></path></g></svg>",
-    pauseButton: "<svg xmlns='http://www.w3.org/2000/svg' version='1.1' xmlns:xlink='http://www.w3.org/1999/xlink' width='512' height='512' x='0' y='0' viewBox='0 0 47.607 47.607' xml:space='preserve' class=''><g><path d='M17.991 40.976a6.631 6.631 0 0 1-13.262 0V6.631a6.631 6.631 0 0 1 13.262 0v34.345zM42.877 40.976a6.631 6.631 0 0 1-13.262 0V6.631a6.631 6.631 0 0 1 13.262 0v34.345z'></path></g></svg>",
-    hideInfoIfError: true,
-});
 
 // tooltip
 tippy(".post-icons.lide", {
