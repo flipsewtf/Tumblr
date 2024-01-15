@@ -704,6 +704,10 @@ article ul, article ol {
 article ol li, article ul li {
     padding-left: var(--gap1);
 }
+article ul li:hover::marker,
+article ol li:hover::marker {
+    color: rgb(var(--c-acc1));
+}
 article h1 {
     font-size: calc(var(--font-size) + 6px);
     font-weight: 700;
