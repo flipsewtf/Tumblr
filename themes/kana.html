@@ -683,6 +683,10 @@ article ul, article ol {
 article ol li, article ul li {
     padding-left: var(--gap1);
 }
+article ul li:hover::marker,
+article ol li:hover::marker {
+    color: rgb(var(--c-acc1));
+}
 /*  user reblogs and original */
 .reblog-header {
     margin: var(--text-margin) 0 var(--text-margin) 0;
