@@ -601,6 +601,10 @@ article ul, article ol {
 article ol li, article ul li {
     padding-left: 4px;
 }
+article ul li:hover::marker,
+article ol li:hover::marker {
+    color: var(--color-accent-1);
+}
 {block:ifAccentedPinnedPost}
 /* accent pinned */
 #button-container {
