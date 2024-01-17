@@ -4,10 +4,10 @@
 <!-------------------------------------------
 
     TUMBLR THEME: Autumn - © Flipse / @mournstera
-    - Version 1.6.0
+    - Version 1.6.1
     
     RELEASED: 30 September 2022
-    UPDATED: 13 January 2024
+    UPDATED: 17 January 2024
     
     CREDITS:        mournstera.tumblr.com/credit
     TERMS OF USE:   mournstera.tumblr.com/themes
@@ -1876,37 +1876,30 @@ form#search {
         {/block:Video}
 
 
-        <!-- audio  -->
-        {block:Audio}
-            {block:AudioPlayer}
-            {AudioPlayer}
-            <figcaption class="npf-audio-wrapper">
-                <div class="npf-audio-background">
-                    <div class="audio_player">
-        			    <span class="custom_audio_buttons"></span>
-        		    </div>
-        	        <div class="npf-audio-details">
-        		        {block:TrackName}
-        		        <span class="npf-audio-title">{TrackName}</span>
-        		        {/block:TrackName}
-        		        {block:Artist}
-        		        <span class="npf-audio-artist">{Artist}</span>
-        		        {/block:Artist}
-        	        </div>
-                </div>
-                
-                {block:AlbumArt}
-        		        <img class="npf-audio-image" src="{AlbumArtURL}"/>
-        	    {/block:AlbumArt}
-                
-                <div class="audio-bar">
-                    <span class="custom_audio_time_left"></span>
-                    <div class="custom_audio_seekbar rounded"></div>
-                </div>
-                
-            </figcaption>
-            {/block:AudioPlayer}
-        {/block:Audio}
+                <!-- legacy audio -->
+                {block:Audio}
+                    <figure class="tmblr-full">
+                        {/block:AudioPlayer}
+                            <figcaption class="audio-caption">
+                                <span class="tmblr-audio-meta audio-details">
+                                    {block:TrackName}
+                                        <span class="tmblr-audio-meta title">{TrackName}</span>
+                                    {/block:TrackName}
+                                    {block:Artist}
+                                        <span class="tmblr-audio-meta artist">{Artist}</span>
+                                    {/block:Artist}
+                                    {block:Album}
+                                        <span class="tmblr-audio-meta album">{TrackName}</span>
+                                    {/block:Album}
+                                </span>
+                                {block:AlbumArt}
+                                <img class="album-cover" src="{AlbumArtURL}" alt="image">
+                                {/block:AlbumArt}
+                            </figcaption>
+                            {AudioPlayer}
+                        {/block:AudioPlayer}
+                    </figure>
+                {/block:Audio}
 
         {block:Answer}
         <!-- ask -->
