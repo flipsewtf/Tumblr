@@ -4,7 +4,6 @@ Here you will find Tumblr themes by me, [Mournstera](https://mournstera.tumblr.c
 ### Folders
 - **Other:** redirect themes and misc.
 - **Pages:** Tumblr page themes
-- **Scripts:** just where I host stuff.
 - **Themes:** full tumblr themes for your tumblr blog.
 
 ## Copyright
