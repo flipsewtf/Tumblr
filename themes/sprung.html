@@ -2051,46 +2051,6 @@ customAudio({
 });
 
 
-// featured tags by egg.design modified by me ----
-// setting this up as a vanilla JS alternative to jquery's getScript
-function getScript(scriptUrl, callback, errors) {
-    const script = document.createElement('script');
-    script.src = scriptUrl;
-    script.onload = callback;
-    script.onerror = errors
-    document.body.appendChild(script);
-}
- 
-// setting up the selectors for the featured tags and the total number of posts
-const featuredTags = document.querySelectorAll('.featured-tags a[href*="/tagged"]');
-const totals = document.querySelectorAll('.featured-tags a[href*="/tagged"] .total');
-
-// get each tag
-featuredTags.forEach((tag, index) => {
-    // grabs the url of the tag and removes everything except the tag name
-    const tagged = tag.href.split('/tagged/')[1];
-    let tagData;
-
-    // gets the API link based on the tag name
-    const tagUrl = `https://{name}.tumblr.com/api/read/json?tagged=${ tagged }`;
-
-    // when there are errors, change the tag's text to say it was not found
-    function onErrors() {
-        tag.innerHTML = `${ tagged } not found`;
-    }
-
-    // when there are no errors and the script loads
-    function onLoad() {
-        // variable for the data
-        tagData = tumblr_api_read;
-        // total number of posts
-        const total = tagData['posts-total'];
-        totals[index].innerHTML = total === '1' ? `${ total }` : `${ total }`;
-    }
-
-    getScript(tagUrl, onLoad, onErrors);
-});
-
 // ------------------- tooltip
 const commonOptions = {
     theme: "custom",
