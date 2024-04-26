@@ -97,6 +97,7 @@
 <meta name="if:Round photo corners" content=""/>
 <meta name="if:Center post column" content=""/>
 <meta name="if:Accented pinned post" content=""/>
+<meta name="if:Search bar" content=""/>
 
 <meta name="text:Body font"  content="Karla"/>
 <meta name="text:Post margin" content="130px"/>
@@ -428,9 +429,9 @@ nav.menu a.home {
     color: rgba(var(--c-acc1))!important;
 }
 form.search {
-{block:HideFromSearchEnabled}
-    display:none!important;
-{/block:HideFromSearchEnabled}
+{block:ifNotSearchBar}
+    display: none!important;
+{/block:ifNotSearchBar}
     justify-content: space-between;
     max-width: 145px;
     gap: 10px;
@@ -1536,12 +1537,14 @@ button.tab-toggle svg {
                     <button class="toggle-nav">{text:Navigate Link Title}</button>
                 {/block:ifNavigateLinkTitle}
             </nav>
+            {block:ifSearchBar}
             <form class="search flex align-center" action="/search" method="get">
                 <button class="search" aria-label="click to search" type="submit">
                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-search"><circle cx="11" cy="11" r="8"></circle><line x1="21" x2="16.65" y1="21" y2="16.65"></line></svg>
                 </button>
                 <input type="text" name="q" value="{SearchQuery}" placeholder="search" autocomplete="off"/>
             </form>
+            {/block:ifSearchBar}
         </div>
 
         <div class="sb-bottom flex gap5 align-center">
