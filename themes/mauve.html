@@ -1,10 +1,10 @@
 <!----------------------------------------------------
 
     TUMBLR THEME: Mauve - © Flipse / @mournstera
-    - Version 1.5.3
+    - Version 1.6.0
     
     RELEASED:   02 August 2023
-    UPDATED:    14 January 2024
+    UPDATED:    30 April 2024
     
     CREDITS:            mournstera.tumblr.com/credit
     TERMS OF USE:       mournstera.tumblr.com/themes
@@ -89,6 +89,7 @@
 <meta name="if:Round content corners" content=""/>
 <meta name="if:Round photo corners" content=""/>
 <meta name="if:Accented pinned post" content=""/>
+<meta name="if:Search bar" content=""/>
 
 <meta name="text:Body font"  content="Inter"/>
 <meta name="text:Post margin" content="130px"/>
@@ -117,6 +118,8 @@
 <meta name="text:Activity 4" content="playing"/>
 {/block:Options}
 
+<!-- AUDIO: npf audio glenthemes -->
+<link href="//tmblr-npf-audio.gitlab.io/s/base.css" rel="stylesheet">
 <!-- PHOTOSETS: pxu -->
 <link href="https://static.tumblr.com/qudkd6d/OcDnl99gb/style.css" rel="stylesheet" type="text/css"/>
 <!-- TOOLTIP: tippy.js scale -->
@@ -513,9 +516,9 @@ span.chevron.active {
     transition: rotate 0.5s ease;
 }
 form.search {
-{block:HideFromSearchEnabled}
-    display:none!important;
-{/block:HideFromSearchEnabled}
+{block:ifNotSearchBar}
+    display: none!important;
+{/block:ifNotSearchBar}
     background-color: rgba(var(--c-bg1));
     border-radius: var(--round2);
     border: 1px solid rgba(var(--c-acc1),.0);
@@ -685,7 +688,11 @@ article {
 }
 
 /* -------------------------------------  article, captions etc. */
-article figcaption.audio-caption,
+article .poll-post a.poll-row,
+article div.npf-link-block,
+article figcaption.audio-caption, /* o.g. npf tumblr audio */
+article figcaption.npf-audio-wrapper,
+article figcaption.legacy-audio-wrapper,
 article h1,
 article h2,
 article h3,
@@ -1110,27 +1117,61 @@ iframe.tumblr_audio_player {
     width: 100%;
 }
 
+
 /* -------------------------------------  POST TYPE: audio */
-.audio_player {
-    max-height: 31px;
+
+.npf-audio-wrapper, .legacy-audio-wrapper {
+    --NPF-Audio-Buttons-Size: 1.4em;
+    --NPF-Audio-Buttons-Color: rgb(var(--c-acc1));
+    --NPF-Audio-Buttons-Spacing: var(--gap3);
+    --NPF-Audio-Image-Size: 85px;
+    --NPF-Audio-Image-Spacing: var(--gap1);
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    width: auto;
 }
-.tmblr-full>.audio-caption .album,
-.tmblr-full>.audio-caption .artist {
-    font-size: inherit;
-}
-.tmblr-full>.audio-caption {
-    margin-bottom: var(--gap2);
-}
-.tmblr-full>.audio-caption .audio-details {
-    padding: 0;
+
+.npf-audio-background, .legacy-audio-background {
     flex: 1;
+    height: var(--NPF-Audio-Image-Size);
+    box-sizing: border-box;
+    display: flex;
+    align-items: center;
+    background: rgb(var(--c-bg2));
+    border-radius: var(--round2);
+    padding: var(--gap2);
 }
-.tmblr-full>.audio-caption .album-cover {
-    flex: none;
-    margin-left: var(--gap2);
-    border-radius: var(--round1);
-    width: 85px!important;
-    height: 85px!important;
+span.npf-audio-title {
+    font-weight: 600;
+}
+.npf-audio-buttons, .legacy-audio-buttons {
+    margin-right: var(--NPF-Audio-Buttons-Spacing);
+    width: var(--NPF-Audio-Buttons-Size);
+    height: var(--NPF-Audio-Buttons-Size);
+    line-height: 0;
+    flex-shrink: 0;
+    cursor: pointer;
+}
+.npf-audio-image, img.legacy-audio-image {
+    margin-left: var(--NPF-Audio-Image-Spacing);
+    width: var(--NPF-Audio-Image-Size)!important;
+    height: var(--NPF-Audio-Image-Size)!important;
+    object-fit: cover;
+    flex-shrink: 0;
+    overflow: hidden;
+    border-radius: var(--round2);
+}
+.custom_audio_buttons svg {
+    width: 1.25em;
+    height: 1.25em;
+    color: rgb(var(--c-acc1));
+}
+span.legacy-audio-details, .npf-audio-details {
+    display: flex;
+    flex: 1;
+    line-height: 1.3;
+    flex-direction: column;
 }
 /* -------------------------------------  quote */
 p.npf_quote {
@@ -1721,30 +1762,25 @@ button.sb-close {
                 </div>
             {/block:Video}
     
-        <!-- legacy audio -->
-        {block:Audio}
-            <figure class="tmblr-full">
-                {/block:AudioPlayer}
-                    <figcaption class="audio-caption">
-                        <span class="tmblr-audio-meta audio-details">
-                            {block:TrackName}
-                                <span class="tmblr-audio-meta title">{TrackName}</span>
-                            {/block:TrackName}
-                            {block:Artist}
-                                <span class="tmblr-audio-meta artist">{Artist}</span>
-                            {/block:Artist}
-                            {block:Album}
-                                <span class="tmblr-audio-meta album">{TrackName}</span>
-                            {/block:Album}
+            <!-- legacy audio -->
+            {block:Audio} 
+                <figcaption class="legacy-audio-wrapper">
+                	{AudioPlayer}
+                    <div class="legacy-audio-background">
+                        <div class="legacy-audio-buttons">
+                            <div class="audio_player">
+                        		<span class="custom_audio_buttons"></span>
+                        		<div class="custom_audio_seekbar"></div>
+                            </div>
+                        </div>
+                        <span class="legacy-audio-details">
+                            {block:TrackName}<span class="npf-audio-title"><span class="npf-audio-title-label"> </span>{TrackName}</span>{/block:TrackName}
+                            {block:Artist}<span class="npf-audio-artist"><span class="npf-audio-artist-label"> </span>{Artist}</span>{/block:Artist}
                         </span>
-                        {block:AlbumArt}
-                        <img class="album-cover" src="{AlbumArtURL}" alt="image">
-                        {/block:AlbumArt}
-                    </figcaption>
-                    {AudioPlayer}
-                {/block:AudioPlayer}
-            </figure>
-        {/block:Audio}
+                    </div>
+                    {block:AlbumArt}<img class="legacy-audio-image" src="{AlbumArtURL}" alt="image">{/block:AlbumArt}
+                </figcaption>
+            {/block:Audio}
 
             {block:Answer}
                 <div class="ask-container">
@@ -2011,6 +2047,10 @@ button.sb-close {
 <script src="https://unpkg.com/tippy.js@6"></script>
 <!-- ICONS: Lucide -->
 <script src="https://unpkg.com/lucide@latest"></script>
+<!-- AUDIO: npf audio glenthemes -->
+<script src="//tmblr-npf-audio.gitlab.io/s/init.js"></script>
+<!-- AUDIO: legacy audio annasthms -->
+<script src="https://cdn.jsdelivr.net/gh/annasthms/customaudio@latest/customaudio.min.js"></script>
 
 <script>
 
@@ -2081,6 +2121,34 @@ $(document).ready(function () {
 });
 
 ////////////////////////////////////// vanilla js
+
+// ------------------- audio
+tumblr_npf_audio({
+    emptyTitleText: "",
+    emptyArtistText: "",
+    emptyAlbumText: "",
+    
+    titleLabel: "",
+    artistLabel: "",
+    albumLabel: ""
+});
+
+customAudio({
+    post: "article",
+    wrappers: {
+        audio: ".custom_audio_wrapper",
+        buttons: ".custom_audio_buttons",
+        duration: ".custom_audio_duration",
+        timeCurrent: ".custom_audio_current_time",
+        timeLeft: ".custom_audio_time_left",
+        seekbar: ".custom_audio_seekbar",
+    },
+    default: false,
+    pauseAll: true,
+    playButton: "<svg xmlns='http://www.w3.org/2000/svg' version='1.1' xmlns:xlink='http://www.w3.org/1999/xlink' width='512' height='512' x='0' y='0' viewBox='0 0 512 512' style='enable-background:new 0 0 512 512' xml:space='preserve' class=''><g><path fill-rule='evenodd' d='M468.8 235.007 67.441 3.277A24.2 24.2 0 0 0 55.354-.008h-.07A24.247 24.247 0 0 0 43.19 3.279a24 24 0 0 0-12.11 20.992v463.456a24.186 24.186 0 0 0 36.36 20.994L468.8 276.99a24.238 24.238 0 0 0 0-41.983z' fill='currentColor'></path></g></svg>",
+    pauseButton: "<svg xmlns='http://www.w3.org/2000/svg' version='1.1' xmlns:xlink='http://www.w3.org/1999/xlink' width='512' height='512' x='0' y='0' viewBox='0 0 47.607 47.607' style='enable-background:new 0 0 512 512' xml:space='preserve' class=''><g><path d='M17.991 40.976a6.631 6.631 0 0 1-13.262 0V6.631a6.631 6.631 0 0 1 13.262 0v34.345zM42.877 40.976a6.631 6.631 0 0 1-13.262 0V6.631a6.631 6.631 0 0 1 13.262 0v34.345z' fill='currentColor' class=''></path></g></svg>",
+    hideInfoIfError: true,
+});
 
 lucide.createIcons();
 
