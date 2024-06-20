@@ -4,7 +4,7 @@
     - Version 1.0.7
     
     RELEASED:   04 November 2023
-    UPDATED:    30 April 2024
+    UPDATED:    20 June 2024
     
     CREDITS:            mournstera.tumblr.com/credit
     TERMS OF USE:       mournstera.tumblr.com/themes  
@@ -34,6 +34,7 @@
 
 {block:Options}
 <meta name="image:Sidebar image" content=""/>
+<meta name="image:Dark mode Sidebar image" content=""/>
 
 <meta name="image:Project 1" content=""/>
 <meta name="image:Project 2" content=""/>
@@ -53,17 +54,17 @@
 <meta name="color:Dark mode Borders" content="#434343"/>
 <meta name="color:Dark mode Accent" content="#a69979"/>
 
-<meta name="select:Blog layout" content="left" title="left sidebar"/>
-<meta name="select:Blog layout" content="right" title="right sidebar"/>
+<meta name="select:Blog layout" content="left" title="Left sidebar"/>
+<meta name="select:Blog layout" content="right" title="Right sidebar"/>
 
-<meta name="select:Font size" content="1.1rem" title="11px"/>
-<meta name="select:Font size" content="1.2rem" title="12px"/> 
-<meta name="select:Font size" content="1.3rem" title="13px"/> 
-<meta name="select:Font size" content="1.4rem" title="14px"/>
-<meta name="select:Font size" content="1.5rem" title="15px"/> 
-<meta name="select:Font size" content="1.6rem" title="16px"/> 
-<meta name="select:Font size" content="1.7rem" title="17px"/> 
-<meta name="select:Font size" content="1.8rem" title="18px"/>
+<meta name="select:Font size" content="1.1rem" title="1.1rem (11px)"/>
+<meta name="select:Font size" content="1.2rem" title="1.2rem (12px)"/> 
+<meta name="select:Font size" content="1.3rem" title="1.3rem (13px)"/> 
+<meta name="select:Font size" content="1.4rem" title="1.4rem (14px)"/>
+<meta name="select:Font size" content="1.5rem" title="1.5rem (15px)"/> 
+<meta name="select:Font size" content="1.6rem" title="1.6rem (16px)"/> 
+<meta name="select:Font size" content="1.7rem" title="1.7rem (17px)"/> 
+<meta name="select:Font size" content="1.8rem" title="1.8rem (18px)"/>
 
 <meta name="select:Post width" content="350px"/>
 <meta name="select:Post width" content="400px"/>
@@ -81,10 +82,10 @@
 <meta name="select:Sidebar image size" content="200px">
 <meta name="select:Sidebar image size" content="255px">
 
-<meta name="select:Sidebar image shape" content="square" title="square">
-<meta name="select:Sidebar image shape" content="rounded" title="rounded">
-<meta name="select:Sidebar image shape" content="circle" title="circle">
-<meta name="select:Sidebar image shape" content="blob" title="blob">
+<meta name="select:Sidebar image shape" content="square" title="Square">
+<meta name="select:Sidebar image shape" content="rounded" title="Rounded">
+<meta name="select:Sidebar image shape" content="circle" title="Circle">
+<meta name="select:Sidebar image shape" content="blob" title="Blob">
 
 <meta name="select:Post info" content="post-icons" title="icons">
 <meta name="select:Post info" content="post-text" title="text">
@@ -430,6 +431,12 @@ a:hover {
 }
 .gap5 {
     gap: var(--gap5);
+}
+.light-on{
+    display: var(--light-on);
+}
+.light-off{
+    display: var(--light-off);
 }
 /* -------------------------------------  containers */
 .page-container {
@@ -1614,13 +1621,6 @@ button.theme-toggle {
     cursor: pointer;
 }
 /* theme-toggle */
-button.theme-toggle .light-on{
-    display: var(--light-on);
-}
-button.theme-toggle .light-off{
-    display: var(--light-off);
-}
-
 .scroll-to-top {
     position: fixed;
     bottom: var(--gap3);
@@ -1841,7 +1841,8 @@ body.active {
         <section class="sidebar-section about">
             {block:IfSidebarImageImage}
                 <div class="sidebar-icon flex {select:Sidebar image shape}">
-                    <img  src="{image:Sidebar image}"/>
+                    <img class="light-on" src="{image:Sidebar image}"/>
+                    <img class="light-off" src="{image:Dark mode Sidebar image}"/>
                 </div>
             {/block:IfSidebarImageImage}
             
