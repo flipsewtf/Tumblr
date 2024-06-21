@@ -1,10 +1,10 @@
 <!----------------------------------------------------
 
     TUMBLR THEME: Brasch - © Flipse / @mournstera
-    - Version 1.0.7
+    - Version 1.1.0
     
     RELEASED:   04 November 2023
-    UPDATED:    20 June 2024
+    UPDATED:    21 June 2024
     
     CREDITS:            mournstera.tumblr.com/credit
     TERMS OF USE:       mournstera.tumblr.com/themes  
@@ -487,10 +487,10 @@ footer.footer-bottom {
 section.foot {
     max-width: 350px;
     padding: var(--gap4);
-}
-section.foot:nth-child(2) {
     border-right: 1px solid rgba(var(--c-border));
-    border-left: 1px solid rgba(var(--c-border));
+}
+section.foot:last-child {
+    border-right: 0;
 }
 nav.socials {
     font-size: 2em;
@@ -1740,6 +1740,7 @@ body.active {
     section.foot {
         border-bottom: 1px solid rgba(var(--c-border));
         max-width: 100%;
+        border-right: 0;
     }
     section.foot:last-child {
         border-bottom: 0;
@@ -2470,10 +2471,13 @@ remember to fill out URL (the #) and blog name.
 
 <footer class="footer-bottom">
     <div class="footer-inner flex wrap">
+    
+        {block:ifFooterDisclaimer}
         <section class="foot disclaimer">
             <div class="section-title">Disclaimer</div>
             {text:Footer Disclaimer}
         </section>
+        {/block:ifFooterDisclaimer}
         
         <section class="foot">
             <div class="section-title">Links</div>
