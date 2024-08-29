@@ -1,10 +1,10 @@
 <!----------------------------------------------------
 
     TUMBLR THEME: Palm - © Flipse / @lushwave
-    - Version 1.0.0
+    - Version 1.0.1
     
     RELEASED:       20 August 2024
-    UPDATED:        -
+    UPDATED:        29 August 2024
     
     CREDITS:        lushwave.tumblr.com/credit
     TERMS OF USE:   lushwave.tumblr.com/themes
@@ -1566,125 +1566,6 @@ nav.mobile-menu::after {
     border-top: 1px solid;
     background: rgb(var(--c-bg1));
 }
-
-/* -------------------------------------  mine */
-.notice {
-    border: 1px solid rgba(var(--c-acc1));
-    padding: var(--gap3);
-    border-radius: var(--round3);
-    background-color: rgba(var(--c-bg2));
-    display: flex;
-    gap: var(--gap3);
-    align-items: center;
-    line-height: 1.5;
-    margin: var(--text-margin) 0;
-}
-.notice-icon {
-    display: flex;
-}
-.notice-icon svg {
-    stroke: rgba(var(--c-acc1));
-    width: 2em;
-    height: 2em;
-    stroke-width: 1.5;
-}
-article ul.cannot, article ul.can {
-    list-style: none;
-    margin-left: 0;
-    padding-left: 0;
-}
-ul.cannot li, ul.can li {
-    margin-bottom: 1rem;
-}
-.post-content ul.can li::before, .post-content ul.cannot li::before {
-    font-size: 1.5em;
-    font-family: "Phosphor";
-    vertical-align: middle;
-    margin-right: var(--gap1);
-}
-.post-content ul.can li::before {
-    content: '\e48e';
-}
-.post-content ul.cannot li::before {
-    content: '\e48c';
-}
-article ul li:hover::before {
-    color: rgb(var(--c-acc1));
-}
-.viewthemes {
-    gap: var(--gap2);
-    flex-direction: column;
-    margin-top: var(--gap3);
-    display: flex;
-}
-.viewthemes a {
-    color: rgba(var(--c-text));
-    display: block;
-    background-color: rgba(var(--c-acc1));
-    padding: var(--gap1);
-    text-align: center;
-    border-radius: var(--round2);
-    border: 1px solid rgba(var(--c-acc1));
-}
-.viewthemes a:hover {
-    color: rgba(var(--c-text));
-    background: rgb(var(--c-bg1));
-}
-.mytags-container {
-    margin-bottom: var(--gap5);
-}
-.tags-section {
-    display: flex;
-    flex-wrap: wrap;
-    gap: var(--gap3);
-    margin: var(--text-margin) 0;
-}
-.tags-section a {
-    color: rgba(var(--c-text));
-    border: 1px solid rgba(var(--c-border));
-    padding: 5px 7px;
-    border-radius: var(--round1);
-    background: rgb(var(--c-bg2));
-}
-.tags-section a:hover {
-    color: rgba(var(--c-bg1));
-    border: 1px solid rgba(var(--c-acc1));
-    background: rgb(var(--c-acc1));
-}
-code.help {
-    background-color: rgba(var(--c-bg2));
-    border: 1px solid rgba(var(--c-border));
-    padding: 1rem;
-    display: block;
-    border-radius: var(--round2);
-}
-/* credits */
-.credit-intro {
-    border-bottom: 1px solid rgb(var(--c-border));
-}
-.credits-grid {
-    display: grid;
-    grid-template-columns: repeat(2,1fr);
-    border-bottom: 1px solid rgb(var(--c-border));
-    padding-bottom: var(--gap1);
-}
-.credits-grid:last-child {
-    border-bottom: 0;
-}
-.credit-section {
-    display: flex;
-    flex-direction: column;
-    margin: var(--text-margin) 0;
-}
-article .caption .credit-section p {
-    margin: 0;
-}
-.credit-section p:first-child {
-    font-weight: 500;
-}
-h2.credit-title {
-    margin-bottom: 0;
-}
 /* ------------------------------------------------- responsive */
 .mobile, .mobile-container {
     display:none;
@@ -1956,21 +1837,7 @@ h2.credit-title {
 
             
             <div class="post-content">
-            
-{block:AskPage}
-    <h1>Contact & faq</h1>
-    <div class="caption  original-post">
-        <p>I've made a <a target="_blank" href="/helpdesk">helpdesk/FAQ page</a> where I've tried to gather as much information as possible. Please read it carefully before sending me any enquiries about my codes.</p>
-            
-        <div class="notice">
-            <div class="notice-icon"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" icon-name="info" class="lucide lucide-info"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="16" x2="12" y2="12"></line><line x1="12" y1="8" x2="12.01" y2="8"></line></svg></div>
-        
-        <div> <b>Please note:</b> I answer all asks publicly unless you tell me not to.</div>
-        </div>
-    </div>
-{/block:AskPage}
-
-                
+		    
                 {block:Photo}
                 <!-- legacy single photo -->
                     <a class="legacy-photo photo-single"  onclick="Tumblr.Lightbox.init([{ width: {PhotoWidth-HighRes}, height: {PhotoHeight-HighRes}, low_res: '{PhotoURL-500}', high_res: '{PhotoURL-HighRes}' }]); $('body').toggleClass('tumblr_lightbox_active'); return false"><img src="{PhotoURL-HighRes}"></a>
