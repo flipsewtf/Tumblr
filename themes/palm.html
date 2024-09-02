@@ -2327,19 +2327,6 @@ document.addEventListener("DOMContentLoaded", function () {
 
 });
 
-// ------------------- bar
-let prevScrollpos = window.pageYOffset;
-window.onscroll = function () {
-    let currentScrollPos = window.pageYOffset;
-    if (prevScrollpos > currentScrollPos) {
-        document.getElementById("bar").style.top = "0";
-    } else {
-        document.getElementById("bar").style.top = "-6rem";
-    }
-    prevScrollpos = currentScrollPos;
-};
-
-
 // ------------------- audio
 tumblr_npf_audio({
     emptyTitleText: "",
