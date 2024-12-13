@@ -7,4 +7,4 @@ Here you will find Tumblr themes by me, [Mournstera](https://mournstera.tumblr.c
 - **Themes:** full tumblr themes for your tumblr blog.
 
 ## Copyright
-All themes distributed by Mournstera are under the Creative Commons Attribution-NoDerivatives 4.0 International license. Please see my full Terms Of Use at [mournstera.tumblr.com/themes](https://mournstera.tumblr.com/themes) before installing any of my themes.
+All themes distributed by Mournstera are under the Creative Commons Attribution-NonCommercial-NoDerivatives 4.0 International. Please see my full Terms Of Use at [mournstera.tumblr.com/themes](https://mournstera.tumblr.com/themes) before installing any of my themes.
