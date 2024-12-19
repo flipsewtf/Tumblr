@@ -1,10 +1,10 @@
 <!----------------------------------------------------
 
     TUMBLR THEME: Sevens - © Flipse / @mournstera
-    - Version 1.1.0
+    - Version 1.1.5
     
     RELEASED:   16 November 2023
-    UPDATED:    30 April 2024
+    UPDATED:    19 December 2024
     
     CREDITS:            mournstera.tumblr.com/credit
     TERMS OF USE:       mournstera.tumblr.com/themes  
@@ -504,18 +504,19 @@ nav.menu a:hover, .toggle-menu span:first-child:hover {
     display: inline-flex;
 }
 span.menu-spin {
-    transition: rotate .5s ease;
+    transition: rotate .6s ease;
 }
 span.menu-spin.active {
     rotate: -180deg;
 }
-nav.menu-2 {
+.menu-2-wrapper {
     max-height: 0;
     overflow: hidden;
-    transition: max-height 0.5s ease-out, padding 0.5s ease-out;
-    margin-top: var(--gap2);
+    transition: max-height 0.6s ease-out;
+}
+nav.menu-2 {
     gap: 0.8rem;
-    padding-bottom: 0.1rem;
+    margin: var(--gap2) 0;
 }
 /* -------------------------------------  pagination */
 .pagi-wrap {
@@ -1607,20 +1608,22 @@ span.activity-icon {
                 </nav>
         
                 {block:ifToggleLabel}
-                <nav class="menu-2 flex">
-                    {block:HasPages}
-                        {block:Pages}
-                            <a href="{URL}">{Label}</a>
-                        {/block:Pages}
-                    {/block:HasPages}
-                    
-                    {block:ifArchiveLinkLabel}
-                        <a href="/archive">{text:Archive Link Label}</a>
-                    {/block:ifArchiveLinkLabel}
-                    {block:SubmissionsEnabled}
-                    <a href="/submit">{SubmitLabel}</a>
-                    {/block:SubmissionsEnabled}
-                </nav>
+                <div class="menu-2-wrapper">
+                    <nav class="menu-2 flex">
+                        {block:HasPages}
+                            {block:Pages}
+                                <a href="{URL}">{Label}</a>
+                            {/block:Pages}
+                        {/block:HasPages}
+                        
+                        {block:ifArchiveLinkLabel}
+                            <a href="/archive">{text:Archive Link Label}</a>
+                        {/block:ifArchiveLinkLabel}
+                        {block:SubmissionsEnabled}
+                        <a href="/submit">{SubmitLabel}</a>
+                        {/block:SubmissionsEnabled}
+                    </nav>
+                </div>
                 {/block:ifToggleLabel}
                 
                 
@@ -2027,29 +2030,28 @@ document.addEventListener('DOMContentLoaded', function () {
     
     controls.forEach(function (control) {
         control.addEventListener('click', function () {
-            document.querySelector('.tmblr-iframe').classList.toggle('active');
             document.querySelector('.line-container').classList.toggle('active');
+            document.querySelector('.tmblr-iframe').classList.toggle('active');
+            
         });
     });
 
     {block:ifToggleLabel}
     // menu
     const toggleButton = document.querySelector(".toggle-menu");
-    const menuSpin = document.querySelector(".menu-spin");
-    const menu = document.querySelector(".menu-2");
+    const navSpin = document.querySelector(".menu-spin");
+    const navWrap = document.querySelector(".menu-2-wrapper");
     
-toggleButton.addEventListener("click", function () {
-    menuSpin.classList.toggle("active");
-    menu.classList.toggle("active");
-
-    if (menu.classList.contains("active")) {
-        menu.style.maxHeight = menu.scrollHeight + "px";
-        menu.style.paddingBottom = "0.5rem";
-    } else {
-        menu.style.maxHeight = 0;
-        menu.style.paddingBottom = 0;
-    }
-});
+    toggleButton.addEventListener("click", function () {
+        navSpin.classList.toggle("active");
+        navWrap.classList.toggle("active");
+    
+        if (navWrap.classList.contains("active")) {
+            navWrap.style.maxHeight = navWrap.scrollHeight + "px";
+        } else {
+            navWrap.style.maxHeight = 0;
+        }
+    });
     {/block:ifToggleLabel}
 
     {block:ifUpdateTab}
@@ -2140,7 +2142,7 @@ customAudio({
         buttons: ".custom_audio_buttons",
         duration: ".custom_audio_duration",
         timeCurrent: ".custom_audio_current_time",
-        timeLeft: ".custom_audio_time_left",
+        timeLeft: ".custom_audio_time_left", 
         seekbar: ".custom_audio_seekbar",
     },
     default: false,
@@ -2159,7 +2161,7 @@ const commonOptions = {
     touch: "hold",
 };
 
-tippy(".lide", {
+tippy(".post-icons.lide", {
     ...commonOptions,
     content: "like",
 });
