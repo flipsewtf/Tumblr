@@ -1,7 +1,7 @@
  <!----------------------------------------------------
 
     TUMBLR THEME: Jude - © Flipse / @mournstera
-    - Version 3.0.0
+    - Version 3.0.1
     
     RELEASED:   12 November 2022 
     UPDATED:    02 January 2025 
@@ -80,6 +80,11 @@
 <meta name="select:Line Height" content="2.4"/>
 <meta name="select:Line Height" content="2.5"/>
 
+<meta name="select:Text Align" content="left" title="Left"/>
+<meta name="select:Text Align" content="justify" title="Justify"/>
+<meta name="select:Text Align" content="right" title="Right"/>
+<meta name="select:Text Align" content="center" title="Center"/>
+
 <meta name="select:Design" content="box" title="Boxed">
 <meta name="select:Design" content="minimal" title="Minimal">
 
@@ -94,6 +99,8 @@
 <meta name="select:Post Width" content="400px"/>
 <meta name="select:Post Width" content="450px"/>
 <meta name="select:Post Width" content="500px"/>
+<meta name="select:Post Width" content="540px"/>
+
 <meta name="select:Post Width" content="540px"/>
 
 <meta name="select:Photoset Gutter" content="1px" title="1px"/>
@@ -1109,6 +1116,10 @@ margin-bottom: var(--layout-gap);
 
 :is(article h1, article h2, article h3, article p, article ul, article ol, article blockquote, article .question, ol.notes) {
     line-height: var(--line-height);
+}
+
+:is(article h1, article h2, article h3, article p, article ul, article ol, article blockquote) {
+    text-align: {select:Text Align};
 }
 
 /* ---------------------------------------------- CAPTIONS, UL, OL HEADERS */
