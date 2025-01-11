@@ -1,10 +1,10 @@
 <!----------------------------------------------------
 
     TUMBLR THEME: Suburban - © Flipse / @mournstera
-    - Version 1.1.0
+    - Version 1.2.0
     
     RELEASED:   28 January 2024
-    UPDATED:    30 April 2024
+    UPDATED:    11 January 2025
     
     CREDITS:            mournstera.tumblr.com/credit
     TERMS OF USE:       mournstera.tumblr.com/themes  
@@ -83,14 +83,16 @@
 <meta name="select:Photoset gutter" content="3px" title="3px"/>
 <meta name="select:Photoset gutter" content="4px" title="4px"/>
 
-<meta name="select:Post info" content="post-icons" title="icons">
-<meta name="select:Post info" content="post-text" title="text">
+<meta name="select:Post info" content="post-icons" title="Icons">
+<meta name="select:Post info" content="post-text" title="Text">
 
-<meta name="select:Display tags" content="tags-always" title="always">
-<meta name="select:Display tags" content="tags-upon-toggle" title="upon toggle">
+<meta name="select:Display tags" content="tags-always" title="Always">
+<meta name="select:Display tags" content="tags-upon-toggle" title="Upon toggle">
+
+<meta name="select:Tumblr controls" content="t-display" title="Display">
+<meta name="select:Tumblr controls" content="t-hide" title="Behind toggle">
 
 <meta name="if:Dark mode" content=""/>
-<meta name="if:Hide Tumblr controls behind toggle" content=""/>
 <meta name="if:Round photoset corners" content=""/>
 <meta name="if:Round content corners" content=""/>
 <meta name="if:Update tab" content=""/>
@@ -1242,9 +1244,6 @@ div.npf-link-block .bottom .site-name {
 .top-corner {
     position: fixed;
     top: var(--gap2);
-{block:ifNotHideTumblrControlsBehindToggle}
-    top: 50px;
-{/block:ifNotHideTumblrControlsBehindToggle}
     right: var(--gap2);
     flex-direction: column;
 }
@@ -1256,28 +1255,31 @@ div.npf-link-block .bottom .site-name {
     border-radius: var(--round2);
     border: 1px solid rgb(var(--c-border));
 }
-{block:ifNotHideTumblrControlsBehindToggle}
-button.controls {
-    display:none;
+.t-display .top-corner {
+    margin-top: 35px;
 }
-{/block:ifNotHideTumblrControlsBehindToggle}
-/* tumblr controls stuff */
-iframe.tmblr-iframe, .tmblr-iframe {
-    z-index: 99!important;
-{block:ifHideTumblrControlsBehindToggle}
-    opacity: 0;
-    visibility: hidden;
-    top: 1rem;
-    right: 8rem!important;
-{/block:ifHideTumblrControlsBehindToggle}
-    transform: scale(0.8);
+.t-display button.controls {
+    display: none;
+}
+iframe.tmblr-iframe, 
+.tmblr-iframe {
+    z-index: 99 !important;
+    transform: scale(0.85);
     transform-origin: 100% 0;
     transition: all 0.3s ease;
 }
-.tmblr-iframe.active {
+.t-hide iframe.tmblr-iframe, 
+.t-hide .tmblr-iframe {
+    opacity: 0;
+    visibility: hidden;
+    top: 17px;
+    right: 60px !important;
+}
+.t-hide .tmblr-iframe.active {
     opacity: 1;
     visibility: visible;
 }
+
 .spin {
     transition: rotate .4s ease;
 }
@@ -1431,7 +1433,7 @@ button.scroll-to-top.visible {
 {CustomCSS}
 </style>
 </head>
-<body>
+<body class="{select:Tumblr controls}">
 
 <div class="page-container">
 
@@ -1900,8 +1902,7 @@ button.scroll-to-top.visible {
 
 <script>
 document.addEventListener("DOMContentLoaded", function () {
-    
-    {block:ifHideTumblrControlsBehindToggle}
+
     // toggle tumblr controls
     const control = document.querySelector(".controls");
     
@@ -1909,7 +1910,6 @@ document.addEventListener("DOMContentLoaded", function () {
         document.querySelector(".tmblr-iframe").classList.toggle("active");
         document.querySelector(".spin").classList.toggle("active");
     });
-    {/block:ifHideTumblrControlsBehindToggle}
     
     // scroll to top button
     const html = document.documentElement;
