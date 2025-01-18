@@ -1,10 +1,10 @@
 <!----------------------------------------------------
 
     TUMBLR THEME: Suburban - © Flipse / @mournstera
-    - Version 1.2.0
+    - Version 1.2.1
     
     RELEASED:   28 January 2024
-    UPDATED:    11 January 2025
+    UPDATED:    18 January 2025
     
     CREDITS:            mournstera.tumblr.com/credit
     TERMS OF USE:       mournstera.tumblr.com/themes  
@@ -1239,7 +1239,12 @@ div.npf-link-block .bottom .site-name {
     margin-top: 10px;
     opacity: 1;
 }
-
+/* --------------------------- TAG/SEARCH PAGES */
+.found {
+    text-align: center;
+    margin-bottom: var(--gap5);
+    text-transform: lowercase;
+} 
 /* -------------------------------------  corners */
 .top-corner {
     position: fixed;
@@ -1528,6 +1533,21 @@ button.scroll-to-top.visible {
     </aside>
 
     <section class="content">
+    
+        {block:TagPage}
+            <div class="found">
+                {TotalPages} page(s) of {lang:Posts tagged Tag 2}
+                {block:NoTagPage}No results.{/block:NoTagPage}
+            </div>
+        {/block:TagPage}
+        
+        
+        {block:SearchPage}
+            <div class="found">
+                {lang:Showing SearchResultCount results for SearchQuery 2}
+                {lang:Sorry no results for SearchQuery}
+            </div>
+        {/block:SearchPage}
     
         {block:posts inlineMediaWidth="1280" inlineNestedMediaWidth="1280"}
     
