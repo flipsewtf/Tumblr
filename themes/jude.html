@@ -1,10 +1,10 @@
  <!----------------------------------------------------
 
     TUMBLR THEME: Jude - © Flipse / @mournstera
-    - Version 3.0.2
+    - Version 3.0.3
     
     RELEASED:   12 November 2022 
-    UPDATED:    05 January 2025 
+    UPDATED:    18 January 2025
     
     CREDITS:        mournstera.tumblr.com/credit
     TERMS OF USE:   mournstera.tumblr.com/themes
@@ -1613,6 +1613,7 @@ a.more_notes_link {
 .found {
     text-align: center;
     margin-bottom: var(--layout-gap);
+    text-transform: lowercase;
 } 
 /* ------------------------------------------------------- POST-TYPE: poll */
 .poll-post a.poll-row {
@@ -2996,7 +2997,7 @@ transform: rotate(0) translateY(100%);
     
         {block:TagPage}
             <div class="found bordering padding">
-                {lang:Showing TagResultCount posts tagged Tag 3}
+                {TotalPages} page(s) of {lang:Posts tagged Tag 2}
                 {block:NoTagPage}No results.{/block:NoTagPage}
             </div>
         {/block:TagPage}
@@ -3008,6 +3009,7 @@ transform: rotate(0) translateY(100%);
                 {lang:Sorry no results for SearchQuery}
             </div>
         {/block:SearchPage}
+        
         {block:DayPage}
             <div class="found bordering padding">
                 {lang:Viewing everything posted on Month DayOfMonth Year}
