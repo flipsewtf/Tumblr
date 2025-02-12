@@ -1,7 +1,7 @@
 <!----------------------------------------------------
 
     TUMBLR THEME: Palm - © Flipse / @mournstera
-    - Version 1.0.1
+    - Version 1.0.2
     
     RELEASED:       20 August 2024
     UPDATED:        29 August 2024
@@ -1686,43 +1686,45 @@ nav.mobile-menu::after {
                 <a href="/submit">{SubmitLabel}</a>
             {/block:SubmissionsEnabled}
         </nav>
-        
-        <div class="mobile-updates">
-            {block:ifUpdateTabText}
-                <div class="update-text">
-                    {text:Update Tab text}
-                </div>
-            {/block:ifUpdateTabText}
-            
-            {block:ifActivity1}
-	        <div class="activity">
-	            {block:ifActivity1Icon}<i class="ph ph-{text:Activity 1 Icon} activity-icon"></i>{/block:ifActivity1Icon}
-	            <span>{text:Activity 1}</span>
-            </div>
-            {/block:ifActivity1}
-            
-            {block:ifActivity2}
-	        <div class="activity">
-	            {block:ifActivity2Icon}<i class="ph ph-{text:Activity 2 Icon} activity-icon"></i>{/block:ifActivity2Icon}
-	            <span>{text:Activity 2}</span>
-            </div>
-            {/block:ifActivity2}
-            
-            {block:ifActivity3}
-	        <div class="activity">
-	            {block:ifActivity3Icon}<i class="ph ph-{text:Activity 3 Icon} activity-icon"></i>{/block:ifActivity3Icon}
-	            <span>{text:Activity 3}</span>
-            </div>
-            {/block:ifActivity3}
-            
-            {block:ifActivity4}
-	        <div class="activity">
-	            {block:ifActivity4Icon}<i class="ph ph-{text:Activity 4 Icon} activity-icon"></i>{/block:ifActivity4Icon}
-	            <span>{text:Activity 4}</span> 
-            </div>
-            {/block:ifActivity4}
-        </div>
-        
+	    
+        {block:ifUpdateTab}
+	        <div class="mobile-updates">
+	            {block:ifUpdateTabText}
+	                <div class="update-text">
+	                    {text:Update Tab text}
+	                </div>
+	            {/block:ifUpdateTabText}
+	            
+	            {block:ifActivity1}
+		        <div class="activity">
+		            {block:ifActivity1Icon}<i class="ph ph-{text:Activity 1 Icon} activity-icon"></i>{/block:ifActivity1Icon}
+		            <span>{text:Activity 1}</span>
+	            </div>
+	            {/block:ifActivity1}
+	            
+	            {block:ifActivity2}
+		        <div class="activity">
+		            {block:ifActivity2Icon}<i class="ph ph-{text:Activity 2 Icon} activity-icon"></i>{/block:ifActivity2Icon}
+		            <span>{text:Activity 2}</span>
+	            </div>
+	            {/block:ifActivity2}
+	            
+	            {block:ifActivity3}
+		        <div class="activity">
+		            {block:ifActivity3Icon}<i class="ph ph-{text:Activity 3 Icon} activity-icon"></i>{/block:ifActivity3Icon}
+		            <span>{text:Activity 3}</span>
+	            </div>
+	            {/block:ifActivity3}
+	            
+	            {block:ifActivity4}
+		        <div class="activity">
+		            {block:ifActivity4Icon}<i class="ph ph-{text:Activity 4 Icon} activity-icon"></i>{/block:ifActivity4Icon}
+		            <span>{text:Activity 4}</span> 
+	            </div>
+	            {/block:ifActivity4}
+	        </div>
+        {/block:ifUpdateTab}
+	    
         {block:ifSearchBar}
             <form class="search flex gap1 align-center" action="/search" method="get">
                 <button class="search" aria-label="click to search" type="submit">
