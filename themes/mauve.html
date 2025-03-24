@@ -1,10 +1,12 @@
 <!----------------------------------------------------
 
     TUMBLR THEME: Mauve - © Flipse / @mournstera
-    - Version 1.6.0
+    - Version 1.7.0:
+    
+      UnifyAudio script installed.
     
     RELEASED:   02 August 2023
-    UPDATED:    30 April 2024
+    UPDATED:    24 March 2025
     
     CREDITS:            mournstera.tumblr.com/credit
     TERMS OF USE:       mournstera.tumblr.com/themes
@@ -118,13 +120,9 @@
 <meta name="text:Activity 4" content="playing"/>
 {/block:Options}
 
-<!-- AUDIO: npf audio glenthemes -->
-<link href="//tmblr-npf-audio.gitlab.io/s/base.css" rel="stylesheet">
-<!-- PHOTOSETS: pxu -->
 <link href="https://static.tumblr.com/qudkd6d/OcDnl99gb/style.css" rel="stylesheet" type="text/css"/>
-<!-- TOOLTIP: tippy.js scale -->
 <link rel="stylesheet" href="https://unpkg.com/tippy.js@6/animations/scale-subtle.css">
-<!-- Google font -->
+
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family={text:Body font}:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap">
@@ -1118,60 +1116,94 @@ iframe.tumblr_audio_player {
 }
 
 
-/* -------------------------------------  POST TYPE: audio */
-
-.npf-audio-wrapper, .legacy-audio-wrapper {
-    --NPF-Audio-Buttons-Size: 1.4em;
-    --NPF-Audio-Buttons-Color: rgb(var(--c-acc1));
-    --NPF-Audio-Buttons-Spacing: var(--gap3);
-    --NPF-Audio-Image-Size: 85px;
-    --NPF-Audio-Image-Spacing: var(--gap1);
-    overflow: hidden;
-    display: flex;
-    align-items: center;
-    width: auto;
+/* -----------------------------------------------------  POST TYPE: audio */
+.tmblr-full>.audio-caption {
+    display: block!important;
 }
-
-.npf-audio-background, .legacy-audio-background {
-    flex: 1;
-    height: var(--NPF-Audio-Image-Size);
-    box-sizing: border-box;
+figcaption.audio-caption {
+    background: rgb(var(--c-bg2));
+    border: 1px solid rgb(var(--c-border));
+    border-radius: var(--round1);
+}
+.audio-info {
     display: flex;
     align-items: center;
-    background: rgb(var(--c-bg2));
-    border-radius: var(--round2);
+    gap: var(--gap2);
     padding: var(--gap2);
 }
-span.npf-audio-title {
-    font-weight: 600;
+.tmblr-full>.audio-caption .audio-details {
+    max-width: 100%;
+    padding: 0;
+    flex: auto;
 }
-.npf-audio-buttons, .legacy-audio-buttons {
-    margin-right: var(--NPF-Audio-Buttons-Spacing);
-    width: var(--NPF-Audio-Buttons-Size);
-    height: var(--NPF-Audio-Buttons-Size);
-    line-height: 0;
-    flex-shrink: 0;
+.tmblr-full>.audio-caption .album-cover {
+    width: 80px;
+    height: 80px;
+    border-radius: var(--round1);
+    object-fit: cover;
+}
+.custom-audio-player-container .play-pause {
+    display: flex;
+}
+.custom-audio-player-container .play-pause svg {
+    width: 26px;
+    height: 26px;
+    color: rgb(var(--c-text));
+}
+.tmblr-full>.audio-caption .album, .tmblr-full>.audio-caption .artist {
+    font-size: 1em;
+    line-height: 1.5;
+}
+.progress-bar-container {
+    display: flex;
+    align-items: center;
+    gap: var(--gap2);
+    border-top: 1px solid rgb(var(--c-border));
+    padding: var(--gap2);
+}
+ 
+/* Style the track (actually range input itself but it's only for chrome) */
+.progress-bar {
+    width: 100%;
+    height: 10px;
+    -webkit-appearance: none;  /* Removes the default styling in most browsers */
+    background: rgb(var(--c-bg1));
+    border-radius: var(--round2);
+    border: 1px solid rgb(var(--c-border));
+}
+
+/* Style the track for both WebKit and Mozilla browsers */
+.progress-bar::-webkit-slider-runnable-track,
+.progress-bar::-moz-range-track {
+    width: 100%;
+    height: 10px;
+    background: rgb(var(--c-bg1));
+    border-radius: var(--round2);
+    border: 1px solid rgb(var(--c-border));
+}
+
+/* Style the thumb for WebKit (Chrome, Safari, etc.) */
+.progress-bar::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 14px;
+    height: 14px;
+    background: rgb(var(--c-acc1));
+    border-radius: 50%;
     cursor: pointer;
 }
-.npf-audio-image, img.legacy-audio-image {
-    margin-left: var(--NPF-Audio-Image-Spacing);
-    width: var(--NPF-Audio-Image-Size)!important;
-    height: var(--NPF-Audio-Image-Size)!important;
-    object-fit: cover;
+
+/* Style the thumb for Mozilla (Firefox) */
+.progress-bar::-moz-range-thumb {
+    width: 14px;
+    height: 14px;
+    background: rgb(var(--c-acc1));
+    border:0; /* remove weird border in firefox */
+    border-radius: 50%;
+    cursor: pointer;
+}
+.time-display {
     flex-shrink: 0;
-    overflow: hidden;
-    border-radius: var(--round2);
-}
-.custom_audio_buttons svg {
-    width: 1.25em;
-    height: 1.25em;
-    color: rgb(var(--c-acc1));
-}
-span.legacy-audio-details, .npf-audio-details {
-    display: flex;
-    flex: 1;
-    line-height: 1.3;
-    flex-direction: column;
 }
 /* -------------------------------------  quote */
 p.npf_quote {
@@ -1762,25 +1794,22 @@ button.sb-close {
                 </div>
             {/block:Video}
     
-            <!-- legacy audio -->
-            {block:Audio} 
-                <figcaption class="legacy-audio-wrapper">
-                	{AudioPlayer}
-                    <div class="legacy-audio-background">
-                        <div class="legacy-audio-buttons">
-                            <div class="audio_player">
-                        		<span class="custom_audio_buttons"></span>
-                        		<div class="custom_audio_seekbar"></div>
+                {block:Audio}
+                    <!-- legacy audio -->
+                    <figure class="tmblr-full">
+                        <figcaption class="audio-caption legacy">
+                            <div class="audio-info">
+                                <span class="tmblr-audio-meta audio-details">
+                                    {block:TrackName}<span class="tmblr-audio-meta title">{TrackName}</span>{/block:TrackName}
+                                    {block:Artist}<span class="tmblr-audio-meta artist">{Artist}</span>{/block:Artist}
+                                    {block:Album}<span class="tmblr-audio-meta album">{Album}</span>{/block:Album}
+                                </span>
+                                {block:AlbumArt}<img class="album-cover" src="{AlbumArtURL}" alt="image"/>{/block:AlbumArt}
                             </div>
-                        </div>
-                        <span class="legacy-audio-details">
-                            {block:TrackName}<span class="npf-audio-title"><span class="npf-audio-title-label"> </span>{TrackName}</span>{/block:TrackName}
-                            {block:Artist}<span class="npf-audio-artist"><span class="npf-audio-artist-label"> </span>{Artist}</span>{/block:Artist}
-                        </span>
-                    </div>
-                    {block:AlbumArt}<img class="legacy-audio-image" src="{AlbumArtURL}" alt="image">{/block:AlbumArt}
-                </figcaption>
-            {/block:Audio}
+                        </figcaption>
+                        {block:AudioPlayer}{AudioPlayer}{/block:AudioPlayer}
+                    </figure>
+                {/block:Audio}
 
             {block:Answer}
                 <div class="ask-container">
@@ -2037,21 +2066,13 @@ button.sb-close {
     </div>
 </div>
 
-<!-- jQuery -->
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.0/jquery.min.js"></script>
-<!-- PHOTOSETS: pxu -->
-<script src="https://static.tumblr.com/yxfeliq/hHwojmt8m/bctphotoset.min.js"></script>
-<!-- TOOLTIP: tippy.js -->
-<script src="https://unpkg.com/@popperjs/core@2"></script>
-<!-- TOOLTIP: tippy.js-->
-<script src="https://unpkg.com/tippy.js@6"></script>
-<!-- ICONS: Lucide -->
-<script src="https://unpkg.com/lucide@latest"></script>
-<!-- AUDIO: npf audio glenthemes -->
-<script src="//tmblr-npf-audio.gitlab.io/s/init.js"></script>
-<!-- AUDIO: legacy audio annasthms -->
-<script src="https://cdn.jsdelivr.net/gh/annasthms/customaudio@latest/customaudio.min.js"></script>
 
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.0/jquery.min.js"></script>
+<script src="https://static.tumblr.com/yxfeliq/hHwojmt8m/bctphotoset.min.js"></script>
+<script src="https://unpkg.com/@popperjs/core@2"></script>
+<script src="https://unpkg.com/tippy.js@6"></script>
+<script src="https://unpkg.com/lucide@latest"></script>
+<script src="https://static.tumblr.com/diajl5m/mobsquso5/unify_audio.js"></script>
 <script>
 
 $(document).ready(function () {
@@ -2121,34 +2142,6 @@ $(document).ready(function () {
 });
 
 ////////////////////////////////////// vanilla js
-
-// ------------------- audio
-tumblr_npf_audio({
-    emptyTitleText: "",
-    emptyArtistText: "",
-    emptyAlbumText: "",
-    
-    titleLabel: "",
-    artistLabel: "",
-    albumLabel: ""
-});
-
-customAudio({
-    post: "article",
-    wrappers: {
-        audio: ".custom_audio_wrapper",
-        buttons: ".custom_audio_buttons",
-        duration: ".custom_audio_duration",
-        timeCurrent: ".custom_audio_current_time",
-        timeLeft: ".custom_audio_time_left",
-        seekbar: ".custom_audio_seekbar",
-    },
-    default: false,
-    pauseAll: true,
-    playButton: "<svg xmlns='http://www.w3.org/2000/svg' version='1.1' xmlns:xlink='http://www.w3.org/1999/xlink' width='512' height='512' x='0' y='0' viewBox='0 0 512 512' style='enable-background:new 0 0 512 512' xml:space='preserve' class=''><g><path fill-rule='evenodd' d='M468.8 235.007 67.441 3.277A24.2 24.2 0 0 0 55.354-.008h-.07A24.247 24.247 0 0 0 43.19 3.279a24 24 0 0 0-12.11 20.992v463.456a24.186 24.186 0 0 0 36.36 20.994L468.8 276.99a24.238 24.238 0 0 0 0-41.983z' fill='currentColor'></path></g></svg>",
-    pauseButton: "<svg xmlns='http://www.w3.org/2000/svg' version='1.1' xmlns:xlink='http://www.w3.org/1999/xlink' width='512' height='512' x='0' y='0' viewBox='0 0 47.607 47.607' style='enable-background:new 0 0 512 512' xml:space='preserve' class=''><g><path d='M17.991 40.976a6.631 6.631 0 0 1-13.262 0V6.631a6.631 6.631 0 0 1 13.262 0v34.345zM42.877 40.976a6.631 6.631 0 0 1-13.262 0V6.631a6.631 6.631 0 0 1 13.262 0v34.345z' fill='currentColor' class=''></path></g></svg>",
-    hideInfoIfError: true,
-});
 
 lucide.createIcons();
 
