@@ -1,13 +1,10 @@
 <!----------------------------------------------------
 
     TUMBLR THEME: Broek - © Flipse / @mournstera
-    - Version 2.2.0:
-      
-      Icon script updated.
-      Audio post appearance updated.
+    - Version 2.2.1
     
     RELEASED:   02 November 2022
-    UPDATED:    24 March 2025
+    UPDATED:    04 April 2025
     
     CREDITS:            mournstera.tumblr.com/credit
     TERMS OF USE:       mournstera.tumblr.com/themes 
@@ -123,9 +120,7 @@
 <meta name="text:Activity 4" content="playing"/>
 {/block:Options} 
 
-<!-- PHOTOSETS: pxu -->
 <link href="https://static.tumblr.com/qudkd6d/OcDnl99gb/style.css" rel="stylesheet" type="text/css"/>
-	
 <link rel="stylesheet" href="https://unpkg.com/tippy.js@6/animations/scale-subtle.css">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -279,7 +274,7 @@ p,h1,h2,h3,h4,h5,h6 {
     font-size: var(--font-size);
     font-weight: 500;
     text-align:center;
-    padding: 1px 0px;
+    padding: 8px;
     color: rgba(var(--c-bg1));
     border: 0px solid rgba(var(--c-border));
     border-radius: var(--round1);
@@ -288,6 +283,21 @@ p,h1,h2,h3,h4,h5,h6 {
     margin: 18px;
     z-index: 99;
 }
+@keyframes smooth-fade {
+    from {
+        opacity: 0;
+        transform: scale(0.8) translateY(2px);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1) translateY(0);
+    }
+}
+
+.tippy-box[data-animation='smooth-fade'] {
+    animation: smooth-fade .3s ease-out;
+}
+
 /* ------------------------------------- tumblr lightbox */
 .vignette, #vignette {
     opacity:0;
@@ -2037,8 +2047,8 @@ span.act-icon {
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.0/jquery.min.js"></script>
 <script src="https://static.tumblr.com/yxfeliq/hHwojmt8m/bctphotoset.min.js"></script>
-<script src="https://unpkg.com/@popperjs/core@2"></script>
-<script src="https://unpkg.com/tippy.js@6"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/tippy.js@6.3.7/dist/tippy.umd.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/@phosphor-icons/web"></script>
 <script src="https://static.tumblr.com/diajl5m/mobsquso5/unify_audio.js"></script>
 <script>
@@ -2114,6 +2124,7 @@ const commonOptions = {
     followCursor: true,
     placement: "top",
     touch: "hold",
+    animation: 'smooth-fade',
 };
 
 tippy(".post-icons.lide", {
