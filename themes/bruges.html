@@ -1,12 +1,10 @@
 <!----------------------------------------------------
 
     TUMBLR THEME: Bruges - © Flipse / @mournstera
-    - Version 2.1.0:
-    
-      UnifyAudio script installed.
+    - Version 2.1.1
     
     RELEASED:       08 October 2021
-    UPDATED:        24 March 2025
+    UPDATED:        04 April 2025
     
     CREDITS:        mournstera.tumblr.com/credit
     TERMS OF USE:   mournstera.tumblr.com/themes
@@ -135,8 +133,6 @@
 {/block:Options} 
 
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/dist/tabler-icons.min.css" />
-
-<!-- Google font -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family={text:Body font}:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap">
@@ -266,7 +262,7 @@ ul,ol {
     font-size: var(--font-size);
     font-weight: 400;
     text-align:center;
-    padding: 0;
+    padding: 8px;
     color: rgb(var(--c-bg1));
     border: 0px solid rgb(var(--c-border));
     border-radius: var(--round1);
@@ -279,16 +275,28 @@ ul,ol {
     font-size: var(--font-size);
     font-weight: 400;
     text-align:center;
-    padding: 0.5rem;
+    padding: var(--gap1);
     color: rgb(var(--c-bg1));
     border: 0px solid rgb(var(--c-border));
     border-radius: var(--round1);
     background-color: rgb(var(--c-text));
     margin: 1.5rem;
     z-index: 9999999;
+    line-height: 1.5;
 }
-.tippy-box[data-theme~='credit'][data-placement^='left'] > .tippy-arrow::before {
-    border-left-color: rgb(var(--c-text));
+@keyframes smooth-fade {
+    from {
+        opacity: 0;
+        transform: scale(0.8) translateY(2px);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1) translateY(0);
+    }
+}
+
+.tippy-box[data-animation='smooth-fade'] {
+    animation: smooth-fade .3s ease-out;
 }
 /* ------------------------------------- tumblr lightbox */
 .vignette, #vignette {
@@ -1939,8 +1947,8 @@ button.scroll-to-top.visible {
 
 
 <script src="https://static.tumblr.com/diajl5m/y39s6mwvr/legacy-photoset.js"></script>
-<script src="https://unpkg.com/@popperjs/core@2"></script>
-<script src="https://unpkg.com/tippy.js@6"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/tippy.js@6.3.7/dist/tippy.umd.min.js"></script>
 <script src="https://static.tumblr.com/diajl5m/mobsquso5/unify_audio.js"></script>
 
 <script>
@@ -2025,6 +2033,7 @@ const commonOptions = {
     followCursor: true,
     placement: "top",
     touch: "hold",
+    animation: 'smooth-fade',
 };
 
 tippy(".post-icons.like-tooltip", {
@@ -2041,6 +2050,7 @@ tippy(".credit", {
     placement: 'left',
     allowHTML: true,
     content: "Bruges theme <br> by @mournstera",
+    animation: 'smooth-fade',
 });
 
 tippy("[title]", {
