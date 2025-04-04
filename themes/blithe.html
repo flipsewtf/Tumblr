@@ -1,13 +1,10 @@
 <!----------------------------------------------------
 
     TUMBLR THEME: Blithe - © Flipse / @mournstera
-    - Version 2.2.0:
-    
-      Icon script updated.
-      UnifyAudio script implemented (neater audio posts)
+    - Version 2.2.5
     
     RELEASED:       31 May 2022
-    UPDATED:        24 March 2025
+    UPDATED:        04 April 2025
     
     CREDITS:        mournstera.tumblr.com/credit
     TERMS OF USE:   mournstera.tumblr.com/themes
@@ -270,7 +267,7 @@ p,h1,h2,h3,h4,h5,h6 {
     font-size: 0.9em;
     font-weight: 400;
     text-align:center;
-    padding: 1px 0px;
+    padding: 8px;
     color: rgb(var(--c-bg1));
     border: 0px solid rgb(var(--c-border));
     border-radius: var(--round1);
@@ -278,6 +275,20 @@ p,h1,h2,h3,h4,h5,h6 {
     text-transform: lowercase;
     margin: 1.8rem;
     z-index: 9999999;
+}
+@keyframes smooth-fade {
+    from {
+        opacity: 0;
+        transform: scale(0.8) translateY(2px);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1) translateY(0);
+    }
+}
+
+.tippy-box[data-animation='smooth-fade'] {
+    animation: smooth-fade .3s ease-out;
 }
 /* ------------------------------------- tumblr lightbox */
 .vignette, #vignette {
@@ -2009,8 +2020,8 @@ span.activity-icon {
 
 <svg height="0" width="0" class="hide-it"><defs><clipPath id="blob" clipPathUnits="objectBoundingBox"><path d="M0.5,0.053c0.266,-0.074 0.242,0.198 0.44,0.447c0.161,0.204 -0.209,0.435 -0.44,0.455c-0.275,0.023 -0.516,-0.183 -0.471,-0.455c0.037,-0.217 0.235,-0.382 0.471,-0.447Z"></path></clipPath></defs></svg>
 
-<script src="https://unpkg.com/@popperjs/core@2"></script>
-<script src="https://unpkg.com/tippy.js@6"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/tippy.js@6.3.7/dist/tippy.umd.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/@phosphor-icons/web"></script>
 <script src="https://static.tumblr.com/diajl5m/mobsquso5/unify_audio.js"></script>
 
@@ -2131,6 +2142,7 @@ const commonOptions = {
     followCursor: true,
     placement: "top",
     touch: "hold",
+    animation: 'smooth-fade',
 };
 
 tippy(".lide", {
