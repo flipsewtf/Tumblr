@@ -1,14 +1,11 @@
 <!----------------------------------------------------
 
     TUMBLR THEME: Autumn - © Flipse / @mournstera
-    - Version 2.1.0
-    
-      Audio appearance updated.
-      Scrollbars appearance updated.
+    - Version 2.2.0
 
     
     RELEASED:   30 September 2022
-    UPDATED:    24 March 2025
+    UPDATED:    04 April 2025
     
     CREDITS:        mournstera.tumblr.com/credit
     TERMS OF USE:   mournstera.tumblr.com/themes
@@ -301,7 +298,7 @@ ul,ol {
     font-size: var(--font-size);
     font-weight: 400;
     text-align:center;
-    padding: 0;
+    padding: 9px;
     color: rgb(var(--c-bg1));
     border: 0px solid rgb(var(--c-border));
     border-radius: var(--round1);
@@ -314,13 +311,27 @@ ul,ol {
     font-size: var(--font-size);
     font-weight: 400;
     text-align:center;
-    padding: 0.5rem;
+    padding: var(--gap1);
     color: rgb(var(--c-bg1));
     border: 0px solid rgb(var(--c-border));
     border-radius: var(--round1);
     background-color: rgb(var(--c-text));
     margin: 1.5rem;
     z-index: 9999999;
+}
+@keyframes smooth-fade {
+    from {
+        opacity: 0;
+        transform: scale(0.9) translateY(2px);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1) translateY(0);
+    }
+}
+
+.tippy-box[data-animation='smooth-fade'] {
+    animation: smooth-fade 0.25s ease-out;
 }
 .tippy-box[data-theme~='credit'][data-placement^='left'] > .tippy-arrow::before {
     border-left-color: rgb(var(--c-text));
@@ -2038,11 +2049,9 @@ button.scroll-to-top.visible, button.scroll-to-top-mobile.visible {
 <svg height="0" width="0" style="position:absolute; width:0px; height:0px;"><defs><clipPath id="blob" clipPathUnits="objectBoundingBox"><path d="M0.5,0.053c0.266,-0.074 0.242,0.198 0.44,0.447c0.161,0.204 -0.209,0.435 -0.44,0.455c-0.275,0.023 -0.516,-0.183 -0.471,-0.455c0.037,-0.217 0.235,-0.382 0.471,-0.447Z"></path></clipPath></defs></svg>
 
 
-<!-- PHOTOSET: legacy -->
 <script src="https://static.tumblr.com/diajl5m/y39s6mwvr/legacy-photoset.js"></script>
-<!-- TOOLTIP: tippy.js -->
-<script src="https://unpkg.com/@popperjs/core@2"></script>
-<script src="https://unpkg.com/tippy.js@6"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/tippy.js@6.3.7/dist/tippy.umd.min.js"></script>
 <script src="https://static.tumblr.com/diajl5m/mobsquso5/unify_audio.js"></script>
 <script>
 document.addEventListener("DOMContentLoaded", function () {
@@ -2180,6 +2189,7 @@ const commonOptions = {
     followCursor: true,
     placement: "top",
     touch: "hold",
+    animation: 'smooth-fade',
 };
 
 tippy("post-icons.like-tooltip", {
@@ -2189,13 +2199,14 @@ tippy("post-icons.like-tooltip", {
 
 tippy(".credit", {
     theme: "credit",
-    arrow: true,
+    arrow: false,
     followCursor: false,
     placement: "top",
     touch: "hold",
     placement: 'left',
     allowHTML: true,
     content: "Autumn theme <br> by @mournstera",
+    animation: 'smooth-fade',
 });
 
 tippy("[title]", {
