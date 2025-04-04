@@ -4,14 +4,11 @@
 <!----------------------------------------------------
 
     TUMBLR THEME: Amber  © Flipse / @mournstera
-    - Version 1.5.0
-    
-      Icon script updated.
-      Audio appearance updated.
+    - Version 1.5.5
       
     
     RELEASED:   22 December 2022
-    UPDATED:    24 March 2025
+    UPDATED:    04 April 2025
     
     CREDITS:        mournstera.tumblr.com/credit
     TERMS OF USE:   mournstera.tumblr.com/themes
@@ -152,7 +149,6 @@
 
 <link rel="stylesheet" href="//npf-images-v3.github.io/recon.css">
 <link href="https://static.tumblr.com/qudkd6d/OcDnl99gb/style.css" rel="stylesheet" type="text/css"/>
-<link rel="stylesheet" href="https://unpkg.com/tippy.js@6/animations/scale-subtle.css">
 <!-- Google font -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -299,7 +295,7 @@ p:last-child {
     font-size:var(--font-size);
     text-align:center;
     font-weight:400;
-    padding:4px 0px;
+    padding: 8px;
     color: rgba(var(--c-bg1));
     background-color: rgba(var(--c-text));
     text-transform: lowercase;
@@ -311,6 +307,20 @@ p:last-child {
 {block:ifRoundedContentCorners}
     border-radius: 0.4em;
 {/block:ifRoundedContentCorners}
+}
+@keyframes smooth-fade {
+    from {
+        opacity: 0;
+        transform: scale(0.9) translateY(2px);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1) translateY(0);
+    }
+}
+
+.tippy-box[data-animation='smooth-fade'] {
+    animation: smooth-fade 0.25s ease-out;
 }
 /* ------------------------------------- scrollbar */
 ::-webkit-scrollbar {
@@ -2311,9 +2321,9 @@ aside#sidebar #title {
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 <script src="//npf-images-v3.github.io/script.js"></script>
 <script src="https://static.tumblr.com/yxfeliq/hHwojmt8m/bctphotoset.min.js"></script>
-<script src="https://unpkg.com/@popperjs/core@2"></script>
-<script src="https://unpkg.com/tippy.js@6"></script>
-<script src="https://unpkg.com/lucide@latest"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/tippy.js@6.3.7/dist/tippy.umd.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/lucide@latest/dist/umd/lucide.min.js"></script>
 <script>
 ////////////////// jquery dependant 
 
@@ -2402,7 +2412,6 @@ Array.from(NoteCount).forEach((element) => {
     }
 });
 
-
 // tooltip
 
 tippy(".post-icons.lide", {
@@ -2413,6 +2422,7 @@ tippy(".post-icons.lide", {
     followCursor: true,
     placement: "top",
     touch: 'hold',
+    animation: 'smooth-fade',
 });
 tippy("[title]", {
     theme: "custom",
@@ -2421,6 +2431,7 @@ tippy("[title]", {
     followCursor: true,
     placement: "top",
     touch: 'hold',
+    animation: 'smooth-fade',
     content(reference) {
         const title = reference.getAttribute("title");
         reference.removeAttribute("title");
