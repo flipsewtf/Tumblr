@@ -1,10 +1,10 @@
  <!----------------------------------------------------
 
     TUMBLR THEME: Leaf  - © Flipse / @mournstera
-    - Version 2.0.0
+    - Version 2.1.0
     
     RELEASED:   - 12 October 2022
-    UPDATED:    - 28 February 2025
+    UPDATED:    - 05 April 2025
     
     CREDITS:        mournstera.tumblr.com/credit
     TERMS OF USE:   mournstera.tumblr.com/themes
@@ -285,7 +285,7 @@ ul,ol {
     font-size: var(--font-size);
     font-weight: 400;
     text-align: center;
-    padding: 5px 4px 3px 4px;
+    padding: var(--gap1);
     color: rgb(var(--c-bg1));
     border: 0;
     border-radius: var(--round1);
@@ -298,7 +298,7 @@ ul,ol {
     font-size: var(--font-size);
     font-weight: 400;
     text-align: center;
-    padding: 0.7rem;
+    padding: var(--gap2);
     color: rgb(var(--c-bg2));
     border: 0px solid rgb(var(--c-border));
     border-radius: var(--round4);
@@ -307,7 +307,41 @@ ul,ol {
     line-height: 1.6;
     z-index: 9999999;
 }
+@keyframes smooth-fade-in {
+    from {
+        opacity: 0;
+        transform: scale(0.8) translateY(2px);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1) translateY(0);
+    }
+}
 
+@keyframes smooth-fade-out {
+    from {
+        opacity: 1;
+        transform: scale(1) translateY(0);
+    }
+    to {
+        opacity: 0;
+        transform: scale(0.8) translateY(2px);
+    }
+}
+
+.tippy-box[data-animation='smooth-fade'] {
+    animation-duration: 0.35s;
+    animation-timing-function: cubic-bezier(0.16, 1, 0.3, 1);
+    will-change: transform, opacity;
+}
+
+.tippy-box[data-animation='smooth-fade'][data-state='visible'] {
+    animation-name: smooth-fade-in;
+}
+
+.tippy-box[data-animation='smooth-fade'][data-state='hidden'] {
+    animation-name: smooth-fade-out;
+}
 /* ----------------------------------------- LIGHTBOXES, TUMBLR STUFF, ETC.*/
 .vignette, #vignette {
     opacity:0;
@@ -2663,9 +2697,9 @@ iframe#submit_form {
 
 
 <script src="https://static.tumblr.com/diajl5m/y39s6mwvr/legacy-photoset.js"></script>
-<script src="https://unpkg.com/@popperjs/core@2"></script>
-<script src="https://unpkg.com/tippy.js@6"></script>
-<script src="https://unpkg.com/lucide@latest"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/tippy.js@6.3.7/dist/tippy.umd.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/lucide@latest/dist/umd/lucide.min.js"></script>
 <script src="https://static.tumblr.com/diajl5m/mobsquso5/unify_audio.js"></script>
 
 <script>
@@ -2870,6 +2904,7 @@ const commonOptions = {
     followCursor: true,
     placement: "top",
     touch: "hold",
+    animation: 'smooth-fade',
 };
 
 tippy(".only-icons .like-tooltip", {
@@ -2895,6 +2930,7 @@ tippy(".credit", {
     touch: "hold",
     allowHTML: true,
     content: "Leaf theme <br> by <strong>mournstera</strong>",
+    animation: 'smooth-fade',
 });
 
 tippy("[title]", {
