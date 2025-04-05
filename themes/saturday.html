@@ -1,13 +1,11 @@
 <!----------------------------------------------------
 
     TUMBLR THEME: Saturday - © Flipse / @mournstera
-    - Version 1.2.0:
-    
-      UnifyAudio script installed.
+    - Version 1.2.1
       
     
     RELEASED:   13 March 2024
-    UPDATED:    30 April 2024
+    UPDATED:    05 April 2025
     
     CREDITS:            mournstera.tumblr.com/credit
     TERMS OF USE:       mournstera.tumblr.com/themes   
@@ -279,7 +277,7 @@ ul,ol {
     font-size: var(--font-size);
     font-weight: 400;
     text-align:center;
-    padding: 0;
+    padding: 9px;
     color: rgb(var(--c-bg1));
     border: 0px solid rgb(var(--c-border));
     border-radius: var(--round1);
@@ -287,6 +285,41 @@ ul,ol {
     text-transform: lowercase;
     margin: 1.5rem;
     z-index: 9999999;
+}
+@keyframes smooth-fade-in {
+    from {
+        opacity: 0;
+        transform: scale(0.8) translateY(2px);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1) translateY(0);
+    }
+}
+
+@keyframes smooth-fade-out {
+    from {
+        opacity: 1;
+        transform: scale(1) translateY(0);
+    }
+    to {
+        opacity: 0;
+        transform: scale(0.8) translateY(2px);
+    }
+}
+
+.tippy-box[data-animation='smooth-fade'] {
+    animation-duration: 0.35s;
+    animation-timing-function: cubic-bezier(0.16, 1, 0.3, 1);
+    will-change: transform, opacity;
+}
+
+.tippy-box[data-animation='smooth-fade'][data-state='visible'] {
+    animation-name: smooth-fade-in;
+}
+
+.tippy-box[data-animation='smooth-fade'][data-state='hidden'] {
+    animation-name: smooth-fade-out;
 }
 /* ------------------------------------- tumblr lightbox */
 .vignette, #vignette {
@@ -1941,8 +1974,8 @@ button.scroll-to-top.visible:hover {
 
 <script src="https://static.tumblr.com/diajl5m/y39s6mwvr/legacy-photoset.js"></script>
 <script src="https://static.tumblr.com/diajl5m/mobsquso5/unify_audio.js"></script>
-<script src="https://unpkg.com/@popperjs/core@2"></script>
-<script src="https://unpkg.com/tippy.js@6"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/tippy.js@6.3.7/dist/tippy.umd.min.js"></script>
 
 <script>
 document.addEventListener("DOMContentLoaded", function () {
@@ -2058,6 +2091,7 @@ const commonOptions = {
     followCursor: true,
     placement: "top",
     touch: "hold",
+    animation: 'smooth-fade',
 };
 
 tippy("post-icons.like-tooltip", {
