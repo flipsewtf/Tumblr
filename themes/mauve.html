@@ -1,12 +1,10 @@
 <!----------------------------------------------------
 
     TUMBLR THEME: Mauve - © Flipse / @mournstera
-    - Version 1.7.0:
-    
-      UnifyAudio script installed.
+    - Version 1.7.5
     
     RELEASED:   02 August 2023
-    UPDATED:    24 March 2025
+    UPDATED:    05 April 2025
     
     CREDITS:            mournstera.tumblr.com/credit
     TERMS OF USE:       mournstera.tumblr.com/themes
@@ -121,8 +119,6 @@
 {/block:Options}
 
 <link href="https://static.tumblr.com/qudkd6d/OcDnl99gb/style.css" rel="stylesheet" type="text/css"/>
-<link rel="stylesheet" href="https://unpkg.com/tippy.js@6/animations/scale-subtle.css">
-
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family={text:Body font}:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap">
@@ -255,7 +251,7 @@ p,h1,h2,h3,h4,h5,h6 {
     font-size: var(--font-size);
     font-weight: 500;
     text-align:center;
-    padding: 1px 0px;
+    padding: 8px;
     color: rgba(var(--c-bg1));
     border: 0px solid rgba(var(--c-border));
     border-radius: var(--round3);
@@ -263,6 +259,41 @@ p,h1,h2,h3,h4,h5,h6 {
     text-transform: lowercase;
     margin: 18px;
     z-index: 99;
+}
+@keyframes smooth-fade-in {
+    from {
+        opacity: 0;
+        transform: scale(0.8) translateY(2px);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1) translateY(0);
+    }
+}
+
+@keyframes smooth-fade-out {
+    from {
+        opacity: 1;
+        transform: scale(1) translateY(0);
+    }
+    to {
+        opacity: 0;
+        transform: scale(0.8) translateY(2px);
+    }
+}
+
+.tippy-box[data-animation='smooth-fade'] {
+    animation-duration: 0.35s;
+    animation-timing-function: cubic-bezier(0.16, 1, 0.3, 1);
+    will-change: transform, opacity;
+}
+
+.tippy-box[data-animation='smooth-fade'][data-state='visible'] {
+    animation-name: smooth-fade-in;
+}
+
+.tippy-box[data-animation='smooth-fade'][data-state='hidden'] {
+    animation-name: smooth-fade-out;
 }
 /* ------------------------------------- scrollbar */
 ::-webkit-scrollbar {
@@ -2069,9 +2100,9 @@ button.sb-close {
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.0/jquery.min.js"></script>
 <script src="https://static.tumblr.com/yxfeliq/hHwojmt8m/bctphotoset.min.js"></script>
-<script src="https://unpkg.com/@popperjs/core@2"></script>
-<script src="https://unpkg.com/tippy.js@6"></script>
-<script src="https://unpkg.com/lucide@latest"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/tippy.js@6.3.7/dist/tippy.umd.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/lucide@latest/dist/umd/lucide.min.js"></script>
 <script src="https://static.tumblr.com/diajl5m/mobsquso5/unify_audio.js"></script>
 <script>
 
@@ -2153,6 +2184,7 @@ const commonOptions = {
     followCursor: true,
     placement: "top",
     touch: "hold",
+    animation: 'smooth-fade',
 };
 
 tippy(".post-icons.lide", {
