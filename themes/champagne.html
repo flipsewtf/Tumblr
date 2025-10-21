@@ -1,10 +1,10 @@
  <!----------------------------------------------------
 
     TUMBLR THEME: Champagne  - © Flipse / @mournstera
-    - Version 1.0.0
+    - Version 1.0.1
     
     RELEASED:   - 20 October 2025
-    UPDATED:    - 
+    UPDATED:    - 21 October 2025
     
     CREDITS:        mournstera.tumblr.com/credit
     TERMS OF USE:   mournstera.tumblr.com/themes
@@ -3348,7 +3348,9 @@ document.addEventListener("DOMContentLoaded", function () {
     const controls = document.querySelector(".controls");
     
     controls.addEventListener("click", function () {
+        {block:ifUpdateTab}
         document.querySelector(".updates-container").classList.toggle("hide");
+        {/block:ifUpdateTab}
         document.querySelector(".spin").classList.toggle("active");
         document.querySelector(".tmblr-iframe").classList.toggle("active");
     });
