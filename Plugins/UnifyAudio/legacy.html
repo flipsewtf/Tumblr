@@ -1,0 +1,16 @@
+{block:Audio}
+    <!-- legacy audio -->
+    <figure class="tmblr-full">
+        <figcaption class="audio-caption legacy">
+            <div class="audio-info">
+                <span class="tmblr-audio-meta audio-details">
+                    {block:TrackName}<span class="tmblr-audio-meta title">{TrackName}</span>{/block:TrackName}
+                    {block:Artist}<span class="tmblr-audio-meta artist">{Artist}</span>{/block:Artist}
+                    {block:Album}<span class="tmblr-audio-meta album">{Album}</span>{/block:Album}
+                </span>
+                {block:AlbumArt}<img class="album-cover" src="{AlbumArtURL}" alt="image"/>{/block:AlbumArt}
+            </div>
+        </figcaption>
+        {block:AudioPlayer}{AudioPlayer}{/block:AudioPlayer}
+    </figure>
+{/block:Audio}

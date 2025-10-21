@@ -1,0 +1,98 @@
+/* .audio-caption is set as flex by tumblr as default, but we need it to be display block */
+.tmblr-full>.audio-caption {
+    display: block!important;
+}
+/* wrapper for entire audio post */
+figcaption.audio-caption {
+    background: white;
+    border: 1px solid grey;
+    border-radius: 6px;
+}
+/* wrapper for button, audio details and album */
+.audio-info {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    padding: 20px;
+}
+/* audio text (album title, etc.) */
+.tmblr-full>.audio-caption .audio-details {
+    max-width: 100%;
+    padding: 0; /* remove tumblr default padding */
+    flex: auto;
+}
+/* album cover */
+.tmblr-full>.audio-caption .album-cover {
+    width: 80px;
+    height: 80px;
+    border-radius: 6px;
+    object-fit: cover;
+}
+/* plauy-pause button wrapper */
+.custom-audio-player-container .play-pause {
+    display: flex;
+}
+/* plauy-pause svg */
+.custom-audio-player-container .play-pause svg {
+    width: 26px;
+    height: 26px;
+    color: purple;
+}
+/* Tumblr has a 1.2em on artist text, resetting it here */
+.tmblr-full>.audio-caption .album, .tmblr-full>.audio-caption .artist {
+    font-size: 1em;
+    line-height: 1.5;
+}
+/* wrapper for progress bar and time display */
+.progress-bar-container {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    border-top: 1px solid grey;
+    padding: 20px;
+}
+ 
+/* Style the progress bar track (actually it's range input itself but it's only for chrome) */
+.progress-bar {
+    width: 100%;
+    height: 10px;
+    -webkit-appearance: none;  /* removes the default styling in most browsers */
+    background: #eeeeee;
+    border-radius: 5px;
+    border: 1px solid grey;
+}
+
+/* Style the track for both WebKit and Mozilla browsers */
+.progress-bar::-webkit-slider-runnable-track,
+.progress-bar::-moz-range-track {
+    width: 100%;
+    height: 10px;
+    background: #eeeeee;
+    border-radius: 5px;
+    border: 1px solid grey;
+}
+
+/* Style the thumb for WebKit (Chrome, Safari, etc.) */
+.progress-bar::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 16px;
+    height: 16px;
+    background: green;
+    border-radius: 50%;
+    cursor: pointer;
+}
+
+/* Style the thumb for Mozilla (Firefox) */
+.progress-bar::-moz-range-thumb {
+    width: 16px;
+    height: 16px;
+    background: green;
+    border:0; /* remove weird border in firefox */
+    border-radius: 50%;
+    cursor: pointer;
+}
+/* style MM:SS time count */
+.time-display {
+    flex-shrink: 0;
+}
