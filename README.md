@@ -2,6 +2,9 @@
 
 Here you will find Tumblr themes, plugins, base code, and tutorials created by me, [Mournstera](https://mournstera.tumblr.com/).
 
+#### Looking for my premium themes?
+They’re available on [Ko-fi](https://ko-fi.com/flipse) 💖
+
 ---
 
 ## Folders 📁
