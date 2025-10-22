@@ -3,7 +3,7 @@ This is a little plugin to unify the design and style of Legacy and NPF Tumblr a
 
 This is an example of the output for both Legacy and npf:
 
-![image](https://github.com/user-attachments/assets/bb61cccd-a69f-40ef-95c7-afd7a112b3c6)
+![image](https://github.com/flipsewtf/Tumblr/blob/main/Plugins/UnifyAudio/unifyaudioim.jpg)
 
 > [!IMPORTANT]
 > <strong>Credit in your theme's code or credits page is a must.</strong>
