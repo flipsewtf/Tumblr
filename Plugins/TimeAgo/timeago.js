@@ -1,9 +1,9 @@
 /*
 TimeAgo Tumblr plugin
--  https://lushwave.tumblr.com
--  https://github.com/flipsewtf/TimeAgo
+-  https://mournstera.tumblr.com
+-  https://github.com/flipsewtf/Tumblr
 -  Version 1.0.0
--  Based on https://bychloethemes.tumblr.com/plugins/timeago
+-  Based on @bychloethemes script
 */
 (function () {
     function timeAgo(elements, options) {
