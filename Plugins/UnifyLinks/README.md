@@ -25,7 +25,7 @@ Place the script somewhere before `</body>` using a `<script>` tag.
 Upload it via Tumblr theme assets — do **not** insert the script directly in your theme, as the Tumblr preview window may not handle it properly.
 
 ```html
-<script src="Plugins/UnifyLinks/links.js"></script>
+<script src="unify_links.js"></script>
 ```
 
 ## HTML
@@ -43,7 +43,3 @@ You're more than welcome to customize it, as long as you keep the classes and HT
 ## Comments
 
 Compatibility with Infinite Scroll is not guaranteed; I do not provide support for it.
-
-```
-
-```
