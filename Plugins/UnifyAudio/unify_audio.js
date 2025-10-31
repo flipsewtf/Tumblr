@@ -1,7 +1,7 @@
 /*
 UnifyAudio Tumblr plugin
 -  https://mournstera.tumblr.com
--  https://github.com/flipsewtf/UnifyAudio
+-  https://github.com/flipsewtf/Tumblr
 -  Version 1.0.0
 */
 
