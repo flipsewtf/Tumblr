@@ -1,0 +1,13 @@
+# Ignore the themes folder entirely
+themes/
+
+# Ignore node_modules (common practice)
+node_modules/
+
+# Ignore build/output folders
+_site/
+dist/
+
+# Optional: ignore any temp or log files
+*.log
+*.tmp
