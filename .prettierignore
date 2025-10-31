@@ -1,12 +1,16 @@
-# Ignore the themes folder entirely
+# Ignore
 themes/
+Plugins/UnifyLinks/unify_links.html
+BaseCode/jquery-free-basecode.html
+*.min.js
 
-# Ignore node_modules (common practice)
+# Ignore node_modules
 node_modules/
 
 # Ignore build/output folders
 _site/
 dist/
+
 
 # Optional: ignore any temp or log files
 *.log
