@@ -1,188 +1,470 @@
-<!----------------------------------------------------
+<!-- ----------------------------------------------------
+    
+    Tumblr Base Code — jQuery-free & a11y/accessibility-friendly
+    Rewritten: 01 November 2025
+    
+    by Flipse / @mournstera.tumblr.com
+    
+    Full credits, resources, and documentation available at:
+    https://github.com/flipsewtf/Tumblr
+    
+**********************************************************************
 
-    IMPORTANT!
-    Please go to
-    https://github.com/flipsewtf/Tumblr-basecode
-    For a full list of credits and resources and comments.
+    REMs over PX: Theme Sizing Guide
+    (Root font-size should always be 16px)
+
+    Why use rem:
+    - Makes your theme more accessible.
+      Fonts, gaps, and sidebar widths scale with user preferences
+      (browser zoom / OS text scaling), helping users who need larger text.
+    - 1rem = 16px by default. Other rems are proportional:
+      e.g., 2rem = 32px, 0.75rem = 12px.
+    - Pixels are still okay for exact sizes (Post widths, Photoset
+      gutters) to prevent layout breaks.
+    
+    20px divided by 16px equals rem size:
+    
+    20 / 16 = 1.25rem.
+
+    Quick reference:
+    
+    1px  = 0.0625rem;
+    2px  = 0.125rem;
+    3px  = 0.1875rem;
+    4px  = 0.25rem;
+    5px  = 0.3125rem;
+    6px  = 0.375rem;
+    7px  = 0.4375rem;
+    8px  = 0.5rem;
+    9px  = 0.5625rem;
+    10px = 0.625rem;
+    11px = 0.6875rem;
+    12px = 0.75rem;
+    13px = 0.8125rem;
+    14px = 0.875rem;
+    15px = 0.9375rem;
+    16px = 1rem;
+    17px = 1.0625rem;
+    18px = 1.125rem;
+    19px = 1.1875rem;
+    20px = 1.25rem;
+    21px = 1.3125rem;
+    22px = 1.375rem;
+    23px = 1.4375rem;
+    24px = 1.5rem;
+    25px = 1.5625rem;
+    
+    *(Tip: For borders, consider a root variable: --border-width: 0.0625rem)*
+
+    Scaling elements:
+    - Use `em` for headings, icons (SVG or font icons), etc.
+      - `rem` = relative to root <html> (global scaling)
+      - `em`  = relative to parent element (scales locally)
+
+    Example:
+        h1 {
+            font-size: 1.7em;  /* scales with parent */
+        }
+        svg.bell {
+            width: 1.7em;       /* scales with text */
+            height: 1.7em;
+        }
+
+---------------------------------------------------- -->
+
+
+
+<!---
+
+    We're no longer using px values in themes! Well, almost not.
+    
+    px → rem conversion guide (root font-size should always be = 16px)
+    
+    Why this matters:
+    
+    - Using rem instead of px makes your theme more accessible.
+      Font sizes, gaps, and sidebar widths will scale with user preferences
+      (browser zoom or OS text scaling), helping users who need larger text.
       
+    - 1rem = 16px by default in modern browsers. All other rem values
+      are proportional (e.g., 2rem = 32px, 0.75rem = 12px).
+      
+    - Pixels are still used for elements where exact sizing is critical 
+      (like Post widths or Photoset gutters), to avoid layout breaks.
+
+    Quick reference table:
+    
+    1px  = 0.0625rem; - this one is good to remember instead of 1px borders.
+                        alternatively create a root variable: --border-width: 0.0625rem; and use that.
+    2px  = 0.125rem;
+    3px  = 0.1875rem;
+    4px  = 0.25rem;
+    5px  = 0.3125rem;
+    6px  = 0.375rem;
+    7px  = 0.4375rem;
+    8px  = 0.5rem;
+    9px  = 0.5625rem;
+    10px = 0.625rem;
+    11px = 0.6875rem;
+    12px = 0.75rem;
+    13px = 0.8125rem;
+    14px = 0.875rem;
+    15px = 0.9375rem;
+    16px = 1rem;
+    17px = 1.0625rem;
+    18px = 1.125rem;
+    19px = 1.1875rem;
+    20px = 1.25rem;
+    21px = 1.3125rem;
+    22px = 1.375rem;
+    23px = 1.4375rem;
+    24px = 1.5rem;
+    25px = 1.5625rem;
+    
+    For elements that should SCALE with the user's chosen font-size
+    - like headings, or icons (SVG or font icons; in this
+      theme, Phosphor Icons) - we use `em` instead of `rem`.  
+    
+    - `rem` is relative to the root `<html>` font-size (16px).  
+    - `em` is relative to the parent element's font-size — so if
+       the user changes the theme font-size, everything sized
+       in `em` scales proportionally.  
+       
+    Example:
+    
+    h1 {
+        font-size: 1.7em;  /* scales with user-chosen body font-size */
+    }
+    
+    svg.bell {
+        width: 1.7em;       /* scales with surrounding text */
+        height: 1.7em;      /* scales with surrounding text */
+    }
+    
+
 ----------------------------------------------------->
-<!DOCTYPE html>
-<html lang="en" data-theme="light"> 
-<head>
 
-<title>{title}{block:PermalinkPage}{block:PostSummary}: {PostSummary}{/block:PostSummary}{/block:PermalinkPage} {block:TagPage}/ #{Tag}{/block:TagPage} {block:SearchPage}| search: {SearchQuery}{/block:SearchPage}</title>
+<!DOCTYPE html> 
+<!-- 
+    Global layout and theme classes are applied to <html> instead of <body>:
 
-<link rel="shortcut icon" href="{Favicon}"/>
+    - { select:Blog Layout }, etc. are global layout options.
+    
+    Why <html> instead of <body>:
+    
+    - Keeps all page-level settings in one place
+    - Simplifies CSS and JS targeting.
+-->
+<html lang="en" data-theme="light" class="{select:Blog Layout} {select:Post Info} {select:Tags}">
 
-<link rel="alternate" type="application/rss+xml" href="{RSS}"/>
+<head> 
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/> 
+<meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+
+<title>
+    @{name} | {title}
+    
+    {block:PermalinkPage}
+        {block:PostSummary}: {PostSummary}
+    {/block:PostSummary}
+    {/block:PermalinkPage}
+    
+    {block:TagPage}/ #{Tag}{/block:TagPage}
+    
+    {block:SearchPage}| search: {SearchQuery}{/block:SearchPage}
+</title>
+
 
 {block:Description}
 <meta name="description" content="{MetaDescription}"/>
 {/block:Description}
 
-{NewPostStyles} 
+<link rel="shortcut icon" href="{Favicon}"/>
+<link rel="icon" href="{Favicon}"/>
+<link rel="alternate" type="application/rss+xml" href="{RSS}"/>
 
-<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1">
+<script> 
+    // where the dark/light mode plugin retrieves setting info
+    const storedTheme = localStorage.getItem("theme") ||  
+        (window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light");
 
-<script> // where the dark/light mode plugin retrieves setting info
-    const storedTheme = localStorage.getItem("theme") || (window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light");
-    if (storedTheme) {
-      document.documentElement.setAttribute("data-theme", storedTheme);
+    if (storedTheme) { 
+        document.documentElement.setAttribute("data-theme", storedTheme);
     }
 </script>
 
 {block:Options}
-<meta name="image:Sidebar image" content=""/>
-<meta name="image:Sidebar image dark mode" content=""/>
 
-<meta name="color:Text" content="#212121"/>
-<meta name="color:Link" content="#828282"/>{}
+<meta name="image:Sidebar" content=""/>
+<meta name="image:Dark mode Sidebar" content=""/>
+
+<meta name="color:Text" content="#121212"/> 
+<meta name="color:Link" content="#b0b0b0"/>
 <meta name="color:Background" content="#ffffff"/>
-<meta name="color:Background 2" content="#f4f4f4"/>
-<meta name="color:Borders" content="#e1e1e1"/>
-<meta name="color:Accent" content="#f5a79c"/>
+<meta name="color:Background 2" content="#f7f7f7"/>
+<meta name="color:Borders" content="#ededed"/>
+<meta name="color:Accent" content="#d1a983"/>
 
 <meta name="color:Dark mode Text" content="#fcfcfc"/>
 <meta name="color:Dark mode Link" content="#b1b1b1"/>
-<meta name="color:Dark mode Background" content="#181818"/>
-<meta name="color:Dark mode Background 2" content="#2e2e2e"/>
-<meta name="color:Dark mode Borders" content="#3b3b3b"/>
-<meta name="color:Dark mode Accent" content="#9ae7d7"/>
+<meta name="color:Dark mode Background" content="#1a1a1a"/>
+<meta name="color:Dark mode Background 2" content="#252525"/>
+<meta name="color:Dark mode Borders" content="#3d3c3b"/>
+<meta name="color:Dark mode Accent" content="#6c8c59"/>
 
-<meta name="select:Font size" content="1.1rem" title="1.1rem (11px)"/>
-<meta name="select:Font size" content="1.2rem" title="1.2rem (12px)"/> 
-<meta name="select:Font size" content="1.3rem" title="1.3rem (13px)"/> 
-<meta name="select:Font size" content="1.4rem" title="1.4rem (14px)"/>
-<meta name="select:Font size" content="1.5rem" title="1.5rem (15px)"/>
-<meta name="select:Font size" content="1.6rem" title="1.6rem (16px)"/>
-<meta name="select:Font size" content="1.7rem" title="1.7rem (17px)"/>
-<meta name="select:Font size" content="1.8rem" title="1.8rem (18px)"/>
+<meta name="select:Font Size" content="0.6875rem" title="11px"/>
+<meta name="select:Font Size" content="0.75rem" title="12px"/>
+<meta name="select:Font Size" content="0.8125rem" title="13px"/>
+<meta name="select:Font Size" content="0.875rem" title="14px"/>
+<meta name="select:Font Size" content="0.9375rem" title="15px"/>
+<meta name="select:Font Size" content="1rem" title="16px"/>
+<meta name="select:Font Size" content="1.0625rem" title="17px"/>
+<meta name="select:Font Size" content="1.125rem" title="18px"/>
 
-<meta name="select:Blog layout" content="head" title="header"/>
-<meta name="select:Blog layout" content="left" title="left sidebar"/>
-<meta name="select:Blog layout" content="right" title="right sidebar"/>
+<meta name="select:Blog Layout" content="head" title="Header"/>
+<meta name="select:Blog Layout" content="left" title="Left Sidebar"/>
+<meta name="select:Blog Layout" content="right" title="Right Sidebar"/>
 
-<meta name="select:Post width" content="350px"/>
-<meta name="select:Post width" content="400px"/>
-<meta name="select:Post width" content="450px"/>
-<meta name="select:Post width" content="500px"/>
-<meta name="select:Post width" content="540px"/>
+<meta name="select:Layout Gap" content="2.5rem" title="40px"/>
+<meta name="select:Layout Gap" content="3.75rem" title="60px"/>
+<meta name="select:Layout Gap" content="5rem" title="80px"/>
+<meta name="select:Layout Gap" content="6.25rem" title="100px"/>
 
-<meta name="select:Photoset gutter" content="1px" title="1px"/>
-<meta name="select:Photoset gutter" content="2px" title="2px"/>
-<meta name="select:Photoset gutter" content="3px" title="3px"/>
-<meta name="select:Photoset gutter" content="4px" title="4px"/>
+<meta name="select:Sidebar Width" content="12.5rem" title="200px"/>
+<meta name="select:Sidebar Width" content="13.75rem" title="220px"/>
+<meta name="select:Sidebar Width" content="15rem" title="240px"/>
+<meta name="select:Sidebar Width" content="16.25rem" title="260px"/>
+<meta name="select:Sidebar Width" content="17.5rem" title="280px"/>
 
-<meta name="select:Display tags" content="tags-always" title="always">
-<meta name="select:Display tags" content="tags-upon-toggle" title="upon toggle">
+<meta name="select:Sidebar Image Size" content="3.75rem" title="60px">
+<meta name="select:Sidebar Image Size" content="5rem" title="80px">
+<meta name="select:Sidebar Image Size" content="6.25rem" title="100px">
+<meta name="select:Sidebar Image Size" content="7.5rem" title="120px">
+<meta name="select:Sidebar Image Size" content="9.375rem" title="150px">
 
-<meta name="text:Body font"  content="Inter"/>
-{/block:Options} 
+<meta name="select:Sidebar Image Shape" content="square" title="Square">
+<meta name="select:Sidebar Image Shape" content="rounded" title="Rounded">
+<meta name="select:Sidebar Image Shape" content="circle" title="Circle">
+<meta name="select:Sidebar Image Shape" content="blob1" title="Blob 1">
+<meta name="select:Sidebar Image Shape" content="blob2" title="Blob 2">
 
-<!-- Google font -->
+<meta name="select:Post Width" content="350px"/>
+<meta name="select:Post Width" content="400px"/>
+<meta name="select:Post Width" content="450px"/>
+<meta name="select:Post Width" content="500px"/>
+<meta name="select:Post Width" content="540px"/>
+
+<meta name="select:Photoset Gutter" content="1px" title="1px"/>
+<meta name="select:Photoset Gutter" content="2px" title="2px"/>
+<meta name="select:Photoset Gutter" content="3px" title="3px"/>
+<meta name="select:Photoset Gutter" content="4px" title="4px"/>
+
+<meta name="select:Post Info" content="info-only-icons" title="Icons"/>
+<meta name="select:Post Info" content="info-only-text" title="Text"/>
+<meta name="select:Post Info" content="info-both" title="Both"/>
+
+<meta name="select:Tags" content="tags-always" title="Display">
+<meta name="select:Tags" content="tags-truncated" title="Truncated">
+<meta name="select:Tags" content="tags-hidden" title="Behind Toggle">
+
+<meta name="if:Rounded Content Corners" content=""/>
+<meta name="if:Rounded Photoset Corners" content=""/>
+<meta name="if:Search Bar" content=""/>
+<meta name="if:Featured Tags" content=""/>
+<meta name="if:Update Tab" content=""/>
+
+<meta name="text:Body Font" content="Inter"/>
+<meta name="text:Post Margin" content="8rem"/>
+<meta name="text:Sidebar Title" content="Lorem Ipsum"/>
+<meta name="text:Sidebar Description" content="This is where your description text goes. Links and html is allowed."/>
+
+<meta name="text:Home Link Label" content="Home"/>
+<meta name="text:Ask Link Label" content="Ask"/>
+<meta name="text:Archive Link Label" content="Archive"/>
+<meta name="text:Submit Link Label" content="Submit"/>
+<!--
+    Feature: Sidebar / menu toggle label.
+    - If this field is left empty, all navigation links are shown.
+    - If filled, all links (except Home and Ask) are hidden inside a
+    toggle button using this text. 
+-->
+<meta name="text:Toggle Label" content=""/>
+
+<meta name="text:Update Text" content="Here is an update."/>
+<meta name="text:Activity 1 Icon" content="popcorn"/>
+<meta name="text:Activity 1" content="watching"/>
+<meta name="text:Activity 2 Icon" content="music-notes"/>
+<meta name="text:Activity 2" content="listening"/>
+<meta name="text:Activity 3 Icon" content="books"/>
+<meta name="text:Activity 3" content="reading"/>
+<meta name="text:Activity 4 Icon" content="game-controller"/>
+<meta name="text:Activity 4" content="playing"/>
+{/block:Options}
+
+{NewPostStyles}
+
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family={text:Body font}:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap">
+
+<link href="https://fonts.googleapis.com/css2?family={text:Body Font}:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
 
 <style>
-:root {
-    --font1: '{text:Body font}', sans-serif;
-    --font-size: {select:Font size};
-    --line-height: 1.8;
- /* there are borders on the post article in this basecode, so we want to keep the size of the chosen post width + 2px for the border removing border? remove the calc( + 2px) */
-    --post-width: calc( {select:Post width} + 2px);
-    --sb-width: 250px;
-    --sb-icon: 100px;
-    --gutter: {select:Photoset gutter};
-    /* gaps for flex og grid but also just for margin and padding */
-    --gap1: 1.2rem;
-    --gap2: 1.5rem;
-    --gap3: 2.5rem;
-    --gap4: 3.5rem;
-    --gap-top-bottom: 12rem;  /* gap between top and bottom.  margin-top on <main> and margin-top on <footer> */
-    --gap-post-margin: 10rem; /* gap between each post*/
-    --text-margin: 1.8rem; /* margins on text etc. more later on it in the CSS  */
+/* -------------------------------------------------------------
+   CSS Variables (Custom Properties)
+   
+   - Define theme-wide values that can be reused throughout the CSS
+   - Makes it easy to change fonts, sizes, colors, spacing, etc.
+   
+   - Variables that stay consistent should go inside :root.
+   
+   - Variables that change with toggling dark/light mode should go
+   inside:
+   
+    :root, html[data-theme='light'] {
     
-    /* border-radius on single photo and photosets, I don't use this when there's a border around the article/post */
-    --photo-corners: 0;
+    and also
+    
+    html[data-theme='dark'] {
+    
+    
+    :root & html[data-theme='light'] are combined as a fallback.
+    Please do not change that.
+    
+------------------------------------------------------------- */
+:root { 
+    --font: "{text:Body Font}", -apple-system, system-ui, BlinkMacSystemFont, sans-serif;
+    --font-size: {select:Font size};
+    --gutter: {select:Photoset gutter};
+    
+    /* there are borders on the post article in this basecode, so we want to keep the size of the chosen post width + 2px/0.125rem for the border. removing border? remove the calc( + 0.125rem) */
+    
+    --post-width: calc({select:Post width} + 0.125rem);
+    --sidebar-width: {select:Sidebar Width};
+    --sidebar-image: {select:Sidebar Image Size};
+    --layout-gap: {select:Layout Gap};
+    --line-height: 1.8;
+    
+    /* shorthand values for flex and grid, margin and padding.
+       I basically go for round 1.7rem, 1rem, 1.2rem, 1.6rem and
+       1.9rem, but if you want the "right" px you can do that.
+       
+       remember it's alwats just px value divided by the number 16:
+       So it's 12 / 16 = 0.75rem
+    */
+       
+    --gap1: 0.75rem;   /* 12px */
+    --gap2: 1rem;      /* 16px */
+    --gap3: 1.25rem;   /* 20px */
+    --gap4: 1.5625rem; /* 25px */
+    --gap5: 1.875rem;  /* 30px */
+    
+    --main-margin: 8rem; /* top & bottom margin on <main> */
+    --post-margin: {text:Post margin}; /* gap between post (margin-bottom) */
+    
+    /* 20px - default margin for text elements (paragraphs, headings,
+       lists, etc within posts.) Detailed explanation further down the CSS*/
+    --text-margin: 1.25rem;
+    
 
-/* here are 4 different border-radius */
-    --round1: 0.5rem;
-    --round2: 0.7rem;
-    --round3: 1rem; 
+    {block:ifRoundedContentCorners}
+    /* Shorthand variables for consistent border-radius
+       throughout the theme */
+    --round1: 0.375rem; /* 6px */
+    --round2: 0.625rem; /* 10px */
+    --round3: 0.875rem; /* 14px*/
+    --round4: 1.125rem; /* 18px*/
     --circle: 100%;
-}
-:root, html[data-theme='light'] {
-    --light-on: block; /* for dark/light mode button and sidebar images */
-    --light-off: none; /* for dark/light mode button and sidebar images */
-    --c-text: {RGBcolor:Text};
-    --c-link: {RGBcolor:Link};
-    --c-bg1: {RGBcolor:Background};
-    --c-bg2: {RGBcolor:Background 2};
-    --c-border: {RGBcolor:Borders};
-    --c-acc1: {RGBcolor:Accent};
-}
-html[data-theme='dark'] {
-    --light-on: none; /* for dark/light mode button and sidebar images */
-    --light-off: block; /* for dark/light mode button and sidebar images */
-    --c-text: {RGBcolor:Dark mode Text};
-    --c-link: {RGBcolor:Dark mode Link};
-    --c-bg1: {RGBcolor:Dark mode Background};
-    --c-bg2: {RGBcolor:Dark mode Background 2};
-    --c-border: {RGBcolor:Dark mode Borders};
-    --c-acc1: {RGBcolor:Dark mode Accent};
+    {/block:ifRoundedContentCorners}
+
+    
+    /* Border radius for images and photosets within posts.
+       The base code already applies a border to articles/posts,
+       so this is set to 0 by default.
+    
+       You do not need:
+       <meta name="if:Rounded Photoset Corners" content=""/>
+       in this setup, since posts (<article>) already have a border.
+    
+       Padding within <article> is controlled by --text-margin.
+       Press Ctrl + F and search for var(--text-margin)
+       to read more about it further down the CSS.
+    */
+    {block:ifRoundedPhotosetCorners}
+    --photo-corners: 0;
+    {/block:ifRoundedPhotosetCorners}
 }
 
-/* dark/light mode snappy transition */
-html.theme-transition,
-html.theme-transition *,
-html.theme-transition *:before,
-html.theme-transition *:after {
-  transition: 0.0s !important;
-  transition-delay: 0 !important;
+:root, html[data-theme='light'] {
+    color-scheme: light;
+    
+     /* paired with .mode-light {display: var(--mode-light);} 
+     and .mode-dark {display: var(--mode-dark);} further down the CSS */
+    --mode-light: block;
+    --mode-dark: none;
+    --color-text: {RGBcolor:Text};
+    --color-link: {RGBcolor:Link};
+    --color-bg1: {RGBcolor:Background};
+    --color-bg2: {RGBcolor:Background 2};
+    --color-border: {RGBcolor:Borders};
+    --color-accent: {RGBcolor:Accent};
 }
-/* -------------------------------------  css resets (Joshua Comeau) */
+
+html[data-theme='dark'] {
+    color-scheme: dark;
+    
+     /* paired with .mode-light {display: var(--mode-light);} 
+     and .mode-dark {display: var(--mode-dark);} further down the CSS */
+    --mode-light: none;
+    --mode-dark: block;
+    --color-text: {RGBcolor:Dark mode Text};
+    --color-link: {RGBcolor:Dark mode Link};
+    --color-bg1: {RGBcolor:Dark mode Background};
+    --color-bg2: {RGBcolor:Dark mode Background 2};
+    --color-border: {RGBcolor:Dark mode Borders};
+    --color-accent: {RGBcolor:Dark mode Accent};
+}
+
+/* 
+   Temporarily disables CSS transitions when switching themes.
+   - Used by the dark mode toggle script to prevent unwanted animation flashes.
+   - Applies to all elements under html.theme-transition.
+*/
+html.theme-transition * {
+    transition: none !important;
+}
+
+/* ------------------------------------------------------------- CSS RESET */
 *,*::before,*::after {
     -webkit-font-smoothing: antialiased;
-    text-rendering: optimizeLegibility;
     -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
     box-sizing: border-box;
 }
 * {
     margin: 0;
-    scrollbar-width: thin; /* firefox scrollbar  */
-    scrollbar-color: rgb(var(--c-acc1)) rgb(var(--c-bg1)); /* firefox scrollbar */
 }
-
-/*  Why is the font-size: 62.5%?
-    - this will make using rem for the theme easier to calculate.
-      1.1rem = 11px and 2.5rem = 25px etc.
-    
-    - See more at:
-      sitepoint.com/understanding-and-using-rem-units-in-css/
-    
-    - I use rem for everything margins/paddings in the CSS variables,
-      and em to increase size depending on the rem-font-size the
-      user have chosen */
-    
 html {
+    font-size: 100%; /* standard 16px*/
     height: 100%;
-    font-size: 62.5%; 
-    scrollbar-width: thin;
+    scroll-behavior: smooth;
+}
+p:empty {
+	display: none;
 }
 button,
 textarea,
-select {
+select { 
     font: inherit;
 }
 button {
-    outline: none;
     border: 0;
     background: transparent;
     padding: 0;
     display: inherit;
     cursor: pointer;
     color: inherit;
+    text-transform: inherit;
 }
 input{
     font: inherit;
@@ -191,54 +473,64 @@ input{
     padding: 0;
     background-color: transparent;
 }
-p,h1,h2,h3,h4,h5,h6 {
+p, h1, h2, h3, h4, h5, h6, ul, ol, li {
     overflow-wrap: break-word;
+    word-break: break-word;
 }
-.tmblr-iframe-pushdown {
-    padding-top: 0!important;
+ul,ol {
+    padding: 0;
+    margin: 0;
+    list-style: none;
 }
-.iframe-controls--phone-mobile {
-    display: none!important; 
+
+/*Visually Hidden Utility
+
+- Hides content visually, but keeps it accessible to screen reader
+- Useful for accessibility text, labels, or skip links */
+.visually-hidden {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0 0 0 0);
+    clip-path: inset(50%);
+    white-space: nowrap;
+    border: 0;
 }
-/* ------------------------------------- selection */
-::-moz-selection {
-    background-color: rgb(var(--c-acc1));
-    color:rgb(var(--c-text));
-}
+
 ::selection {
-    background-color: rgb(var(--c-acc1));
-    color:rgb(var(--c-text)); 
+    background-color: rgb(var(--color-accent));
+    color:rgb(var(--color-text));
 }
-/* ------------------------------------- scrollbar (not firefrox) */
-::-webkit-scrollbar {
-    width: 8px;
-    background-color: rgb(var(--c-bg1));
-}
-::-webkit-scrollbar-thumb {
-    background: rgb(var(--c-acc1));
-    border-radius: var(--round1);
-}
-::-webkit-scrollbar-track {
-    background-color: rgb(var(--c-bg1));
-}
-/* ------------------------------------- tooltips */
+/* -------------------------------------------------------------- TOOLTIPS */
+
+/* Note: Tippy.js GitHub repo is archived
+(https://github.com/atomiks/tippyjs), but this theme uses a
+specific script version that works perfectly with these modifications. */
+
+  
+/* Base style for custom-themed tooltips tippy.js */
 .tippy-box[data-theme~='custom'] {
     font-size: var(--font-size);
+
     font-weight: 400;
-    text-align:center;
-    padding: 1rem;
-    color: rgb(var(--c-bg1));
-    border: 0px solid rgb(var(--c-border));
+    text-align: center;
+    padding: 0.625rem;
+    color: rgb(var(--color-bg1));
+    border: 0;
     border-radius: var(--round1);
-    background-color: rgb(var(--c-text));
-    text-transform: lowercase;
-    margin: 1.5rem;
-    z-index: 9999999;
+    background-color: rgb(var(--color-text));
+    margin: 1.125rem;
+    z-index: 9999999999;
 }
-@keyframes smooth-fade {
+
+/* Smooth fade-in animation for tooltips */
+@keyframes smooth-fade-in {
     from {
         opacity: 0;
-        transform: scale(0.9) translateY(2px);
+        transform: scale(0.8) translateY(2px);
     }
     to {
         opacity: 1;
@@ -246,262 +538,636 @@ p,h1,h2,h3,h4,h5,h6 {
     }
 }
 
-.tippy-box[data-animation='smooth-fade'] {
-    animation: smooth-fade 0.25s ease-out;
+/* Smooth fade-out animation for tooltips */
+@keyframes smooth-fade-out {
+    from {
+        opacity: 1;
+        transform: scale(1) translateY(0);
+    }
+    to {
+        opacity: 0;
+        transform: scale(0.8) translateY(2px);
+    }
 }
-/* ------------------------------------- tumblr lightbox */
+
+/* Apply smooth fade animation to tooltips */
+.tippy-box[data-animation='smooth-fade'] {
+    animation-duration: 0.35s;
+    animation-timing-function: cubic-bezier(0.16, 1, 0.3, 1);
+    will-change: transform, opacity;
+}
+
+/* Trigger fade-in when tooltip is visible */
+.tippy-box[data-animation='smooth-fade'][data-state='visible'] { 
+    animation-name: smooth-fade-in;
+}
+
+/* Trigger fade-out when tooltip is hidden */
+.tippy-box[data-animation='smooth-fade'][data-state='hidden'] {
+    animation-name: smooth-fade-out;
+}
+
+/* ----------------------------------------- TUMBLR: LIGHTBOXES, BANNERS.*/
 .vignette, #vignette {
-    opacity:0;
+    opacity: 0;
 }
 .lightbox-image, #tumblr_lightbox img {
-    box-shadow:none !important;
-    border-radius:0 !important;
-    max-width:none;
+    box-shadow: none !important;
+    border-radius: 0 !important;
+    max-width: none;
 }
 .tmblr-lightbox, #tumblr_lightbox {
-    background-color: rgb(var(--c-bg1),.90)!important;
+    background-color: rgb(var(--color-bg1),.90)!important;
 }
+.iframe-controls--phone-mobile,
 .tmblr-iframe--gdpr-banner,
 .tmblr-iframe--app-cta-button,
 .gdpr-banner {
     display: none !important;
 }
-/* ------------------------------------- general */
+.tmblr-iframe-pushdown {
+    padding-top: 0!important; 
+}
+/* --------------------------------------------------------- SCROLLBARS */
+
+/* Custom scrollbar styles for WebKit */
+@supports selector(::-webkit-scrollbar) {
+    ::-webkit-scrollbar {
+        width: 8px;
+        height: 8px;
+    }
+    ::-webkit-scrollbar-track {
+        background-clip: padding-box;
+        background-color: rgb(var(--color-bg1));
+        border-left: 0.0625rem solid rgb(var(--color-border));
+    }
+    ::-webkit-scrollbar-thumb {
+        background-color: rgb(var(--color-accent));
+    }
+    ::-webkit-scrollbar-button {
+        display: none;
+    }
+    ::-webkit-scrollbar-corner {
+        background-color: rgb(var(--color-bg1));
+    }
+}
+
+/* Firefox scrollbar styling */
+@-moz-document url-prefix() {
+    * {
+        scrollbar-width: thin;
+        scrollbar-color: rgb(var(--color-accent)) rgb(var(--color-bg1));
+    }
+}
+
+/* --------------------------------------------------------------- GENERAL */
 body {
-    font-family: var(--font1);
+    font-family: var(--font);
     font-size: var(--font-size);
-    color: rgb(var(--c-text));
-    background-color: rgb(var(--c-bg1));
+    color: rgb(var(--color-text));
+    background-color: rgb(var(--color-bg1));
     height: 100%;
-    -webkit-font-smoothing: antialiased;
     text-rendering: optimizeLegibility;
-    overflow: hidden;
+    overflow-wrap: break-word;
     line-height: 1;
     font-weight: 400;
     overflow-x: hidden;
     overflow-y: scroll;
 }
+
 a {
-    color:rgb(var(--c-link));
+    color:rgb(var(--color-link));
     text-decoration: none;
-    transition: all 0.2s ease;
+    overflow-wrap: anywhere;
+    
+    &:hover {
+        color: rgb(var(--color-accent)); 
+    }
 }
-a:hover {
-    color: rgb(var(--c-acc1)); 
-    transition: all 0.2s ease;
-}
+/* ------------------------------------------------------------ SHORTHANDS */
 
-/* These are shorthands(?) classes I use on divs etc, so
-   I don't have to repeat myself in the CSS */
-.flex {
-	display: flex;
-}
-.centered {
-	align-items: center;
-	justify-content: center;
-}
-.align-center {
-	align-items: center;
-}
-.justify-center {
-	justify-content: center;
-}
-.between {
-	justify-content: space-between;
-}
-.wrap {
-    flex-wrap: wrap;
-}
-/* gap shorthands for grid or flex */
-.gap1 {
-    gap: var(--gap1);
-}
-.gap2 {
-    gap: var(--gap2);
-}
-.gap3 {
-    gap: var(--gap3);
-}
-.gap4 {
-    gap: var(--gap4);
-}
+/* Utility classes for quick layout and spacing adjustments.
+   Includes flexbox helpers, gap helpers, column/wrap directions,
+   and light/dark mode visibility controls. */
+   
+.flex { display: flex; } 
 
-/* -------------------------------------  dark/light toggles*/
+.centered { align-items: center; justify-content: center; }
 
-/* these classes are used to toggle anything that changes with
-   the mode, from the dark/light toggles to the sidebar image. */
+.align-center { align-items: center; }
 
-.light-on {
-    display: var(--light-on);
-}
-.light-off{
-    display: var(--light-off); 
-}
+.justify-center { justify-content: center; }
 
-/* -------------------------------------  containers */
+.between { justify-content: space-between; }
 
-/* this page-container keeps <main> and <footer>,
-   and the flex: 1; on the <main> makes the footer
-   stick to the bottom no matter how tall the window is */
+.column { flex-direction: column; }
+
+.wrap { flex-wrap: wrap; }
+
+.gap1 { gap: var(--gap1); }
+.gap2 { gap: var(--gap2); }
+.gap3 { gap: var(--gap3); }
+.gap4 { gap: var(--gap4); }
+.gap5 { gap: var(--gap5); }
+
+/* 
+   Light and dark mode visibility toggles:
+   - The CSS variables --mode-light and --mode-dark are defined 
+     inside the theme blocks for [data-theme='light'] and [data-theme='dark'].
+   - They control which elements are shown depending on the current theme.
+     For example:
+       * In light mode → --mode-light: block; --mode-dark: none;
+       * In dark mode  → --mode-light: none;  --mode-dark: block;
+   - These variables are used by the helper classes below to
+     show or hide elements (e.g., theme toggle icons or sidebar images).
+*/
+.mode-light { display: var(--mode-light); }
+.mode-dark  { display: var(--mode-dark); }
+
+/* ------------------------------------------------------------ PRIMARY CONTAINERS */
+
+/* 
+   .page-container ensures the footer stays at the bottom:
+   
+   - Uses flex column layout
+   - <main> grows to fill remaining space with flex: 1
+   - Works even if content is short or the window is tall.
+   
+   the markup of the theme:
+   
+    <div class="page-container">
+        <main>
+            <aside></aside> (sidebar)
+            <section>
+                <article><article> (every post container)
+            </section>
+            <footer></footer>
+        </main>
+        
+        <div>corner icon stuff</div>
+        <div>corner icon stuff</div>
+    </div>
+    
+*/
 .page-container {
     display: flex;
     flex-direction: column;
-    min-height: 100dvh;
+    min-height: 100vh;    /* fallback for older browsers */
+    min-height: 100dvh;   /* modern dynamic viewport unit */
     justify-content: space-between;
 }
-/* there's a class="{select:Blog Layout}" on the <body>
-so the user can choose positioning of the sidebar. head, left or right.
-I use grid for that. */
 
+/* 
+   <main> layout:
+   - Uses grid for flexible  layout choices
+   
+        * first row sizes naturally to content (e.g., top content or heading)
+        * second row stretches to fill remaining space
+        * this keeps footer pushed to the bottom even with very little content
+    
+     gap:
+     
+     8rem = vertical, var(--layout-gap) = { select:Layout Gap }
+*/
 main {
     display: grid;
-    margin-top: var(--gap-top-bottom);
-    gap: 7rem 5rem;
-    justify-items: center;
+    flex: 1;    
+    gap: 8rem var(--layout-gap);
+    transition: margin-inline 0.5s ease-out; /* pretty horixontal transition*/
     justify-content: center;
-    flex: 1;
+    margin: var(--main-margin) 0;
 }
-.head main {
-    grid-template-areas: "sb" "post";
+
+/*
+   <main> layout Blog Layout options:
+
+   - html.head:
+       * Single-column layout
+       * Sidebar stacks above content/post
+
+   - html.left:
+       * Sidebar on the left of main content/post
+       * margin-right adjusted to account for sidebar width
+         so the post is centered of the screen
+
+   - html.right:
+       * Sidebar on the right of main content/post
+       * margin-left adjusted to account for sidebar width
+         so the post is centered of the screen
+*/
+
+
+html.head main {
+    grid-template-areas:  "sb" "post";
 }
-.left main {
-    grid-template-areas: "sb post";
+html.left main {
+    grid-template-areas:  "sb post";
+    margin-right: calc(var(--layout-gap) + var(--sidebar-width));
 }
-.right main {
-    grid-template-areas: "post sb";
+html.right main {
+    grid-template-areas:  "post sb";
+    margin-left: calc(var(--layout-gap) + var(--sidebar-width));
 }
-/* -------------------------------------  footer */
+
+/* 
+   Footer
+   
+   - When using .page-container with flex-direction: column
+     and main { flex: 1 }, the footer can
+     extend past the viewport height and the internet doesn't
+     know why.
+     
+   - Adding a tiny padding (even 1px) prevents the footer
+     from overflowing the 100vh limit. */
+   
 footer.footer-bottom {
-    margin-top: var(--gap-top-bottom);
-    line-height: 1.6;
+    line-height: var(--line-height);
     padding: var(--gap3);
-    text-align:center;
+    text-align: center;
 }
-/* -------------------------------------  sidebar */
+
+
+/* Some icon fonts aren’t perfectly square by default,
+   so we force a 1:1 aspect ratio to keep all icons consistently square.
+   In this base code I'm using Phosphor Icons.*/
+   
+i.ph,
+i.ph-thin,
+i.ph-light,
+i.ph-bold,
+i.ph-fill,
+i.ph-duotone {
+    aspect-ratio: 1/1;
+}
+
+/* ------------------------------------------------------------ SIDEBAR */
+
 aside {
     grid-area: sb;
-    width: var(--sb-width);
 }
-.head aside {
-    width: var(--post-width);
+
+/* SIDEBAR IMAGE
+   - every shape has its own css
+   - { select:Sidebar Image Shape } is a class on
+   the <div class="sidebar-image"> so nesting goes smoothly
+*/ 
+.sidebar-image {
+    margin-bottom: var(--gap4);
+
+    img {
+        width: var(--sidebar-image);
+        height: var(--sidebar-image);
+        object-fit: cover;
+        overflow-clip-margin: unset;
+    }
+    
+    &.rounded img { 
+        border-radius: 0.7em;
+    }
+
+    &.circle img {
+        border-radius: 100%;
+    }
+    &.blob1 img {
+        -webkit-clip-path: url(#blob1); 
+        clip-path: url("#blob1"); 
+    }
+    &.blob2 img {
+        -webkit-clip-path: url(#blob2); 
+        clip-path: url("#blob2"); 
+    }
 }
-.head .sb-inner {
-    width: var(--post-width);
-}
-:where(.left, .right) .sb-inner {
-    gap: var(--gap1);
-    position: sticky;
-    top: var(--gap-top-bottom);
-}
-.sb-inner {
-    border: 1px solid rgb(var(--c-border));
-    border-radius: var(--round3);
-    background-color: rgb(var(--c-bg2));
-    padding: var(--gap2);
-}
-/* sidebar image */
-.sidebar-icon {
+
+/*SIDEBAR TITLE*/
+h3.sidebar-title {
+    font-size: 1.4em;
+    font-weight: 700;
+    line-height: 1.5;
     margin-bottom: var(--gap1);
 }
-.sidebar-icon img {
-    width: var(--sb-icon);
-    height: var(--sb-icon);
-    overflow: hidden;
+
+/*SIDEBAR DESCRIPTION*/
+.sidebar-description {
+    line-height: 1.6;
+    color: rgb(var(--color-text));
+    margin-bottom: var(--gap3);
 }
-/* navigation */
-nav.menu, nav.menu2 {
-    flex-direction: column;
+
+/*SEARCH BAR*/
+form.search {
+    width: 100%;
+    background: rgb(var(--color-bg2));
+    border: 0.0625rem solid rgb(var(--color-border));
+    padding: 0.6rem;
+    border-radius: var(--round2);
+    margin-bottom: var(--gap3);
+    
+    input {
+        width: 100%;
+        color: rgb(var(--color-text));
+
+        &::placeholder {
+            padding: 0;
+            color: rgb(var(--color-text));
+            opacity: 1;
+        }
+    }
+    button.search {
+        display: inline-flex;
+        color: rgb(var(--color-text));
+        flex-shrink: 0;
+        font-size: 1.4em;
+    }
 }
-span.nav-spin {
-    transition: rotate .5s ease;
-    margin-left: var(--gap1);
+
+form.search:focus-within {
+    background: rgb(var(--color-bg1));
+    border-color: rgb(var(--color-accent));
+    
+    button.search {
+        color: rgb(var(--color-accent));
+    }
 }
-span.nav-spin.active {
-    rotate: -180deg;
+
+/* ----- SIDEBAR NAVIGATION/LINKS ----- */
+
+/* Base link/button colors for all navigation
+types (menu, menu-toggle, submenu,
+sub-toggle buttons) */
+
+nav.menu a,
+nav.menu-toggle a,
+nav.submenu a,
+button.sub-toggle {
+    color: rgb(var(--color-text));
 }
-.nav-wrap {
+
+/* Toggle navigation container:
+   - Hidden by default
+   - Expands/collapses via max-height transition JS
+   - Inner nav.submenu spacing managed here
+*/
+#submenu-container {
     max-height: 0;
     overflow: hidden;
-    transition: max-height 0.5s ease-out;
+    transition: max-height 0.4s ease;
+    padding-block: 0;
+    margin-bottom: var(--gap2);
+
+    nav.submenu {
+        margin: var(--gap2) 0;
+    }
 }
 
-/* -------------------------------------  pagination */
-nav.pagi a[class*="page"] {
-    color: rgb(var(--c-text));
-    cursor: default;
-    padding: 0.8rem;
-    opacity: 0.3;
+/* Hover states for links:
+   - Subtle underline for accessibility/clarity
+   - Menu-toggle buttons get accent color on hover
+*/
+nav.menu a:hover,
+nav.submenu a:hover {
+    color: rgb(var(--color-text));
+    text-decoration: underline;
+    text-decoration-color: rgb(var(--color-accent));
+    text-underline-offset: 2px;
+    text-decoration-thickness: 1px;
 }
-nav.pagi a.has_page {
-    cursor: pointer;
-    opacity: 1;
+nav.menu-toggle a:hover,
+button.sub-toggle:hover {
+    color: rgb(var(--color-link));
 }
-nav.pagi a.has_page:hover {
-    color: rgb(var(--c-acc1));
-}
-/* -------------------------------------  sections */
 
-/* section.content that contains the post and the
-   pagination at the bottom */
-  
-section.content {
+/* Arrow rotation for submenu toggle */
+.nav-spin {
+    display: inline-flex;
+    transition: rotate 0.5s ease;
+    font-size: 1.2em;
+}
+.nav-spin.active {
+    rotate: -180deg;
+}
+
+
+/*  FEATURED TAGS
+   - Hides /tagged/ links from the main menu
+     and throws them into its own section
+   - Styles the featured tags list and counts
+   - The script (find it in <script>) populates the
+   .total spans dynamically
+*/
+{block:ifFeaturedTags}
+nav.menu a[href*="/tagged"],
+nav.submenu a[href*="/tagged"],
+.featured-tags a {
+    display: none;
+}
+.featured-tags a:not([href*="/tagged"]){
+    display: inline-flex;
+}
+{/block:ifFeaturedTags}
+
+.featured-tags {
+    margin-top: var(--gap3);
+    
+    a {
+        display: flex;
+        align-items: center;
+        border-radius: var(--round3);
+        background: rgb(var(--color-text));
+        color: rgb(var(--color-bg1));
+        padding: 0.5rem 0.6rem;
+        
+        &:hover {
+            color: rgb(var(--color-bg1));
+            background: rgb(var(--color-accent));
+        }
+
+    }
+    a:not([href*="/tagged"]) {
+        display:none;
+    }
+    span.total {
+        display: flex;
+        align-items: center;
+        margin-left: 0.25rem;
+        
+        &::before {
+            content:'(';
+        }
+        &::after {
+            content:')';
+        }
+    }
+}
+
+/* Specific overrides for html.head / html.left / html.right
+   - These are placed at the end to ensure they aren't overridden
+     by the more general sidebar rules above.
+   - html.head: sidebar takes post-width
+   - html.left/right: sidebar takes sidebar-width, and inner sidebar sticks
+*/
+
+/* CSS specific for html.head */ 
+html.head {
+    
+    aside {
+        width: var(--post-width);
+    }
+}
+
+/* CSS specific for html.left AND html.right */ 
+html.left, html.right {
+    
+    aside{
+        width: var(--sidebar-width);
+    }
+    .sidebar-inner {
+        position: sticky;
+        top: var(--main-margin);
+    }
+}
+
+/* ------------------------------------------------------------ PAGINATION */
+nav.pagi {
+    margin-top: var(--main-margin);
+
+    a[class*="page"] {
+        display: flex;
+        cursor: default;
+        color: rgb(var(--color-text));
+
+        span.pagi-icon {
+            display: inline-flex;
+            background: rgb(var(--color-text));
+            padding: 0.8rem;
+            border-radius: var(--circle);
+            font-size: 1.3em;
+            color: rgba(var(--color-bg1), 0.4); /* faded for inactive by default */
+
+            i {
+                display: inline-flex; /* make phosphor icon square for alignment */
+            }
+        }
+
+
+        /* Hover for active pages */
+        &.has_page:hover span.pagi-icon {
+            color: rgb(var(--color-bg1)); /* full opacity */
+            background: rgb(var(--color-accent));
+        }
+    }
+
+    /* active links */
+    a.has_page {
+        cursor: pointer;
+        color: rgb(var(--color-text));
+
+        span.pagi-icon {
+            color: rgb(var(--color-bg1)); /* full opacity for active links */
+        }
+    }
+}
+
+/* -----------------------------------------------------  SECTION POSTS */
+
+/* The main post column */
+section {
     grid-area: post;
     width: var(--post-width);
 }
 
-/* the post container with post info + tags */
+/* Wrapper for each Tumblr post, including tags, date, etc. */
 article {
     width: 100%;
-    border: 1px solid rgb(var(--c-border));
-    border-radius: var(--round3);
-    background-color: rgb(var(--c-bg2));
-    overflow: hidden;
-{block:IndexPage}
-    margin-bottom: var(--gap-post-margin);
-{/block:IndexPage}
 }
 
-/* the post container - only the post content */
+/* Adds margin below every post except the last one */
+article:not(:last-of-type) {
+    margin-bottom: var(--post-margin);
+}
+
+/* Wrapper for the actual content of a Tumblr post. */
 .post-content {
+    border: 0.0625rem solid rgb(var(--color-border));
+    background: rgb(var(--color-bg2));
+    overflow: hidden;
+    border-radius: var(--round2);
 }
 
-/*  ------------------------------------- lineheight
+/* -----------------------------------------------------  Line height handling
 
-    I try to keep the line-height on the text itself
-    inside the article, rather than the <body> since
-    it will skew or elongate buttons or square divs.
-    "article .question" is the text in ask question/answer.
-    
-    if you need line-height on anothers,
-    simply add it here to the list. I use :is
-    instead of:where because I don't want
-    accidentally override it.
+   Line-height is applied directly to the text elements inside each post
+   rather than on <body>, so it doesn't affect buttons, images, or other
+   elements that rely on square/consistent dimensions.
+
+   This includes headings, paragraphs, lists, blockquotes, ask questions,
+   and note lists.
+
+   I use :is() instead of :where() to avoid accidentally overriding other
+   inherited line-heights.
 */
-:is(article h1, article h2, article h3, article p, article ul, article ol, article blockquote, article .question, ol.notes) {
-    line-height: var(--line-height); 
+:is(
+    article h1,
+    article h2,
+    article h3,
+    article p,
+    article ul,
+    article ol,
+    article blockquote,
+    ol.notes) {
+    line-height: var(--line-height);
 }
-/* -------------------------------------  captions and others */
 
-/* the padding for basically everything that isn't photos */
+/* -------------------------------------------- CAPTIONS, UL, OL HEADLINES */
 
-article figcaption.audio-caption, /* <-- npf audio wrapper */
-article h1,
-article h2,
-article h3,
-article ul,
-article ol,
-article pre,
-article blockquote,
-article .caption p,
-article .replies p,
-article .question p {
-	margin: var(--text-margin);
+/* If you have a border (like this basecode has) on the post wrapper,
+    We can have a nice snug fit for photos/photosets, and place the
+    padding of the wrapper on everything else. The other way won't work
+    due to negative space not handling NPF photos that great.
+    
+    you can add     figure:has(iframe), .video:has(iframe),
+    to the list, and *some videos* will have padding as well.
+    There are too many variables to catch everything.
+    
+    */
+
+
+article :is(
+    .poll-post a.poll-row,  /*poll row */
+    .custom-link-block,  /*link block */
+    figcaption.audio-caption,  /* audio block */
+    p:not(.link-description),  /*the <p> inside the link block: .link-description, is already inside a parent with margin so we're exluding it here*/
+    h1,
+    h2,
+    h3,
+    ul,
+    ol,
+    pre,
+    blockquote) {
+    margin: var(--text-margin); /* make it `margin: var(--text-margin) 0;` if your post wrapper does not have a border or framing */
 }
-article ul,
-article ol {
+
+
+/*ul and ol stuff have been reset in the css reset portion at the top of the CSS stylesheet. Now we make it work for our themes*/
+article ul, article ol {
     padding-left: var(--text-margin);
 }
-article h1, .poll-post .poll-question {
+article ul {
+    list-style: outside;
+}
+article ol {
+    list-style: decimal;
+}
+article ul li:hover::marker,
+article ol li:hover::marker {
+    color: rgb(var(--color-accent));
+}
+article ol li, article ul li {
+    padding-left: var(--gap1);
+}
+
+
+article h1,
+.poll-post .poll-question { /* poll header is a <p> but big as hell, so we make it match */
     font-size: 1.5em;
     font-weight: 700;
 }
@@ -510,165 +1176,324 @@ article h2 {
     font-weight: 700;
 }
 article h3 {
-    font-size: 1.1em;
+    font-size: 1.2em;
     font-weight: 700;
 }
+/* ----------------------------------------------- BLOCKQUOTES/QUOTE POSTS */
+
+/* Tumblr blockquotes are messy:
+   - article blockquote: legacy Tumblr quotes
+   - blockquote.npf_indented: from NPF posts
+   - p.npf_quote: usually styled quotes, often reblogs of
+     legacy quotes becomes p.npf_quote
+
+   We standardize them for consistency. */
+
+article blockquote,
+blockquote.npf_indented {
+    border-left: 0.0625rem solid rgb(var(--color-accent));
+    padding-left: var(--text-margin);
+    margin-left: var(--text-margin)!important;
+}
+
+article blockquote p {
+    margin: 0!important; /* remove extra spacing inside legacy blockquotes */
+}
+
+/* NPF quotes */
+p.npf_quote {
+    font-size: inherit;
+    font-family: inherit;
+    vertical-align: inherit;
+    font-style: normal;
+    border-left: 0.125rem solid rgb(var(--color-accent));
+    padding-left: var(--text-margin);
+    margin-left: var(--text-margin);
+}
+
+/* Attributions inside NPF photos/posts
+   - width:auto ensures responsiveness */
+.post-content div.npf_row .npf_col figure p.tmblr-attribution,
+.post div.npf_row .npf_col figure p.tmblr-attribution,
+body div.npf_row .npf_col figure p.tmblr-attribution {
+    width: auto;
+}
+
+/* ----------------------------------------------- USER/AVATAR/REBLOG HEADERS */ 
+
+/* 
+   If your post wrapper does not have a border or framing,
+   you may want to remove the vertical spacing and only keep horizontal spacing.
+
+   In that case, set:
+
+   .reblog-header {
+       margin: var(--text-margin) 0;
+   }
+
+   And leave the non-original rule empty:
+
+   .reblog-header:is(:not(.original)) {
+   }
+
+   This keeps spacing consistent without adding unnecessary top/bottom gaps,
+   similar to how we handle captions, headings, and lists in the main post content.
+*/
+
+
 /*  user original  */
 .reblog-header {
     margin: var(--text-margin);
 }
-/*  user reblogs  */
+/*  user reblog  */
 .reblog-header:is(:not(.original)) {
-    border-top: 1px solid rgb(var(--c-border));
-    margin: 0 0 var(--gap2) 0;
+    border-top: 0.0625rem solid rgba(var(--color-border));
+    margin: var(--text-margin) 0;
     padding: var(--text-margin) var(--text-margin) 0 var(--text-margin);
 }
+/*  user avatar */
 .reblog-header img {
-    max-width: 2em;
-    height: auto;
+    width: 2em;
+    height: 2em;
     border-radius: var(--round1);
 }
+/*  username text */
 .reblog-header .user {
-    color: rgb(var(--c-text));
+    color: rgb(var(--color-text));
     font-weight: 600;
 }
+/*  username url text hover */
 .reblog-header a.user:hover {
-    color: rgb(var(--c-acc1));
+    color: rgb(var(--color-accent)); 
 }
-span.deactivated:after {
-    content:'deactivated';
-    opacity:0;
-    transition: all 0.2s ease;
-    margin-left: 10px;
-}
-.reblog-header:hover span.deactivated:after {
-    opacity:0.7;
-}
-p:empty {
-	display: none;
-}
-/* -------------------------------------  npf photoset stuff. */
-
-figure.tmblr-full:is(:not(:last-of-type)) {
-    margin-bottom: var(--gutter);
-}
-figure:is(:not(:last-of-type)) {
-    margin-bottom: var(--gutter);
-}
+/* ---------------------------------------------------------- NPF PHOTOSET */
 article img {
-	display: block;
-}
-article iframe,
-article img {
+    display: block;
     max-width: 100%;
     height: auto;
 }
+
+article iframe {
+    max-width: 100%;
+    height: auto;
+}
+
 .post-content div.npf_row {
     margin-bottom: calc(var(--gutter) - 4px);
+
+    &:last-child {
+        margin-bottom: 0;
+    }
+
+    .npf_col {
+        margin-right: calc(var(--gutter) - 4px);
+
+        &:last-child {
+            margin-right: 0;
+        }
+    }
 }
-.post-content div.npf_row:last-child {
-    margin-bottom: 0;
-}
-.post-content div.npf_row .npf_col {
-    margin-right: calc(var(--gutter) - 4px); 
-}
-.post-content div.npf_row .npf_col:last-child {
-    margin-right: 0;
-}
+
+/* General photoset styling */
 .npf_row:only-of-type,
 .npf-photos,
-.more_photoset,
-.legacy-photo img,
-.photoset {
+.more_photoset {
     border-radius: var(--photo-corners);
-    overflow:hidden;
-    margin: auto;
+    overflow: hidden;
 }
+
+/* Margin between figures */
+figure:is(:not(:last-of-type)) {
+    margin-bottom: var(--gutter);
+}
+
+/* Full-width figure rounding for NPF photos followed by figure */
 .npf-photos:has(+figure) {
     border-radius: var(--photo-corners) var(--photo-corners) 0 0;
     max-width: fit-content;
 }
+
 .npf-photos + figure {
     overflow: hidden;
     border-radius: 0 0 var(--photo-corners) var(--photo-corners);
-    margin: var(--gutter) auto auto;
+    margin: var(--gutter) 0;
     max-width: fit-content;
 }
-/* -------------------------------------  legacy photoset stuff. */
 
-/* Gutter width has to be divided into 2 since it's the padding
-that's around each photo-row or legacy-photoset-inner - last one
-being the inner container of the photoset.
-See 5ppi Flexible Photoset credit for more info */
+/* Figures containing linked photos */
+figure:has(a.post_media_photo_anchor) {
+    width: fit-content;
+    max-width: 100%; /* keeps it responsive inside the container */
+}
 
+/* ----------------------------------------------------- LEGACY PHOTOSET */
+
+
+/* Each photo-row and legacy-photoset-inner receives half
+   of the gutter as padding. This ensures consistent spacing
+   between photos, while the last element aligns with
+   the outer container. 
+   
+   So we use calc(). gutter-width divided by 2. */
+
+
+/* control of single legacy photo 
+   and photoset border-radius */
+.legacy-photo img,
+.photoset {
+    border-radius: var(--photo-corners);
+    overflow: hidden;
+}
 .photo-row {
     padding: calc(var(--gutter) / 2) 0; 
-    display:flex;
-}
-.photo-row:first-child {
-	padding-top:0;
-}
-.photo-row:last-child {
-	padding-bottom:0;
-}
-/* legacy-photoset-inner is inside each photo-row,
-use inspect firefox or chrome to see more  */
-.legacy-photoset-inner {
-    cursor:pointer;
-    padding: 0 calc(var(--gutter) / 2); 
-    flex-grow:1;
-}
-.legacy-photoset-inner:first-child {
-    padding-left:0;
-}
-.legacy-photoset-inner:last-child {
-    padding-right:0;
-}
-/* every single img.image inide legacy-photoset-inner */
-.legacy-photoset-inner .image {
-    width:100%;
-    height:100%;
-    display:block;
-    object-fit:cover; /* technically not needed, but helps when browsers glitch */
-}
-.photo-row-1 .legacy-photoset-inner {
-    width:100%;
-}
-.photo-row-2 .legacy-photoset-inner {
-    width:50%;
-}
-.photo-row-3 .legacy-photoset-inner {
-    width:33.3333333%;
-}
+    display: flex;
 
-/* single legacy photo post */
+    &:first-child {
+        padding-top: 0;
+    }
+
+    &:last-child {
+        padding-bottom: 0;
+    }
+}
+.legacy-photoset-inner {
+    cursor: pointer;
+    padding: 0 calc(var(--gutter) / 2); 
+    flex-grow: 1;
+
+    & .image {
+        width: 100%;
+        height: 100%;
+        display: block;
+        object-fit: cover;
+    }
+
+    &:first-child {
+        padding-left: 0;
+    }
+
+    &:last-child {
+        padding-right: 0;
+    }
+}
+.photo-row-1 .legacy-photoset-inner { width: 100%; }
+.photo-row-2 .legacy-photoset-inner { width: 50%; }
+.photo-row-3 .legacy-photoset-inner { width: 33.3333333%; }
+
 .photo-single {
     cursor: pointer;
 }
-/* ------------  blockquotes, quote posts, legacy quotes */
-article blockquote {
-    border-left: 1px solid rgb(var(--c-border));
-    padding-left: var(--text-margin);
-}
-/* there's already a margins around <p> *and* blockquote, so let's remove it around <p> */
-article blockquote p {
-    margin: 0!important;
+
+/* The /mournstera-legacy-photoset.js script
+   sets the photoset's `visibility` to visible
+   once the layout is processed, preventing
+   layout shifts or a "wonky" initial display. */
+   
+.photoset {
+    visibility: hidden;
 }
 
-/* ------------ styling different stuff */
-small, sup, sub, big, p.npf_quote {
-    font-size: inherit;
-    font-family: inherit;
-    vertical-align: inherit;
+/* --------------------------------------------------- LINK STYLE IN POSTS */
+
+/* I like to overide the global link styling of:
+
+a {
+    color:rgb(var(--color-link));
+    text-decoration: none;
+    overflow-wrap: anywhere;
+    
+    &:hover {
+        color: rgb(var(--color-accent)); 
+    }
 }
+
+
+
+
+*/
+:where(
+    .post-content p,
+    .post-content ul,
+    .post-content ol,
+    .post-content blockquote,
+    .sidebar-description,
+    .updates
+) a {
+    text-decoration: underline;
+    text-decoration-color: rgb(var(--color-accent));
+    text-underline-offset: 2px;
+    text-decoration-thickness: 1px;
+}
+
+/* Hover state for links in the same areas*/
+:where(
+    .post-content p,
+    .post-content ul,
+    .post-content ol,
+    .post-content blockquote,
+    .sidebar-description,
+    .updates
+) a:hover {
+    color: rgb(var(--color-accent));
+    text-decoration-color: rgb(var(--color-link));
+}
+
+/* Make sure that links inside spans inherit surrounding
+   text color from the colors used in dashboard. This fix is
+   only sometimes needed - it is depended on whether
+   the user used one of the 3 choices in the Text Editor:
+   
+   - Rich text
+   - HTML
+   - Markdown
+   
+   The "correct parent is <a><span>text</span></a>
+   however some use <span><a>text</a></span>
+   which mess things up.
+   
+ */
+ 
+.post-content span a {
+    color: inherit;
+}
+
+/* "Read More" links/buttons */
+.read_more {
+    border-radius: var(--round1);
+    padding: 0.8rem;
+    background: rgb(var(--color-bg2));
+    color: rgb(var(--color-text));
+    font-weight: 500;
+    text-decoration: none;
+    border: 0.0625rem solid rgb(var(--color-border));
+
+    &:hover {
+        border-color: rgb(var(--color-accent));
+    }
+}
+
+/* --------------------------------------------------- MISC STYLING FOR SPECIAL CONTENT */
+
+/* Quirky paragraph style (npf_quirky) */
 p.npf_quirky {
     line-height: inherit;
     font-size: 1.6em;
 }
+
+/* Preformatted text adjustments:
+   - Resets whitespace to allow line breaks naturally
+   - Removes default margins to fit post layout */
+   
 pre {
     white-space: initial;
     margin: 0;
 }
+
+/* Inline code styling:
+   - Matches surrounding text size
+   - Transparent background so it blends in
+   - Allows long words or URLs to break naturally */
+   
 code {
     line-height: inherit !important;
     background: transparent;
@@ -676,139 +1501,440 @@ code {
     word-wrap: break-word;
 }
 
-/* -------------------------------------  post footer */
-footer.info {
-    border-top: 1px solid rgb(var(--c-border));
-    padding: var(--text-margin);
-}
-.info-inner a {
-    color: rgb(var(--c-text));
-}
-.info-inner a:hover, .toggle-tags:hover {
-    color: rgb(var(--c-acc1));
-}
-.info-icon {
-    display: inline-flex;
-    font-size: 1.5em;
-}
-.interact {
-    gap: 0.8rem;
-}
-/* make 'em square */
-.interact a {
-    display: inline-flex;
-}
-/*  like */
+/* ----------------------------------- ALT. DESCRIPTION (Tumblr Popovers) */
 
-a.custom-like-container {
+/* Overrides Tumblr's default popover styling:
+   - Heavy use of !important to ensure custom theme colors and padding are applied
+   - Makes popover content readable and visually consistent with the theme */
+
+/* Tutorial popover wrapper */
+.popover.tutorial {
+    padding: var(--gap3)!important;
+    background-color: rgb(var(--color-text))!important;
+    color: rgb(var(--color-bg1))!important;
+}
+
+/* General popover wrapper:
+   - Rounded corners
+   - Inherit theme font
+   - Removes Tumblr's default shadow */
+.popover {
+    border-radius: var(--round1)!important;
+    font: inherit!important;
+    box-shadow: none!important;
+}
+
+/* Tutorial popover content and title text colors */
+.popover.tutorial .content,
+.popover.tutorial .title {
+    color: rgb(var(--color-bg1))!important;
+}
+
+/* Tutorial popover title:
+   - Bold and slightly larger for emphasis */
+.popover.tutorial .title {
+    font-weight: 700!important;
+    font-size: 1.2em!important;
+}
+
+/* Tutorial popover content:
+   - Inherits font size from parent for consistency */
+.popover.tutorial .content {
+    font-size: inherit!important;
+}
+
+/* Tutorial popover "OK" button:
+   - Matches theme colors
+   - Cursor indicates clickable
+   - Rounded and padded for visual balance and usability */
+.popover.tutorial .ok_button {
+    color: rgb(var(--color-text))!important;
+    cursor: pointer!important;
+    background: rgb(var(--color-bg1));
+    padding: var(--gap1)!important;
+    border-radius: var(--round1);
+}
+
+/* ----------------------------------------------------- POST FOOTER */
+footer.post-footer {
+    margin-top: var(--text-margin);
+}
+button.pinned {
+    font-size: 1.45em;
+    color: rgb(var(--color-accent));
+}
+.date {
+    color: rgb(var(--color-text));
+    
+    &:hover {
+        color: rgb(var(--color-accent));
+    }
+}
+/* .info-item wrap (<a> links or <button> for toggle tags
+   contains the note count/like/toggle tags/reblog + their icon */
+.info-item {
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+}
+/*  LIKE BUTTON */
+a.custom-like {
     position: relative;
+
+    .like_button {
+        position: absolute;
+        inset: 0;
+        width: 100%;
+        height: 100%;
+        opacity: 0;
+        z-index: 1;
+
+        iframe {
+            width: 100% !important;
+            height: 100% !important;
+        }
+    }
+
+    /* liked state */
+    .liked + .info-like-icon,
+    .liked + .info-like-icon svg {
+        color: rgb(var(--color-accent)) !important;
+        fill: currentColor;
+    }
+
+    .liked + .info-like-icon + .info-like-text {
+        color: rgb(var(--color-text)) !important;
+    }
+
+    .liked + .info-like-icon + .info-like-text::after {
+        content: 'd';
+    }
 }
-a.custom-like-container .like_button {
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
+
+/* ICONS */
+.info-icon {
+    font-size: 1.45em;
+}
+
+/* ICON-ONLY MODE */
+html.info-only-icons {
+
+    .info-right {
+        gap: 0.8rem;
+
+        a,
+        .info-tags {
+            color: rgb(var(--color-text));
+
+            &:hover {
+                color: rgb(var(--color-accent));
+            }
+        }
+    }
+
+    .info-text {
+        display: none;
+    }
+
+    .info-icon {
+        display: flex;
+    }
+}
+
+/* TEXT-ONLY MODE */
+html.info-only-text {
+
+    .info-right {
+        gap: 0.5rem;
+
+        a, .info-tags {
+            color: rgb(var(--color-text));
+
+            &:hover {
+                color: rgb(var(--color-accent));
+            }
+        }
+
+        .info-item:not(:last-child)::after {
+            content: '/';
+            display: block;
+            color: rgb(var(--color-border));
+            margin-left: 0.5rem;
+        }
+    }
+
+    .info-text {
+        display: flex;
+    }
+
+    .info-icon {
+        display: none;
+    }
+}
+
+/* ICON + TEXT MODE */
+html.info-both {
+
+    .info-right {
+        gap: var(--gap2);
+
+        a, .info-tags {
+            color: rgb(var(--color-text));
+
+            &:hover {
+                color: rgb(var(--color-accent));
+            }
+        }
+
+        svg {
+            color: rgb(var(--color-link));
+        }
+    }
+
+    /* Refining liked post icon so only the icon is coloured.*/
+    a.custom-like {
+
+        .liked + .info-like-icon {
+            color: rgb(var(--color-accent)) !important;
+        }
+
+        .liked + .info-like-icon svg {
+            stroke: rgb(var(--color-accent)) !important;
+        }
+
+        .liked + .info-like-icon + .info-like-text {
+            color: rgb(var(--color-text)) !important;
+        }
+    }
+}
+
+
+
+/*    TAGS (and toggle-button) */
+
+
+.tags-container {
     width: 100%;
-    height: 100%;
-    opacity: 0;
-}
-a.custom-like-container .like_button iframe {
-    width: 100%!important;
-    height: 100%!important;
-}
-a.custom-like-container .liked + .custom-like-icon {
-    color: rgb(var(--c-acc1))!important;
-}
-
-/*  tags */
-.toggle-tags {
-    cursor: pointer;
-    transition: all 0.2s ease;
-    display: inline-flex;    
-}
-.toggle-tags:hover {
-    color: rgb(var(--c-acc1));
-}
-
-/* if 'display tags: always' is chosen in the customizations, we
-   hide the toggle.. */
-.toggle-tags.tags-always {
-    display:none;
-}
-/* ..but if 'display tags: upon toggle' is chosen in the
-   customizations, we hide the tags instead! Max-height is
-   important    to create a slide-toggle without jquery.
-   scroll down to    the scripts to see more of it*/
-.tags-container.tags-upon-toggle {
-    max-height: 0;
-    overflow: hidden;
-    transition: max-height 0.6s ease;
 }
 .tags {
-    margin-top: var(--gap2);
+    
+    a {
+        margin-right: var(--gap1);
+        line-height: 1.7;
+        color: rgb(var(--color-link));
+        
+        &:hover {
+            color: rgb(var(--color-accent));
+        }
+    }
 }
-/* ---------  on permalink pages */
-.permalink-ago {
+
+/*  TAG DISPLAY BEHAVIOR
+   The <html> element has a { select:Tags } option, which outputs one of:
+   - tags-always
+   - tags-truncated
+   - tags-hidden
+
+   When "tags-hidden" is selected:
+   
+   - the .toggle-tags element becomes visible (acts as a button)
+   - the .tags-container starts hidden (max-height: 0)
+   
+ */
+ 
+  /* hidden unless 'tags-hidden' mode is active */
+.toggle-tags {
+    display: none;
+}
+
+html.tags-hidden .toggle-tags {
+        cursor: pointer;
+        transition: all 0.2s ease;
+        display: inline-flex;     /* visible when active */
+}
+
+
+
+html.tags-always {
+    
+    .toggle-tags {
+        display: none;
+    }
+}
+
+html.tags-hidden {
+    
+    .tags-container {
+        max-height: 0;
+        overflow: hidden;
+        transition: max-height 0.4s ease;
+    }
+}
+/* TRUNCATED */
+/* if post has more than 3 tags, they are truncated and hidden behind
+   a "See all" link - when pressed all are visible. Just like
+   the dashboard. there is a JS script that handles this. */
+html.tags-truncated {
+
+    
+    .tags-container {
+
+            a.expand {
+                font-weight: 500;
+                margin-right: 0;
+                color: rgb(var(--color-link));
+            }
+            a.visible {
+                display: inline-block;
+            }
+            a.hidden {
+                display: none;
+            }
+            .ellipsis {
+                display: inline-block;
+                text-overflow: ellipsis;
+                white-space: nowrap;
+                overflow: hidden;
+                
+                &:after {
+                    content: '...';
+            }
+        }
+    }
+}
+
+/*  PERMALINK PAGES */
+
+footer.permalink-footer {
+    border: 0.0625rem solid rgb(var(--color-border));
+    background: rgb(var(--color-bg2));
+    overflow: hidden;
+    border-radius: var(--round2);
+    margin-top: var(--gap5);
+    padding: var(--text-margin);
+    
+    .tags {
+        margin-top: var(--gap3);
+    }
+}
+
+time.permalink-ago {
     font-weight: 700;
     font-size: 1.1em;
 }
-.permalink-date {
+time.permalink-date {
     line-height: 1.6;
-    margin-top: 0.4em;
-}
-.permalink-reblogged {
+    margin: 0.6rem 0 var(--gap3) 0;
+    display: flex;
     flex-direction: column;
-    margin-top: var(--gap3);
-    gap: 10px;
+    gap: var(--gap3);
+    
+    &::after {
+        content: '';
+        width: 30%;
+        height: 0.0625rem;
+        background: rgb(var(--color-border));
+    }
 }
-.permalink-source {
-    margin-top: var(--gap1);
+
+.perma-wrap {
+    margin-top: 0.6rem;
+
+    span {
+        font-weight: 700;
+
+        &:after {
+            content: ':';
+            margin-right: 0.3rem;
+        }
+    }
+}
+
+.source-info {
+    margin-top: var(--gap2);
     display: block;
 }
-/* -------------------------------------  notes */
-.notes-container {
+
+/*  NOTES SECTION */
+
+.perma-post-notes {
     margin-top: var(--gap4);
+    border: 0.0625rem solid rgb(var(--color-border));
+    overflow: hidden;
+    border-radius: var(--round2);
+    background: rgb(var(--color-bg2));
 }
-span.note-counter {
+
+.perma-notes {
     display: block;
     font-weight: 600;
-    margin-bottom: var(--gap3);
+    border-bottom: 0.0625rem solid rgb(var(--color-border));
+    padding: var(--gap2);
+    text-align: center;
 }
+
+/* Notes list */
+ol.notes {
+    padding: var(--text-margin);
+}
+
 ol.notes li.note {
-    padding: var(--gap1) 0;
-    position: relative
+    padding: 0.5rem 0;
+    position: relative;
 }
+
+ol.notes li.note:first-of-type {
+    padding-top: 0;
+}
+
+ol.notes li.note:last-of-type {
+    padding-bottom: 0;
+}
+
+/* Avatars inside notes */
 ol.notes li.note img.avatar {
     margin-right: var(--gap1);
     vertical-align: middle;
     max-width: 2em;
-    height: auto;
-    border-radius: var(--circle);
-}
-a.more_notes_link {
-    color: rgb(var(--c-text));
-    display: block;
-    font-weight: 500;
+    height: 2em;
+    border-radius: var(--round1);
 }
 
-/* -------------------------------------  POST-TYPE: poll */
+/* "More notes" link */
+a.more_notes_link {
+    color: rgb(var(--color-text));
+    display: block;
+    font-weight: 500; 
+}
+
+
+/* ----------------------------------------------------- TAG/SEARCH PAGES */
+.results-summary {
+    text-align: center;
+    margin-bottom: var(--gap5);
+    border: 0.0625rem solid rgb(var(--color-border));
+    background: rgb(var(--color-bg2));
+    overflow: hidden;
+    border-radius: var(--round2);
+    padding: var(--text-margin);
+}
+/* ------------------------------------------------------- POST-TYPE: poll */
 .poll-post a.poll-row {
-    color: rgb(var(--c-text));
+    color: rgb(var(--color-text));
     line-height: inherit !important;
     font-size: var(--font-size);
     border-radius: var(--round1);
-    padding: 8px var(--gap1);
+    padding: 0.8rem var(--gap1);
     font-weight: 600;
-    margin: var(--text-margin) 0;
-    border: 1px solid rgb(var(--c-border));
-    background-color: rgb(var(--c-bg2));
+    border: 0.0625rem solid rgb(var(--color-border));
+    background-color: rgb(var(--color-bg2));
     width: auto!important;
     text-align: center;
     min-height: auto;
 }
+
 .poll-post a.poll-row:hover {
-    color: rgb(var(--c-acc1))!important;
+    color: rgb(var(--color-accent))!important;
 }
 a.poll-row p {
     margin: 0!important;
@@ -817,162 +1943,155 @@ a.poll-row p {
     margin-top: 0;
     margin-bottom: var(--text-margin);
 }
-/* -------------------------------------  POST-TYPE: quote */
-p.npf_quote {
-    border-left: 1px solid rgb(var(--c-border));
-    padding-left: var(--text-margin);
-}
-/* -------------------------------------  POST-TYPE: ask*/
-.ask-container {
-    border-bottom: 1px solid rgb(var(--c-border));
+/* -------------------------------------------------------- POST-TYPE: ask */
+
+.ask-block {
+    border: 0.0625rem solid rgb(var(--color-border));
+    background: rgb(var(--color-bg1));
     overflow: hidden;
-}
-.asker-wrap {
+    border-radius: var(--round2);
     margin: var(--text-margin);
 }
-.asker-wrap img {
-    width: 3em;
-    height: 3em;
-    border-radius: var(--circle);
-    display: inline-flex;
-}
-.ask-user-info {
-    gap: 0.8rem;
+header.ask-header {
+    display: flex;
+    align-items: center;
+    gap: var(--gap2);
+    padding: var(--text-margin);
+    border-bottom: 0.0625rem solid rgb(var(--color-border));
+
+    img.ask-avatar {
+        width: 3.5em;
+        height: 3.5em; 
+        border-radius: var(--round1);
+    }
+
+.ask-user {
+    display: flex;
     flex-direction: column;
+    gap: 0.3rem;
+
+        a {
+            color: rgb(var(--color-text));
+            text-decoration: none;
+
+            &:hover {
+                color: rgb(var(--color-accent));
+            }
+        }
+
+        .ask-username {
+            font-weight: 700;
+            text-transform: lowercase;
+        }
+    }
 }
-.ask-user-info span:first-child {
-    font-weight: 700;
-    text-transform: lowercase;
-}
-.ask-user-info a.asker,
-.ask-user-info a.answerer {
-    color: rgb(var(--c-text));
-} 
-.ask-user-info a.asker:hover, 
-.ask-user-info a.answerer:hover {
-    color: rgb(var(--c-acc1));
-}
-/* margin on ask since some legacy asks don't wrap the questions in <p> ... */
+
 .question {
-    margin: var(--text-margin);
+    border-bottom: 0.0625rem solid rgb(var(--color-border));
 }
-/* .. then remove the usual horizontal margins we've created earlier...*/
-.question p {
-    margin-right: 0!important;
-    margin-left: 0!important;
-}
-/* ... and remove the first and last vertical margins we've created earlier <p>*/
-.question p:first-of-type {
-    margin-top: 0;
-}
-.question p:last-of-type {
-    margin-bottom: 0;
-}
-/* keep npf photos from extending over the askbox size */
-.question .npf_inst {
-    max-width: 100%;
-    margin: 0;
-}
-/* keeps the aspect ratio and width on images inside asks */
-:where(.question, .replies, .rb-answer) img {
-    width: auto!important;
+
+/* handles photoset in answered asks, but skips inline images in ask/answers */
+:where(.ask-body) img {
+    width: auto !important;
     max-width: 100%;
     border-radius: var(--photo-corners);
 }
-/* this is the original answer container */
-.replies {
-    margin-top: var(--text-margin);
-}
-/* this is the rebloged answer container */
-.rb-answer {
-    margin-bottom: -1px; /* to fix double border at bottom when using borders */
-}
-/* -------------------------------------  POST-TYPE: chat */
+
+/* ------------------------------------------------------- POST-TYPE: chat */
 p.npf_chat span.label {
     font-weight: 600;
 }
 p.npf_chat {
     font-family: inherit!important;
 }
-/* -------------------------------------  video /audio responsiveness */
+/* --------------------------------- POST-TYPE: video/some audio responsiveness */
 
-/* since aspect-ratio is now supported CSS,
-the following takes care of reponsiveness and the aspect
-ratio of videos and iframes and sound. */
-
-article iframe:not(iframe.bandcamp_audio_player,.spotify_audio_player, iframe.soundcloud_audio_player, iframe.tumblr_audio_player) {
+article iframe:not(
+    iframe.bandcamp_audio_player,
+    .spotify_audio_player,
+    iframe.soundcloud_audio_player,
+    iframe.tumblr_audio_player,
+    iframe[src*="instagram.com"]
+) {
     max-width: 100%;
     aspect-ratio: 16/9;
     height: auto;
+    display: block;
 }
-
+figure.tmblr-embed iframe.embed_iframe[src*="instagram.com"] {
+    height: revert-layer !important;
+    aspect-ratio: auto !important;
+    width: 100% !important;
+}
 iframe.soundcloud_audio_player,
 .tumblr_video_container {
     width: 100%!important;
     height: auto!important;
 }
+
 figure iframe.spotify_audio_player,
 iframe.spotify_audio_player {
-    max-height: 90px;
+    max-height: 80px;
     width: 100%;
 }
+
 article iframe[src*='soundcloud'] {
     max-height: 130px;
-    width: 100%;
 }
+
 figure iframe.bandcamp_audio_player {
     max-height: 120px;
-    width: 100%;
 }
-iframe.tumblr_audio_player {
-    max-height: 85px;
-    width: 100%;
+
+figure.tmblr-full video {
+    display: block;
 }
 
 /* -----------------------------------------------------  POST TYPE: audio */
-
 /* .audio-caption is set as flex by tumblr as default, but we need it to be display block */
-.tmblr-full>.audio-caption {
-    display: block!important;
+.tmblr-full > .audio-caption {
+    display: block !important;
 }
 /* wrapper for entire audio post */
 figcaption.audio-caption {
-    background: rgb(var(--c-bg2));
-    border: 1px solid rgb(var(--c-border));
+    background: white;
+    border: 0.0625rem solid rgb(var(--color-border));
     border-radius: var(--round1);
+    background: rgb(var(--color-bg1));
 }
 /* wrapper for button, audio details and album */
 .audio-info {
     display: flex;
     align-items: center;
-    gap: var(--gap2);
-    padding: var(--gap2);
+    gap: var(--gap3);
+    padding: var(--text-margin);
 }
 /* audio text (album title, etc.) */
-.tmblr-full>.audio-caption .audio-details {
+.tmblr-full > .audio-caption .audio-details {
     max-width: 100%;
-    padding: 0;
+    padding: 0; /* remove tumblr default padding */
     flex: auto;
 }
 /* album cover */
-.tmblr-full>.audio-caption .album-cover {
-    width: 80px;
-    height: 80px;
+.tmblr-full > .audio-caption .album-cover {
+    width: 5rem;
+    height: 5rem;
     border-radius: var(--round1);
     object-fit: cover;
 }
-/* play-pause button wrapper */
+/* plauy-pause button wrapper */
 .custom-audio-player-container .play-pause {
     display: flex;
 }
-/* play-pause svg */
+/* plauy-pause svg */
 .custom-audio-player-container .play-pause svg {
-    width: calc(var(--font-size) + 14px);
-    height: calc(var(--font-size) + 14px);
-    color: rgb(var(--c-text));
+    width: 2.2em;
+    height: 2.2em;
+    color: rgb(var(--color-accent));
 }
 /* Tumblr has a 1.2em on artist text, resetting it here */
-.tmblr-full>.audio-caption .album, .tmblr-full>.audio-caption .artist {
+.tmblr-full > .audio-caption .album,
+.tmblr-full > .audio-caption .artist {
     font-size: 1em;
     line-height: 1.5;
 }
@@ -980,304 +2099,551 @@ figcaption.audio-caption {
 .progress-bar-container {
     display: flex;
     align-items: center;
-    gap: var(--gap2);
-    border-top: 1px solid rgb(var(--c-border));
-    padding: var(--gap2);
+    gap: var(--gap3);
+    border-top: 0.0625rem solid rgb(var(--color-border));
+    padding: var(--gap3);
 }
- 
-/* Style the track (actually range input itself but it's only for chrome) */
+
+/* Style the progress bar track (actually it's range input itself but it's only for chrome) */
 .progress-bar {
     width: 100%;
-    height: 10px;
-    -webkit-appearance: none;  /* Removes the default styling in most browsers */
-    background: rgb(var(--c-bg1));
-    border-radius: var(--round2);
-    border: 1px solid rgb(var(--c-border));
+    height: 0.625rem;
+    -webkit-appearance: none; /* removes the default styling in most browsers */
+    background: rgb(var(--color-bg2));
+    border-radius: var(--round1);
+    border: 0.0625rem solid rgb(var(--color-border));
 }
 
 /* Style the track for both WebKit and Mozilla browsers */
 .progress-bar::-webkit-slider-runnable-track,
 .progress-bar::-moz-range-track {
     width: 100%;
-    height: 10px;
-    background: rgb(var(--c-bg1));
-    border-radius: var(--round2);
-    border: 1px solid rgb(var(--c-border));
+    height: 0.625rem;
+    background: rgb(var(--color-bg2));
+    border-radius: var(--round1);
+    border: 0.0625rem solid rgb(var(--color-border));
 }
 
 /* Style the thumb for WebKit (Chrome, Safari, etc.) */
 .progress-bar::-webkit-slider-thumb {
     -webkit-appearance: none;
     appearance: none;
-    width: 14px;
-    height: 14px;
-    background: rgb(var(--c-acc1));
+    width: 1.2em;
+    height: 1.2em;
+    background: rgb(var(--color-accent));
     border-radius: 50%;
     cursor: pointer;
 }
 
 /* Style the thumb for Mozilla (Firefox) */
 .progress-bar::-moz-range-thumb {
-    width: 14px;
-    height: 14px;
-    background: rgb(var(--c-acc1));
-    border:0; /* remove weird border in firefox */
+    width: 1.2em;
+    height: 1.2em;
+    background: rgb(var(--color-accent));
+    border: 0; /* remove weird border in firefox */
     border-radius: 50%;
     cursor: pointer;
 }
-/* time display */
+/* style MM:SS time count */
 .time-display {
     flex-shrink: 0;
 }
-/* -------------------------------------  POST TYPE: link */
 
-/* recreated tumblr's npf style of
-link posts so legacy will match. see
-HTML part for more info */
-div.npf-link-block {
-    align-items: flex-start;
-    border: 1px solid rgb(var(--c-border));
-    background-color: rgb(var(--c-bg1));
-    border-radius: var(--round2);
-    display: flex;
-    justify-content: center;
-    margin: var(--text-margin);
-    overflow: hidden;
-    flex-direction: column;
+/* ------------------------------------------------------  POST TYPE: link */
+.custom-link-block {
+    
 }
-div.npf-link-block .poster {
-    -ms-flex-align: center;
+
+a.link-header {
+    display: flex;
+    flex-direction: row;
     align-items: center;
-    background-position: 50%;
-    background-repeat: no-repeat;
-    background-size: cover;
-    background-clip: content-box;
-    border-bottom: 1px solid rgb(var(--c-bg1));
-    display: -ms-flexbox;
-    display: flex;
-    height: 250px;
-    -ms-flex-pack: center;
-    justify-content: center;
-    position: relative;
-}
-div.npf-link-block .title {
-    font-size: 1.5em;
-    line-height: var(--line-height);
-    max-height: 136px;
-    overflow: hidden;
-    overflow-wrap: anywhere;
-    text-overflow: ellipsis;
-    font-weight: 500;
-    padding: var(--gap2) var(--gap2) 0;
-}
-div.npf-link-block .poster .title {
-    color: #fff;
-    font-weight: 400;
-    padding: var(--gap3);
-    position: absolute;
-    text-align: center;
-}
-div.npf-link-block .bottom {
-    color: inherit;
-    line-height: var(--line-height);
-    padding: var(--gap2);
-}
-div.npf-link-block .bottom .description {
-    color: inherit;
-    font-size: inherit;
-    line-height: inherit;
-    margin: 0;
-    max-height: 80px;
-    overflow: hidden;
-    overflow-wrap: anywhere;
-    text-overflow: ellipsis;
-}
-div.npf-link-block .bottom .site-name {
-    color: rgb(var(--c-link));
-    font-size: inherit;
-    font-weight: 400;
-    line-height: var(--line-height);
-    margin-top: 10px;
-    opacity: 1;
-    text-transform: uppercase;
+    background: rgb(var(--color-accent));
+    color: rgb(var(--color-bg1));
+    padding: var(--text-margin);
+    justify-content: space-between;
+    border-radius: var(--round1) var(--round1) 0 0;
+    
+    &:not(:has(+ .link-description)) {
+        border-radius: var(--round1);
+    }
+
+    svg.link-icon {
+        --arrow-gap: var(--gap5); /* space between text and arrow */
+        flex-shrink: 0;
+        stroke-width: 3.2;
+        width: 1.8em;
+        height: 1.8em;
+        margin-left: var(--arrow-gap);
+        transition: margin 0.15s ease;
+    }
+
+    .link-title-wrap {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        gap: 0.4rem;
+
+        span.link-title {
+            font-size: 1.3em;
+            line-height: 1.5;
+            font-weight: 700;
+        }
+        span.site-url {
+            font-size: 0.9em;
+            text-transform: uppercase;
+        }
+    }
+
+    &:hover svg.link-icon {
+        margin-left: var(--arrow-gap);
+        margin-right: -0.6rem;
+    }
 }
 
-/* -------------------------------------  corners */
-.top-corner {
+p.link-description {
+    background: rgb(var(--color-bg1));
+    border: 0.0625rem solid rgb(var(--color-border));
+    border-top: 0;
+    padding: var(--text-margin);
+    border-radius: 0 0 var(--round2) var(--round2);
+}
+
+/* ----------------------------------------------------- RIGHT CORNER CONTENT */
+.corner-controls {
     position: fixed;
+    display: flex;
+    gap: var(--gap1);
     flex-direction: column;
-    top: var(--gap2);
-    right: var(--gap2);
-    z-index: 2;
     align-items: flex-end;
+    z-index: 2;
+    right: var(--gap3);
 }
-/* styling right side icons */
-.right-icon {
-    padding: 0.5rem;
-    font-size: 1.5em;
-    background-color: rgb(var(--c-bg2));
-    border: 1px solid rgb(var(--c-border));
-    color: rgb(var(--c-text));
-    border-radius: var(--round2);
+
+.corner-controls.top {
+    top: var(--gap3);
 }
-/* tumblr controls stuff */
-iframe.tmblr-iframe, .tmblr-iframe {
-    z-index: 99!important;
-    opacity: 0;
-    visibility: hidden;
-    top: 1rem;
-    right: 5rem!important;
-    transform: scale(0.8);
+.corner-controls.bottom {
+    bottom: var(--gap3);
+}
+/* all "buttons" in corner top/bottom*/
+.corner-button {
+    display: inline-flex;
+    color: rgb(var(--color-text));
+    background: rgb(var(--color-bg2));
+    border: 0.0625rem solid rgb(var(--color-border));
+    border-radius: var(--round1);
+    padding: 0.375rem;
+    font-size: 1.4em;
+}
+    
+/*  tumblr controls*/
+iframe.tmblr-iframe,  
+.tmblr-iframe {
+    z-index: 999 !important;
+    transform: scale(0.84);
     transform-origin: 100% 0;
     transition: all 0.3s ease;
+    opacity: 0;
+    visibility: hidden;
+    top: 10px;
+    right: 50px;
 }
 .tmblr-iframe.active {
     opacity: 1;
     visibility: visible;
 }
+
 .spin {
-    transition: rotate .4s ease;
+    transition: rotate 0.3s ease;
+    display: inline-flex;
 }
 .spin.active {
     rotate: 30deg;
 }
+
+
 /*  updates tab */
 .updates-container {
-    flex-direction: row-reverse;
+    flex-direction: column;
+    display: flex;
+    align-items: flex-end;
+    gap: var(--gap1);
+
+}
+
+button.update-toggle .upd-icon.hidden {
+    display: none;
 }
 .updates {
-    width: 180px;
-    border: 1px solid rgb(var(--c-border));
-    background-color: rgb(var(--c-bg2));
-    padding: var(--gap2);
-    transition: visibility 0.5s ease, opacity 0.5s ease;
-    border-radius: var(--round2);
-    overflow: hidden;
+    padding: var(--gap3);
+    border-radius: var(--round1);
+    background: rgb(var(--color-bg2));
+    border: 0.0625rem solid rgb(var(--color-border));
+    transition: visibility 0.5s ease, opacity 0.5s ease, transform 0.5s ease;
     opacity: 0;
     visibility: hidden;
-    position: absolute;
-    margin-right: 5rem;
 }
+
 .updates.active {
     opacity: 1;
     visibility: visible;
 }
-.updates-icon {
-    display:none;
-}
-.updates-icon.active {
-    display:inline-flex;
-}
-/* scroll to top stuff */
-button.scroll-to-top {
-    display:inline-flex;
-    bottom: var(--gap2);
-    right: var(--gap2);
-    position: fixed;
-}
-button.scroll-to-top {
-    color: rgb(var(--c-text),.4);
-    cursor: default;
-}
-button.scroll-to-top.visible {
-    cursor: pointer;
-    color: rgb(var(--c-text));
+
+.updates-inner {
+    width: 12rem;
+    max-height: 13rem;
+    overflow-x: hidden;
+    overflow-y: auto;
+    line-height: 1.5;
 }
 
-/* ------------------------------------------------- responsive */
-
-/* {select:Post width} in the Media Query makes the first lines of
-code look a bit wonky but it works, I promise. it just a simple
-calc() with post width + however wide the sidebar is + 100px or so.*/
-
-@media only screen and (max-width: calc({select:Post width} + 350px)) {
-    :root {
-        --sb-width: var(--post-width);
+@supports selector(::-webkit-scrollbar) {
+    .updates-inner::-webkit-scrollbar {
+        width: 4px;
+        height: 4px;
     }
-    :is(.left,.right) main {
+    .updates-inner::-webkit-scrollbar-track {
+        background-clip: padding-box;
+        background-color: rgb(var(--color-bg2));
+        border-left: 0;
+    }
+    .updates-inner::-webkit-scrollbar-thumb {
+        background-color: rgb(var(--color-accent));
+    }
+    .updates-inner::-webkit-scrollbar-button {
+        display: none;
+    }
+    .updates-inner::-webkit-scrollbar-corner {
+        background-color: rgb(var(--color-bg2));
+    }
+}
+
+@-moz-document url-prefix() {
+    .updates-inner {
+        scrollbar-width: thin;
+        scrollbar-color: rgb(var(--color-accent)) rgb(var(--color-bg2));
+    }
+}
+/* if update-text has activity div below,
+   then: .activity gets this */
+.update-text + .activity {
+    margin-top: var(--gap3);
+}
+
+.activity {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin-bottom: 0.3rem;
+    
+    &:last-child {
+        margin-bottom: 0;
+    }
+    .activity-icon {
+        font-size: 1.2rem;
+    }
+    &:hover {
+        .activity-icon {
+            color: rgb(var(--color-accent));
+        }
+    }
+}
+
+/* SCROLL TO TOP & CREDIT LINK*/
+.bottom-corner {
+    position: fixed;
+    bottom: var(--gap3);
+    right: var(--gap3);
+    z-index: 80;
+}
+button.scroll-to-top {
+    color: rgb(var(--color-text), 0.3);
+    cursor: default;
+
+    &.visible {
+        cursor: pointer;
+        color: rgb(var(--color-text));
+    }
+}
+/* ---------------------------------------------------------MEDIA QUERIES */
+
+/* LEFT/RIGHT SIDEBAR MARGINS */
+
+/* Remove left/right post margins on small screens.
+   The calc() sums post width + 2 x sidebar width + 2 x layout gap + buffer
+   to match the margins applied in html.left/html.right and cancel them
+   when the viewport is too narrow. */
+
+@media only screen and (max-width: calc({select:post width} + {select:Sidebar Width} + {select:Sidebar Width} + {select:Layout Gap} + {select:Layout Gap} + 3rem)) {
+
+    html.left main, html.right main {
+        margin-right: 0;
+        margin-left: 0;
+    }
+}
+
+
+/* 
+   When the viewport/screen size  is smaller than the combined width of:
+   - post width
+   - sidebar width
+   - layout gaps
+   - plus a small 3rem buffer
+   We switch the <main> layout to a stacked layout so the sidebar 
+   moves above or below the post for narrow screens.
+*/
+@media only screen and (max-width: calc({select:post width} + {select:Sidebar Width} + {select:Layout Gap} + 3rem)) {
+    
+    :root {
+        --sidebar-width: var(--post-width);
+    }
+    
+    html.left main, html.right main {
         grid-template-areas: "sb" "post";
     }
-}
-@media only screen and (max-width: calc({select:Post width} + 50px)) {
-    :root {
-        --post-width: 85vw;
-        --sb-width: 85vw
+    
+    .left,.right {
+        aside {
+            width: var(--post-width); /* make the sidebar the same width as post */
+        }
+        .sidebar-inner {
+            position: unset; /* disable sticky/fixed positioning */
+            top: unset;
+        }
     }
-    main {
-        width: 100vw;
-    }
-}
-{CustomCSS}
-</style>    
 
+    .mobile {
+        display: block; /* show mobile-specific elements */
+    }
+    .desktop {
+        display: none!important; /* hide desktop-specific elements */
+    }
+}
+
+
+/* When the viewport/screen size is smaller than the user-set post-width */
+@media only screen and (max-width: calc({select:post width} + 3rem)) {
+    :root {
+        --post-width: 88vw;
+    }
+}
+
+/* 
+   Definite mobile: 
+   For very small screens (<425), hide controls and iframes
+   since that's not useful for mobile view.
+*/
+@media only screen and (max-width: 425px) {
+    button.controls,
+    iframe.tmblr-iframe,
+    .tmblr-iframe { 
+        display:none;
+    }
+}
+
+/* 
+   Accessibility: 
+   Respect user' reduced motion preferences.
+   Any element with animation or very long transition,
+    will have its animation disabled if the user has
+    enabled reduced motion on their device/computer.
+*/
+@media (prefers-reduced-motion: reduce) {
+    .your-class-here {
+        animation: none !important;
+    }
+}
+
+{CustomCSS}
+</style>
 </head>
-<body class="{select:Blog Layout}">
+
+<body>
 
 <div class="page-container">
 
 <main>
-    <!-- sidebar -->
+
     <aside>
-        <div class="sb-inner">
-        
-            {block:IfSidebarImageImage}
-                <div class="sidebar-icon">
-                    <img class="light-on" src="{image:Sidebar image}"/>
-                    <img class="light-off" src="{image:Sidebar image dark mode}"/>
+        <div class="sidebar-inner">
+
+
+            <!-- If { image:Dark mode Sidebar } is not uploaded, just show { image:Sidebar } -->
+            {block:IfSidebarImage}
+                <div class="sidebar-image {select:Sidebar Image Shape} flex" aria-hidden="true">
+                    <img {block:IfDarkModeSidebarImage}class="mode-light"{/block:IfDarkModeSidebarImage} src="{image:Sidebar}" alt="Sidebar image"/>
+                    {block:IfDarkModeSidebarImage}
+                        <img class="mode-dark" src="{image:Dark mode Sidebar}" alt="Sidebar dark mode image"/>
+                    {/block:IfDarkModeSidebarImage}
                 </div>
-            {/block:IfSidebarImageImage}
+            {/block:IfSidebarImage}
+
+            {block:ifSidebarTitle}
+                <h3 class="sidebar-title">{text:Sidebar Title}</h3>
+            {/block:ifSidebarTitle}
             
-            <nav class="menu flex gap1 wrap">
-                <a href="{BlogURL}">home</a>
-                
-                {block:AskEnabled}
-                    <a href="/ask">{AskLabel}</a>
-                {/block:AskEnabled}
-                
-                <button class="toggle-nav" type="button">
-                    <span>toggle navigation</span>
-                    <span class="nav-spin"><i class="ph ph-caret-down"></i></span>
+            {block:ifSidebarDescription}
+                <div class="sidebar-description">{text:Sidebar Description}</div>
+            {/block:ifSidebarDescription}
+            
+            {block:ifSearchBar}
+            <form class="search flex between align-center gap1" role="search" action="/search" method="get" aria-label="Search the blog">
+                <label for="search-input" class="visually-hidden">Search the blog</label>
+                <button class="search" aria-label="search" type="submit">
+                    <i class="ph-bold ph-magnifying-glass"></i>
                 </button>
-                
-                <div class="nav-wrap">
-                    <nav class="menu2 flex gap1">
-                        {block:HasPages}
-                            {block:Pages}
-                                <a href="{URL}">{Label}</a>
-                            {/block:Pages}
-                        {/block:HasPages}
-                        
-                        {block:ifArchiveLinkLabel}
-                            <a href="/archive">archive</a>
-                        {/block:ifArchiveLinkLabel}
-                        
-                        {block:SubmissionsEnabled}
-                            <a href="/submit">{SubmitLabel}</a>
-                        {/block:SubmissionsEnabled}
-                    </nav>
-                </div>
+                <input id="search-input" type="text" name="q" value="{SearchQuery}" placeholder="Search" autocomplete="off" />
+            </form>
+            {/block:ifSearchBar}
+            
+        <!-- NAVIGATION START -->
+    
+            <!--Typically, a navigation menu would use <ul> and <li> elements
+            inside a <nav>. Here, we simplify the structure for flexibility
+            and easier customization. We use role="list" on the <nav> and
+            role="listitem" on each link to maintain accessibility. This
+            approach allows you to remove or restructure the menu without
+            breaking the theme, while keeping screen readers happy.-->
+        
+            <!-- NAVIGATION: no toggle -->
+            {block:ifNotToggleLabel}
+            <nav class="menu flex gap1 align-center wrap" aria-label="Primary navigation" role="list">
+                <a href="{BlogURL}" role="listitem">{text:Home Link Label}</a>
+            
+                {block:AskEnabled}
+                    {block:ifAskLinkLabel}
+                        <a href="/ask" role="listitem">{text:Ask Link Label}</a>
+                    {/block:ifAskLinkLabel}
+                {/block:AskEnabled}
+            
+                {block:HasPages}
+                    {block:Pages}
+                        <a href="{URL}" role="listitem">{Label}</a>
+                    {/block:Pages}
+                {/block:HasPages}
+            
+                {block:ifArchiveLinkLabel}
+                    <a href="/archive" role="listitem">{text:Archive Link Label}</a>
+                {/block:ifArchiveLinkLabel}
+            
+                {block:SubmissionsEnabled}
+                    {block:ifSubmitLinkLabel}
+                        <a href="/submit" role="listitem">{text:Submit Link Label}</a>
+                    {/block:ifSubmitLinkLabel}
+                {/block:SubmissionsEnabled}
             </nav>
+            {/block:ifNotToggleLabel}
+            
+            <!-- NAVIGATION: toggle -->
+            {block:ifToggleLabel}
+            <!-- Toggle navigation -->
+            <nav class="menu-toggle flex align-center gap1 wrap" aria-label="Primary navigation" role="list">
+                <a href="{BlogURL}" role="listitem">{text:Home Link Label}</a>
+                {block:AskEnabled}
+                    {block:ifAskLinkLabel}
+                        <a href="/ask" role="listitem">{text:Ask Link Label}</a>
+                    {/block:ifAskLinkLabel}
+                {/block:AskEnabled}
+                <button class="sub-toggle flex align-center gap1" aria-expanded="false" aria-controls="submenu-container">
+                    <span>{text:Toggle Label}</span>
+                    <span class="nav-spin" aria-hidden="true"><i class="ph ph-caret-down"></i></span>
+                </button>
+            </nav>
+            
+            <!-- Submenu -->
+            <!-- The ID "submenu" is required so the toggle button's
+            aria-controls can reference this container for accessibility -->
+            <div id="submenu-container" aria-label="Secondary navigation">
+                <nav class="submenu flex gap1 wrap" role="list" hidden="true">
+                    {block:HasPages}
+                        {block:Pages}
+                            <a href="{URL}" role="listitem">{Label}</a>
+                        {/block:Pages}
+                    {/block:HasPages}
+                    {block:ifArchiveLinkLabel}
+                        <a href="/archive" role="listitem">{text:Archive Link Label}</a>
+                    {/block:ifArchiveLinkLabel}
+                    {block:SubmissionsEnabled}
+                        {block:ifSubmitLinkLabel}
+                            <a href="/submit" role="listitem">{text:Submit Link Label}</a>
+                        {/block:ifSubmitLinkLabel}
+                    {/block:SubmissionsEnabled}
+                </nav>
+            </div>
+            {/block:ifToggleLabel}
+        <!-- NAVIGATION END -->
+            
+            {block:ifFeaturedTags}
+                <nav class="featured-tags flex gap2 wrap" aria-label="Featured tags">
+                    {block:HasPages}
+                        {block:Pages}
+                                <a href="{URL}">
+                                    <span class="tagname">{Label}</span>
+                                    <span class="total"></span>
+                                </a>
+                        {/block:Pages}
+                    {/block:HasPages}
+                </nav>
+            {/block:ifFeaturedTags}
             
         </div>
     </aside>
+    <!--SIDEBAR END-->
 
-    <section class="content">
+    <section>
+
+    {block:TagPage}
+        <!-- Search/Tag/Day Results Info
+             Displays a summary message about the current page:
+             - TagPage: number of posts for this tag (or "No results")
+             - SearchPage: number of results for a search query (or fallback message)
+             - DayPage: shows everything posted on a specific date
+             This is shown above the post list to give context to the user.
+        -->
+        <div class="results-summary">
+            {lang:Showing TagResultCount posts tagged Tag 3}
+            {block:NoTagPage}No results.{/block:NoTagPage}
+        </div> 
+    {/block:TagPage}
     
+    {block:SearchPage}
+        <div class="results-summary">
+            {lang:Showing SearchResultCount results for SearchQuery 2}
+            {lang:Sorry no results for SearchQuery}
+        </div>
+    {/block:SearchPage}
+    
+    {block:DayPage}
+        <div class="results-summary">
+            {lang:Viewing everything posted on Month DayOfMonth Year}
+        </div>
+    {/block:DayPage}
+
+        <!--
+           { block:Posts } block with inlineMediaWidth / inlineNestedMediaWidth attributes:
+           
+           - Unlike a plain { block:posts }, this ensures that inline images
+             and nested media in posts display correctly up to the specified width.
+           - Important for full-size images in posts without breaking layout.
+           - Note: Tumblr’s editor will not highlight this as a "“"valid block"
+             but it works as expected and should not be replaced with a plain { block:posts }.
+        -->
         {block:posts inlineMediaWidth="1280" inlineNestedMediaWidth="1280"}
-    
-        <!-- post article -->
-        <article id="post-{PostID}" class="{posttype}-post posts">
-    
-            <!-- post content -->
+
+        <article id="post-{PostID}" class="{posttype}-post posts" role="article" aria-labelledby="post-title-{PostID}">
+            
+            
+            <!-- .post-content BEGINS -->
             <div class="post-content">
-                
-                <!-- legacy single photo -->
+
                 {block:Photo}
+                <!-- legacy single photo -->
                     <a class="legacy-photo photo-single"  onclick="Tumblr.Lightbox.init([{ width: {PhotoWidth-HighRes}, height: {PhotoHeight-HighRes}, low_res: '{PhotoURL-500}', high_res: '{PhotoURL-HighRes}' }]); $('body').toggleClass('tumblr_lightbox_active'); return false"><img src="{PhotoURL-HighRes}"></a>
                 {/block:Photo}
-                
-                <!-- legacy photoset -->
+
                 {block:Photoset}
+                <!-- legacy photoset -->
                     <div class="photoset" data-layout="{PhotosetLayout}">
                         {block:Photos}
                             <div class="legacy-photoset-inner" 
@@ -1290,25 +2656,19 @@ calc() with post width + however wide the sidebar is + 100px or so.*/
                         {/block:Photos}
                     </div>
                 {/block:Photoset}
-    
-                <!-- panorama -->
-                {block:Panorama}
-                    <div class="legacy-photo"><img src="{photourl-panorama}" alt="{photoalt}"></div>
-                {/block:Panorama}
-                
-                <!-- legacy quote (styled as npf) -->
+
                 {block:Quote}
+                <!-- legacy quote (styled as npf) -->
                     <div class="caption">
                         <p class="npf_quote">{Quote}</p>
-                        
                         {block:Source}
                             <p class="source">-{Source}</p>
                         {/block:Source}
                     </div>
                 {/block:Quote}
-                
-                <!-- legacy chat (styled as npf) -->
+
                 {block:Chat}
+                <!-- legacy chat (styled as npf) -->
                     <div class="caption">
             	        {block:Lines}
             	        <p class="npf_chat">
@@ -1320,97 +2680,106 @@ calc() with post width + however wide the sidebar is + 100px or so.*/
             	        {/block:Lines}
                     </div>
                 {/block:Chat}
-                
-                <!-- legacy link (styled as npf) -->
+
                 {block:link}
-                    <div class="npf-link-block {block:Thumbnail}has-poster{/block:Thumbnail}">
-                        <a {Target} href="{URL}" class="link">
-                            <div {block:Thumbnail}class="poster" style="background:url({Thumbnail-HighRes}); background-position: 50%; background-repeat: no-repeat; background-size: cover; background-clip: content-box;"{/block:Thumbnail}>
-                                <div class="title">{Name}</div>
+                    <!-- legacy link (npf+legacy styled JS manip) -->
+                    <div class="custom-link-block">
+                        <a {Target} href="{URL}" class="link-header">
+                            <div class="link-title-wrap">
+                                <span class="link-title">{Name}</span>
+                                {block:Host}
+                                    <span class="site-url" aria-label="Host: {Host}">{Host}</span>
+                                {/block:Host}
                             </div>
-                            <div class="bottom">
-                                {block:Excerpt}<div class="description">{Excerpt}</div>{/block:Excerpt}
-                                {block:Host}<div class="site-name">{Host}</div>{/block:Host}
-                            </div>
+                            <svg class="link-icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"/></svg>
                         </a>
+                        {block:Excerpt}
+                            <p class="link-description">{Excerpt}</p>
+                        {/block:Excerpt}
                     </div>
                 {/block:link}
-                
-                <!-- legacy video -->
+
                 {block:Video}
+                <!-- legacy video -->
                     <div class="video">
                         {Video-700}
                     </div>
                 {/block:Video}
-                
-		<!-- legacy audio styled as npf audio -->
+
                 {block:Audio}
+                    <!-- legacy audio -->
+                    
+                    <!--I have installed my plugin to unify legacy and NPF audio posts.
+                    read more here:
+                    https://github.com/flipsewtf/Tumblr/tree/main/Plugins/UnifyAudio-->
+                    
                     <figure class="tmblr-full">
-                        {/block:AudioPlayer}
-                            <figcaption class="audio-caption">
+                        <figcaption class="audio-caption legacy">
+                            <div class="audio-info">
                                 <span class="tmblr-audio-meta audio-details">
-                                    {block:TrackName}
-                                        <span class="tmblr-audio-meta title">{TrackName}</span>
-                                    {/block:TrackName}
-                                    {block:Artist}
-                                        <span class="tmblr-audio-meta artist">{Artist}</span>
-                                    {/block:Artist}
-                                    {block:Album}
-                                        <span class="tmblr-audio-meta album">{TrackName}</span>
-                                    {/block:Album}
+                                    {block:TrackName}<span class="tmblr-audio-meta title">{TrackName}</span>{/block:TrackName}
+                                    {block:Artist}<span class="tmblr-audio-meta artist">{Artist}</span>{/block:Artist}
+                                    {block:Album}<span class="tmblr-audio-meta album">{Album}</span>{/block:Album}
                                 </span>
-                                {block:AlbumArt}
-                                <img class="album-cover" src="{AlbumArtURL}" alt="image">
-                                {/block:AlbumArt}
-                            </figcaption>
-                            {AudioPlayer}
-                        {/block:AudioPlayer}
+                                {block:AlbumArt}<img class="album-cover" src="{AlbumArtURL}" alt="image"/>{/block:AlbumArt}
+                            </div>
+                        </figcaption>
+                        {block:AudioPlayer}{AudioPlayer}{/block:AudioPlayer}
                     </figure>
                 {/block:Audio}
-                
-                <!-- ask -->
+
                 {block:Answer}
-                    <div class="ask-container">
-        	            <div class="asker-wrap flex gap1 align-center">
-            	            <img src="{AskerPortraitURL-64}"/>
-            	            <div class="ask-user-info flex">
-                                <span>{Asker}</span>
-                                <span>sent a message</span>
+                    <!-- Ask post -->
+             
+                        <!-- Question -->
+                        <div class="ask-block ask-question">
+                            <header class="ask-header">
+                                <img class="ask-avatar" src="{AskerPortraitURL-48}" alt="Avatar of ansker">
+                                <div class="ask-user">
+                                    <span id="asker-{PostID}" class="ask-username">{Asker}</span>
+                                    <span class="ask-label">Sent a message</span>
+                                </div>
+                            </header>
+                            <div class="ask-body">
+                                {Question}
                             </div>
                         </div>
-                            
-                        <div class="question">
-                            {Question}
-            	       </div>
-                    </div>
-            
-                    {block:NotReblog}
-                        <div class="replies">{Answer}</div>
-                    {/block:NotReblog}
-            
-                    {block:Answerer}
-                    <div class="ask-container rb-answer">
-        	            <div class="asker-wrap flex gap1 align-center">
-            	            <img src="{AnswererPortraitURL-64}"/>
-            	            <div class="ask-user-info flex">
-                                <span>{Answerer}</span>
-                                <span>answered</span>
-                            </div>
-                        </div>
-                            
-                        <div class="question">
-                            {Answer}
-            	       </div>
-                    </div>
-                    {/block:Answerer}
-                {/block:Answer}
                 
+                        <!-- Direct answer -->
+                        {block:NotReblog}
+                            <div class="caption ask-answer">
+                                {Answer}
+                            </div>
+                        {/block:NotReblog}
+                
+                        <!-- Reblogged answer -->
+                        {block:Answerer}
+                            <div class="ask-block ask-answer-reblog">
+                                <header class="ask-header">
+                                    <img class="ask-avatar" src="{AnswererPortraitURL-48}" alt="Avatar of answerer">
+                                    <div class="ask-user">
+                                        <span class="ask-username">{Answerer}</span>
+                                        <span class="ask-label">Answered</span>
+                                    </div>
+                                </header>
+                                <div class="ask-body">
+                                    {Answer}
+                                </div>
+                            </div>
+                        {/block:Answerer}
+
+                {/block:Answer}
+
+                
+                
+                <!--caption / and text posts -->
+                
+                <div class="caption {block:notreblog}original-post{/block:notreblog}">
                 <!-- caption -->
-                <div class="caption {block:notreblog} original-post {/block:notreblog}">
                     {block:Text}
-                        {block:Title}<h2>{Title}</h2>{/block:Title}
+                        {block:Title}<h1 id="post-title-{PostID}">{Title}</h1>{/block:Title}
                     {/block:Text}
-                    
+
                     {block:Link}
                         {block:Description}
                         {block:NotReblog}{Description}{/block:NotReblog}
@@ -1419,22 +2788,26 @@ calc() with post width + however wide the sidebar is + 100px or so.*/
                     
                     {block:notreblog}
                     {block:caption}{Caption}{/block:caption}
-                                        <!-- below: 'reblog-content original' needed for secondary photosets to wrap in div -->
-                    {block:Text}<div class="reblog-content original">{Body}</div>{/block:Text}
+
+                    {block:Text}<!-- 'reblog-content original' needed for
+                    secondary photosets in npf to wrap properly in its own div -->
+                        <div class="reblog-content original">{Body}</div>
+                    {/block:Text}
                     
                     {/block:notreblog}
                     
                     {block:Rebloggedfrom}
                         {block:Reblogs}
+                        
                         <!-- display:none; below hides the double comments that sometimes appear in old pre-2014 reblogged quote posts --> 
                         <div class="reblogs" {block:Quote}style="display:none;"{/block:Quote}>
-                            <div class="reblog-header {block:IsOriginalEntry}original{/block:IsOriginalEntry} flex align-center gap1">
+                            <div class="reblog-header {block:IsOriginalEntry}original{/block:IsOriginalEntry} flex gap1 align-center">
                                 <img src="{PortraitURL-64}" alt="{username}'s avatar">
                                 {block:IsActive}
             			        <a class="user flex align-center" target="_blank" href="{Permalink}">{Username}</a>
             			        {/block:IsActive}
             			        {block:IsDeactivated}
-            		            <span class="user flex align-center deactivated" aria-label="user deactivated">{Username}</span>
+            		            <span class="user deactivated" title="Deactivated" aria-label="User is deactivated">{Username}</span>
             			        {/block:IsDeactivated}
                             </div>
                             
@@ -1446,101 +2819,189 @@ calc() with post width + however wide the sidebar is + 100px or so.*/
                     {/block:RebloggedFrom}
                 </div>
         
-            </div><!-- post-content end -->     
-        
+            </div><!-- .post-content END -->
+             
+             
+             
+             <!-- always wrap content that is only meant for dated stuff in { block:Date } so username.tumblr.com/about-me does not have a footer-->
+             
             {block:Date}
-                <footer class="info">
-                    
-                    {block:IndexPage}
+
+                {block:IndexPage}
+                <!-- footer for index-->
+                    <footer class="post-footer" aria-label="Post details">
                         <div class="info-inner flex gap2 align-center between">
-                        
-                            <div class="numbers flex gap1 align-center">
+                            
+                            <!--pinned and date -->
+                            <div class="info-left flex gap1 align-center">
                                 {block:PinnedPostLabel}
-                                    <div class="pinned" aria-label="pinned post" title="pinned post" aria-label="pinned post">
-                    				    <span class="info-icon">
-                    				        <i class="ph ph-bookmark-simple"></i>
-                    				    </span>
-                    			    </div>
-                    	       {/block:PinnedPostLabel}
-                        		<a class="date" href="{Permalink}" title="{TimeAgo}">{Month} {DayOfMonth}, {Year}</a>
-                        		<span class="notecount">{NoteCountWithLabel}</span>
+                                        <button class="pinned" title="{PinnedPostLabel}" aria-label="{PinnedPostLabel}">
+                                            <i class="ph-fill ph-bookmark-simple"></i>
+                                        </button>
+                                {/block:PinnedPostLabel}
+                                <a class="date" href="{Permalink}" title="{DayOfMonth} {Month} {Year}" aria-label="Posted on {DayOfMonth} {Month} {Year}">
+                                    <time datetime="{Year}-{MonthNumberWithZero}-{DayOfMonthWithZero}">{Month} {DayOfMonth}</time>
+                                </a>
                             </div>
                             
-                            <div class="interact flex align-center">
+                            <!-- note, tag toggle, like, reblog -->
+                            <div class="info-right flex wrap align-center">
+
+                                <a class="info-item" href="{Permalink}#note" title="{NoteCountWithLabel}">
+                                    <span class="info-icon" aria-hidden="true"><i class="ph ph-chat-circle"></i></span>
+                                    <span class="info-text notecount" aria-label="{NoteCountWithLabel}">{NoteCount}</span>
+                                </a>
                                 {block:HasTags}
-                                    {block:IndexPage}
-					    <div class="toggle-tags {select:Display tags}" aria-label="show tags" title="show tags">
-						    <span class="info-icon">
-							<i class="ph ph-tag"></i>
-						    </span>
-					    </div>
-                    		    {/block:IndexPage}
-                		{/block:HasTags}
-				<a class="custom-like-container" href="#" aria-label="like post" title="like">
-				    {LikeButton}
-					<span class="custom-like-icon info-icon">
-					    <i class="ph ph-heart"></i>
-					</span>
-				</a>
-				<a class="rb" href="{ReblogURL}" target="_blank" aria-label="replog post" title="reblog">
-				    <span class="info-icon">
-					    <i class="ph-fill ph-arrows-clockwise"></i>
-				    </span>
-                        	</a>
+                                    <button class="toggle-tags info-item info-tags" type="button" aria-label="Show or hide tags" aria-expanded="false" aria-controls="tags-container-{PostID}">
+                                        <span class="info-icon" aria-hidden="true"><i class="ph ph-tag"></i></span>
+                                        <span class="info-text">Tags</span>
+                                    </button>
+                                {/block:HasTags}
+                                <a class="info-item custom-like like-tooltip" href="#" aria-label="Like this post">
+                                    {LikeButton}
+                                    <span class="info-icon info-like-icon"><i class="ph ph-heart-straight"></i></span>
+                                    <span class="info-text info-like-text">Like</span>
+                                </a>
+                                <a class="info-item info-reblog rb-tooltip" href="{ReblogURL}" target="_blank" aria-label="Reblog this post">
+                                    <span class="info-icon"><i class="ph ph-arrows-clockwise"></i></span>
+                                    <span class="info-text">Reblog</span>
+                                </a>
                             </div>
-                            
                         </div>
-                    {/block:IndexPage}
-    
-                    {block:PermalinkPage}
-                        <div class="permalink-container">
                         
-                            <div class="permalink-ago">Posted {TimeAgo}</div>
-                            <div class="permalink-date">on {Month} {DayOfMonth}, {Year} at {12Hour}:{Minutes} {CapitalAmPm}</div>
-                            
-                            {block:RebloggedFrom}
-                                <div class="permalink-reblogged flex"> 
-                    			    <div>Created by: <a href="{ReblogRootURL}">{ReblogRootName}</a></div>
-                    			    <div>Reblogged from: <a href="{ReblogParentURL}">{ReblogParentName}</a></div>
+                        {block:HasTags}
+                            <div class="tags-container" id="tags-container-{PostID}">
+                                <div class="tags" aria-label="Post tags" role="list">
+                                    {block:Tags}
+                                    <a href="{TagURL}" role="listitem">#{Tag}</a>
+                                    {/block:Tags}
                                 </div>
-                            {/block:RebloggedFrom}
-                            
-                            {block:ContentSource}
-                                <div class="permalink-source">Source: <a href="{SourceURL}">{SourceTitle}</a></div>
-                            {/block:ContentSource}
-                        </div>
-                    {/block:PermalinkPage}
-                    
-                    {block:HasTags}
-                        <div class="tags-container {block:IndexPage}{select:Display tags}{/block:IndexPage}">
-                            <div class="tags flex gap1 wrap">
-                                {block:Tags}
-                                <a href="{TagURL}">#{Tag}</a>
-                                {/block:Tags}
+                                <div class="visually-hidden" aria-live="polite" aria-atomic="true"></div>
                             </div>
-                        </div>
-                    {/block:HasTags}
+                        {/block:HasTags}
+                    </footer>
+                {/block:IndexPage}
+                
+                
+                {block:PermalinkPage}
+                <!-- footer for permalink. example: url.tumblr.com/post/697631004545 -->
+                    <footer class="permalink-footer" aria-label="Post details">
                     
-                </footer>
+                            <!-- Time ago -->
+                            <time class="permalink-ago" datetime="{Year}-{MonthNumberWithZero}-{DayOfMonthWithZero}T{Hour24}:{Minutes}:00" aria-label="Posted on {Month} {DayOfMonth}, {Year} at {12Hour}:{Minutes} {CapitalAmPm}">
+                                {TimeAgo}
+                            </time>
+                    
+                            <!-- Full date/time -->
+                            <time class="permalink-date" datetime="{Year}-{MonthNumberWithZero}-{DayOfMonthWithZero}T{Hour24}:{Minutes}:00" aria-label="{Month} {DayOfMonth}, {Year} at {12Hour}:{Minutes} {CapitalAmPm}">
+                                {Month} {DayOfMonth}, {Year} at {12Hour}:{Minutes} {CapitalAmPm}
+                            </time>
+
+                            <!-- Reblog info -->
+                            {block:RebloggedFrom}
+                            <div class="perma-wrap reblog-info">
+                                <span class="label">Created by</span>
+                                <a href="{ReblogRootURL}">{ReblogRootName}</a> 
+                            </div>
+                    
+                            <div class="perma-wrap reblog-source">
+                                <span class="label">Reblogged from</span>
+                                <a href="{ReblogParentURL}">{ReblogParentName}</a>
+                            </div>
+                            {/block:RebloggedFrom}
+                    
+                            <!-- Original source -->
+                            {block:ContentSource}
+                            <div class="perma-wrap source-info">
+                                <span class="label">Source</span>
+                                <a href="{SourceURL}">{SourceTitle}</a>
+                            </div>
+                            {/block:ContentSource}
+                    
+                            <!-- Tags -->
+                            {block:HasTags}
+                                <div class="tags" aria-label="Post tags" role="list">
+                                    {block:Tags}
+                                        <a href="{TagURL}" role="listitem">#{Tag}</a>
+                                    {/block:Tags}
+                                </div>
+                            {/block:HasTags}
+
+                    
+                    </footer>
+                {/block:PermalinkPage}
+
             {/block:Date}
-            
         </article>
         
         {block:PostNotes}
-            <div class="notes-container">
-                <span class="note-counter">{NoteCountWithLabel}</span>
+            <section id="note" class="perma-post-notes" aria-labelledby="notes-heading">
+                <h2 id="notes-heading" class="visually-hidden">Post notes</h2>
+                <div class="perma-notes">{NoteCountWithLabel}</div>
                 {PostNotes-64}
-            </div>
+            </section>
         {/block:PostNotes}
         
-        {/block:Posts}
-            
+        {/block:Posts}<!-- End post tumblr block -->
+ 
+        {block:DayPagination}
+        <nav class="pagi flex gap2 align-center between" role="navigation" aria-label="Pagination">
+        
+            <!-- Next Day Link -->
+            <a 
+                {block:NextDayPage} href="{NextDayPage}" aria-label="Next day {DayOfMonth} {Month}, {Year}" {/block:NextDayPage} 
+                class="flex align-center gap2 {block:NextDayPage}has_{/block:NextDayPage}page" 
+                {block:NoNextDayPage} aria-disabled="true" tabindex="-1" {/block:NoNextDayPage}>
+                <span class="pagi-icon" aria-hidden="true">
+                    <i class="ph-bold ph-arrow-left"></i>
+                </span>
+                {block:NextDayPage}
+                    <span>{DayOfMonth} {Month} {Year}</span>
+                {/block:NextDayPage}
+            </a>
+        
+            <!-- Previous Day Link -->
+            <a 
+                {block:PreviousDayPage} href="{PreviousDayPage}" aria-label="Previous day {DayOfMonth} {Month}, {Year}" {/block:PreviousDayPage} 
+                class="flex align-center gap2 {block:PreviousDayPage}has_{/block:PreviousDayPage}page" 
+                {block:NoPreviousDayPage} aria-disabled="true" tabindex="-1" {/block:NoPreviousDayPage}>
+                {block:PreviousDayPage}
+                    <span>{DayOfMonth} {Month} {Year}</span>
+                {/block:PreviousDayPage}
+                <span class="pagi-icon" aria-hidden="true">
+                    <i class="ph-bold ph-arrow-right"></i>
+                </span>
+            </a>
+        
+        </nav>
+        {/block:DayPagination}
+        
         {block:Pagination}
-            <nav class="pagi flex gap3 align-center between" aria-label="Pagination">
-                <a {block:PreviousPage} href="{PreviousPage}" title="prev page"{/block:PreviousPage} class="{block:PreviousPage}has_{/block:PreviousPage}page">prev</a>
-                <a {block:NextPage} href="{NextPage}" title="next page"{/block:NextPage} class="{block:NextPage}has_{/block:NextPage}page">next</a>
-            </nav>
+        <nav class="pagi flex gap5 align-center centered" role="navigation" aria-label="Pagination">
+        
+            <!-- Previous Page Link -->
+            <a 
+                {block:PreviousPage} href="{PreviousPage}" title="Newer posts" aria-label="Newer posts" {/block:PreviousPage} 
+                class="{block:PreviousPage}has_{/block:PreviousPage}page" 
+                {block:NoPreviousPage} aria-disabled="true" tabindex="-1" {/block:NoPreviousPage}>
+                <span class="pagi-icon" aria-hidden="true">
+                    <i class="ph-bold ph-arrow-left"></i>
+                </span>
+            </a>
+        
+            <!-- Next Page Link -->
+            <a 
+                {block:NextPage} href="{NextPage}" title="Older posts" aria-label="Older posts" {/block:NextPage} 
+                class="{block:NextPage}has_{/block:NextPage}page" 
+                {block:NoNextPage} aria-disabled="true" tabindex="-1" {/block:NoNextPage}>
+                <span class="pagi-icon" aria-hidden="true">
+                    <i class="ph-bold ph-arrow-right"></i>
+                </span>
+            </a>
+        
+        </nav>
         {/block:Pagination}
+
     </section>
 </main>
 
@@ -1548,133 +3009,391 @@ calc() with post width + however wide the sidebar is + 100px or so.*/
     Powered by <a target="_blank" href="https://www.tumblr.com/">Tumblr</a>.
 </footer>
 
-</div> <!-- end .page-container -->
+</div> <!-- END PAGE-CONTAINER (.page-container) -->
 
-<div class="top-corner flex gap1">
-    <button class="controls right-icon" title="tumblr controls" type="button" aria-label="open tumblr controls">
-        <i class="ph ph-gear spin"></i>
+<div class="corner-controls top">
+    <button class="tumblr-controls corner-button" title="Tumblr controls" type="button" aria-label="Open Tumblr controls">
+        <span class="spin">
+            <i class="ph ph-gear"></i>
+        </span>
     </button>
-    <button class="theme-toggle right-icon" type="button" aria-label="toggle dark or light mode"> <!-- tooltips are taken care of in the script -->
-        <i class="ph ph-sun light-on"></i>
-        <i class="ph ph-moon light-off"></i>
+    
+    <!-- aria-label="" is updated dynamically via the JS: Enable light mode/Enable dark mode-->
+    <button class="theme-toggle corner-button" aria-label="" type="button" role="button">
+        <i class="ph ph-sun mode-light"></i>
+        <i class="ph ph-moon mode-dark"></i>
     </button>
-    <div class="updates-container flex gap2">
-        <button class="update-toggle right-icon" title="update tab" type="button" aria-label="open or close update tab">
-                <i class="ph ph-bell updates-icon active"></i>
-                <i class="ph ph-bell-simple-slash updates-icon"></i>
-        </button>
-        <div class="updates">
-            updates container
+    
+    {block:ifUpdateTab}
+        <!--aria-controls="updates" needs to match the id="updates". aria-controls="Open update tab" is updated dynamically -->
+        <div class="updates-container">
+            <button class="update-toggle corner-button" type="button" aria-expanded="false" aria-controls="Open update tab" aria-label="">
+                <i class="ph ph-bell upd-icon"></i>
+                <i class="ph ph-bell-slash upd-icon hidden"></i>
+            </button>
+            <div id="updates" class="updates" role="region" aria-label="Update tab" aria-hidden="true" tabindex="-1">
+                <div class="updates-inner">
+                    {block:ifUpdateText}
+                        <div class="update-text">
+                            {text:Update Text}
+                        </div>
+                    {/block:ifUpdateText}
+        
+                    {block:ifActivity1}
+                        <div class="activity">
+                            {block:ifActivity1Icon}
+                                <i class="ph-light ph-{text:Activity 1 Icon} activity-icon"></i>
+                            {/block:ifActivity1Icon}
+                            <span>{text:Activity 1}</span>
+                        </div>
+                    {/block:ifActivity1}
+        
+                    {block:ifActivity2}
+                        <div class="activity">
+                            {block:ifActivity2Icon}
+                                <i class="ph-light ph-{text:Activity 2 Icon} activity-icon"></i>
+                            {/block:ifActivity2Icon}
+                            <span>{text:Activity 2}</span>
+                        </div>
+                    {/block:ifActivity2}
+        
+                    {block:ifActivity3}
+                        <div class="activity">
+                            {block:ifActivity3Icon}
+                                <i class="ph-light ph-{text:Activity 3 Icon} activity-icon"></i>
+                            {/block:ifActivity3Icon}
+                            <span>{text:Activity 3}</span>
+                        </div>
+                    {/block:ifActivity3}
+        
+                    {block:ifActivity4}
+                        <div class="activity">
+                            {block:ifActivity4Icon}
+                                <i class="ph-light ph-{text:Activity 4 Icon} activity-icon"></i>
+                            {/block:ifActivity4Icon}
+                            <span>{text:Activity 4}</span>
+                        </div>
+                    {/block:ifActivity4}
+                </div>
+            </div>
         </div>
-    </div>
+    {/block:ifUpdateTab}
+</div>
+    
+<div class="corner-controls bottom flex column gap1">
+    <button class="scroll-to-top corner-button" type="button" aria-label="Scroll to top" title="Scroll to top">
+        <i class="ph ph-caret-up"></i>
+    </button>
+    <a class="credit corner-button" target="_blank" href="https://THEME-MAKER-URL-HERE.tumblr.com/" title="Credit" aria-label="Visit THEME-MAKER-URL-HERE Tumblr for more information" rel="noopener noreferrer"><i class="ph ph-code"></i>
+    </a>
 </div>
 
-<button class="scroll-to-top right-icon"  title="scroll to top" type="button" aria-label="click scroll to top">
-    <i class="ph-light ph-caret-up"></i>
-</button>
+<!-- 
+    Sidebar image blob shapes:
 
-<!-- PHOTOSET: legacy -->
-<script src="https://static.tumblr.com/diajl5m/y39s6mwvr/legacy-photoset.js"></script>
-<!-- TOOLTIP: tippy.js -->
+    These invisible <svg> elements define clipPaths (#blob1, #blob2) 
+    that are applied to sidebar images using the .blob1 and .blob2 classes.
+
+    The SVGs are hidden with height="0" width="0" and positioned absolute,
+    so they don't affect layout but remain available for clip-path usage.
+-->
+<svg aria-hidden="true" focusable="false" height="0" width="0" style="position:absolute; width:0px; height:0px;"><clipPath id="blob1" clipPathUnits="objectBoundingBox"><path d="M0.5,0.053c0.266,-0.074 0.242,0.198 0.44,0.447c0.161,0.204 -0.209,0.435 -0.44,0.455c-0.275,0.023 -0.516,-0.183 -0.471,-0.455c0.037,-0.217 0.235,-0.382 0.471,-0.447Z"></path></clipPath></svg>
+<svg aria-hidden="true" focusable="false" viewBox="0 0 390.3 414.4" height="0" width="0" style="position:absolute; width:0px; height:0px;"><clipPath id="blob2" clipPathUnits="objectBoundingBox" transform="scale(0.002562, 0.002413)"><path class="st0" d="M276.8,56.9c23.5,25.9,33.9,61.3,53.7,95.3c19.8,33.9,49,66.4,57.3,104.6c8.2,38.2-4.5,82.3-35.2,102.2 c-30.6,20-79.2,15.8-121.3,23.7c-42.1,7.8-77.8,27.6-118.6,31.1c-40.9,3.5-86.9-9.3-99.3-41.4c-12.3-32.1,8.9-83.4,8.9-127.5 c0-44.2-21.1-81.2-22.3-121.6C-1.1,82.9,17.9,39,51.2,17.6C84.6-3.9,132.3-2.9,174.5,5.8S253.3,30.9,276.8,56.9z"/></clipPath></svg>
+
+
+<!--Legacy photoset script-->
+<script src="https://static.tumblr.com/diajl5m/dgbt13q7x/mournstera-legacy-photoset.js"></script>
+
+<!--unifying legacy and npf audio script -->
+<script src="https://static.tumblr.com/diajl5m/LPDt50612/mournstera_unify_audio.js"></script>
+
+<!--Unifying legacy and npf structure of links-->
+<script src="https://static.tumblr.com/diajl5m/KOtt506hd/mournstera_unify_links.js"></script>
+
+<!-- For tooltip-->
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"></script>
+
+<!-- For tooltip-->
 <script src="https://cdn.jsdelivr.net/npm/tippy.js@6.3.7/dist/tippy.umd.min.js"></script>
-<!-- ICONS: phosphor -->
+
+<!-- Phosphor icon script-->
 <script src="https://cdn.jsdelivr.net/npm/@phosphor-icons/web"></script>
-<!-- AUDIO: UnifyAudio https://github.com/flipsewtf/UnifyAudio -->
-<script src="https://static.tumblr.com/diajl5m/mobsquso5/unify_audio.js"></script>
 
 <script>
 document.addEventListener("DOMContentLoaded", function () {
+    // ------------------------------------------------ TOGGLE TUMBLR CONTROL
+    const controls = document.querySelector("button.tumblr-controls");
+    const spin = document.querySelector(".spin");
     
-    // ------------------- toggle tumblr controls
-    const control = document.querySelector(".controls");
+    controls.addEventListener("click", function () {
     
-    control.addEventListener("click", function () {
-        document.querySelector(".spin").classList.toggle("active");
-        document.querySelector(".tmblr-iframe").classList.toggle("active");
+        spin.classList.toggle("active");
+    
+        const iframe = document.querySelector(".tmblr-iframe");
+        if (!iframe) return;
+    
+        iframe.classList.toggle("active");
+    
+        // Update ARIA attributes for accessibility
+        const isExpanded = controls.getAttribute("aria-expanded") === "true";
+        controls.setAttribute("aria-expanded", String(!isExpanded));
+        iframe.setAttribute("aria-hidden", String(isExpanded));
+    
+        // Update the button label for screen readers
+        controls.setAttribute(
+            "aria-label",
+            !isExpanded ? "Close Tumblr controls" : "Open Tumblr controls"
+        );
     });
 
-    // ------------------- scroll to top button
+    // ------------------------------------------------- SCROLL TO TOP BUTTON
     const html = document.documentElement;
-    const scrollElement = document.querySelector(".scroll-to-top");
-
+    const scrollButton = document.querySelector(".scroll-to-top");
+    
     document.addEventListener("scroll", function () {
-        if (html.scrollTop > 70) {
-            scrollElement.classList.add("visible");
-        } else {
-            scrollElement.classList.remove("visible");
+        const isVisible = html.scrollTop > 70;
+    
+        scrollButton.classList.toggle("visible", isVisible);
+        scrollButton.setAttribute("aria-hidden", String(!isVisible));
+    });
+    
+    scrollButton.addEventListener("click", function () {
+        window.scrollTo({
+            top: 0,
+            behavior: "smooth"
+        });
+    });
+
+    // --------------------------------------------------- NOTE COUNT SHORTEN
+    document.querySelectorAll(".notecount").forEach(noteCountElement => {
+        const noteCount = parseInt(noteCountElement.textContent.replace(/,/g, "").split(" ")[0], 10);
+    
+        if (noteCount >= 1000) {
+            const formattedCount = (noteCount >= 1000000)
+                ? `${(noteCount / 1000000).toFixed(2)}m `
+                : `${(noteCount / 1000).toFixed(1)}k`;
+            noteCountElement.textContent = `${ formattedCount }`;
         }
     });
-
-    scrollElement.addEventListener("click", function () {
-        html.scrollTo({ top: 0, behavior: "smooth" });
-    });
-
-    // ------------------- shorten note count by @mournstera
-    const noteCounts = document.querySelectorAll(".notecount");
-
-    noteCounts.forEach(function (noteCountElement) {
-        let noteCount = parseInt(noteCountElement.textContent.replace(/,/g, "").split(" ")[0], 10);
-
-        if (noteCount >= 1000000) {
-            noteCountElement.textContent = `${(noteCount / 1000000).toFixed(2)}m notes`;
-        } else if (noteCount >= 1000) {
-            noteCountElement.textContent = `${(noteCount / 1000).toFixed(1)}k notes`;
-        }
-    });
     
-    // ------------------- update tab
-    const updateToggle = document.querySelector('.update-toggle');
+    {block:ifToggleLabel}
+    // --------------------------------------------------- TOGGLE NAV
+    const subMenuBtn = document.querySelector(".sub-toggle");
+    const submenuContainer = document.querySelector("#submenu-container");
+    const submenuNav = submenuContainer.querySelector("nav.submenu");
+    const navSpin = subMenuBtn.querySelector(".nav-spin");
     
-    updateToggle.addEventListener("click", function () {
-        const updatesContainer = document.querySelector(".updates");
-        const updatesIcons = document.querySelectorAll(".update-toggle .updates-icon");
+    function toggleSubmenu() {
+        const expanded = subMenuBtn.getAttribute("aria-expanded") === "true";
     
-        updatesContainer.classList.toggle("active");
-        updatesIcons.forEach(icon => icon.classList.toggle("active"));
-    });
+        // Update ARIA attributes
+        subMenuBtn.setAttribute("aria-expanded", !expanded);
+        submenuNav.setAttribute("aria-hidden", expanded);
     
-    // ------------------- toggle navigation 
-    const toggleButton = document.querySelector(".toggle-nav");
-    const navSpin = document.querySelector(".nav-spin");
-    const navWrap = document.querySelector(".nav-wrap");
-    
-    toggleButton.addEventListener("click", function () {
+        // Rotate arrow
         navSpin.classList.toggle("active");
-        navWrap.classList.toggle("active");
     
-        if (navWrap.classList.contains("active")) {
-            navWrap.style.maxHeight = navWrap.scrollHeight + "px";
+        // Expand/collapse with dynamic height
+        if (!expanded) {
+            submenuContainer.style.maxHeight = submenuContainer.scrollHeight + "px";
         } else {
-            navWrap.style.maxHeight = 0;
+            submenuContainer.style.maxHeight = "0";
+        }
+    }
+    
+    // click
+    subMenuBtn.addEventListener("click", toggleSubmenu);
+    
+    // Keyboard (enter / space)
+    subMenuBtn.addEventListener("keydown", (e) => {
+        if (e.key === "Enter" || e.key === " " || e.key === "Spacebar") {
+            e.preventDefault(); // prevent scrolling when using `Space` key
+            toggleSubmenu();
         }
     });
-    
+    {/block:ifToggleLabel}
+
+
     {block:IndexPage}
-    // -------------------  toggle tags
-    // I like to keep the tags visible on permalink pages, hence why the tumblr blocks.
+    // keep the tag scripts inside the index blocks, so they are not rendered
+    // on permalink.
+    
+    // ---------------------------------------------------------- TOGGLE TAGS
     const toggleTagsElements = document.querySelectorAll(".toggle-tags");
     
     toggleTagsElements.forEach(function (element) {
         element.addEventListener("click", function (event) {
             const article = this.closest("article");
             if (!article) return;
-            
+    
             const tagsContainer = article.querySelector(".tags-container");
             if (!tagsContainer) return;
-            
-            const maxHeight = tagsContainer.scrollHeight + "px";
-            const isOpen = tagsContainer.style.maxHeight === maxHeight;
     
-            tagsContainer.style.maxHeight = isOpen ? "0" : maxHeight;
+            const computedMaxHeight = window.getComputedStyle(tagsContainer).maxHeight;
+            const isOpen = computedMaxHeight !== "0px" && computedMaxHeight !== "none";
+    
+            if (isOpen) {
+                tagsContainer.style.maxHeight = `${tagsContainer.scrollHeight}px`;
+                setTimeout(() => {
+                    tagsContainer.style.maxHeight = "0px";
+                }, 10);
+            } else {
+                tagsContainer.style.maxHeight = `${tagsContainer.scrollHeight}px`;
+            }
+    
             this.classList.toggle("active");
+            this.setAttribute("aria-expanded", String(!isOpen));
             event.preventDefault();
         });
     });
+    
+    // ---------------------------------------------------- TRUNCATED TAGS
+    const maxVisibleTags = 3;
+    
+    document.querySelectorAll(".tags-truncated .tags-container .tags").forEach(tagsContainer => {
+        const tags = tagsContainer.querySelectorAll("a");
+    
+        if (tags.length > maxVisibleTags) {
+    
+            tags.forEach((tag, index) => {
+                if (index < maxVisibleTags) {
+                    tag.classList.add("visible");
+                    tag.style.display = "inline";
+                } else {
+                    tag.style.display = "none";
+                }
+            });
+    
+            const thirdTag = tags[maxVisibleTags - 1];
+            if (thirdTag) {
+                thirdTag.classList.add("ellipsis");
+            }
+    
+            const expandLink = document.createElement("a");
+            expandLink.href = "#expand";
+            expandLink.className = "expand";
+            expandLink.textContent = "see all";
+    
+            // a11y attributes
+            expandLink.setAttribute("role", "button");
+            expandLink.setAttribute("aria-expanded", "false");
+            expandLink.setAttribute("tabindex", "0");
+    
+            tagsContainer.appendChild(expandLink);
+    
+            expandLink.addEventListener("click", function (event) {
+                event.preventDefault();
+    
+                tags.forEach(tag => {
+                    tag.style.display = "inline";
+                });
+    
+                if (thirdTag) {
+                    thirdTag.classList.remove("ellipsis");
+                }
+    
+                expandLink.setAttribute("aria-expanded", "true");
+    
+                expandLink.remove();
+    
+                // Announce to screen readers
+                const liveRegion = tagsContainer.querySelector(".sr-live");
+                if (liveRegion) {
+                    liveRegion.textContent = "All tags are now visible.";
+                }
+            });
+    
+            // handle keyboard activation for a11y (enter / space)
+            expandLink.addEventListener("keydown", function(event) {
+                if(event.key === "Enter" || event.key === " ") {
+                    event.preventDefault();
+                    expandLink.click();
+                }
+            });
+    
+        } else {
+            tags.forEach(tag => {
+                tag.classList.add("visible");
+                tag.style.display = "inline";
+            });
+        }
+    });
     {/block:IndexPage}
+    
+    {block:ifUpdateTab}
+    // ------------------------------------------------ UPDATE TAB
+    const updTab = document.querySelector(".update-toggle");
+    const updates = document.getElementById("updates");
+    const icons = updTab.querySelectorAll(".upd-icon");
+    
+    if (updTab && updates) {
+        // tooltip get updated
+        const tip = tippy(updTab, {
+            ...commonOptions,
+            content: "Open update tab",
+        });
+    
+        updTab.addEventListener("click", function () {
+            const isExpanded = updTab.getAttribute("aria-expanded") === "true";
+    
+            // Toggle aria-expanded and aria-hidden
+            updTab.setAttribute("aria-expanded", String(!isExpanded));
+            updates.classList.toggle("active");
+            updates.setAttribute("aria-hidden", String(isExpanded));
+    
+            // Toggle both icons
+            icons.forEach(icon => icon.classList.toggle("hidden"));
+    
+            // Update tooltip and aria-label dynamically
+            const newLabel = !isExpanded ? "Close update tab" : "Open update tab";
+            updTab.setAttribute("aria-label", newLabel);
+            tip.setContent(newLabel);
+        });
+    }
+
+    {/block:ifUpdateTab}
+
 });
 
-// ------------------- tooltip
+{block:ifFeaturedTags}
+// ------------------------------------------------------------ FEATURED TAGS
+function getScript(scriptUrl, callback, errorCallback) {  
+    const script = document.createElement('script');
+    script.src = scriptUrl;
+    script.onload = callback;
+    script.onerror = errorCallback;
+    document.body.appendChild(script);
+}
+
+const featuredTags = document.querySelectorAll('.featured-tags a[href*="/tagged"]');
+
+featuredTags.forEach(tag => {
+    const tagged = tag.href.split('/tagged/')[1] || 'unknown';
+    const totalSpan = tag.querySelector('.total');
+    const tagUrl = `https://{name}.tumblr.com/api/read/json?tagged=${ tagged }`;
+
+    function onErrors() {
+        const nameSpan = tag.querySelector('.tagname');
+        if (nameSpan) nameSpan.textContent = `${ tagged } not found`;
+        if (totalSpan) totalSpan.textContent = '';
+    }
+
+    function onLoad() {
+        const tagData = window.tumblr_api_read;
+        if (tagData && tagData['posts-total'] !== undefined) {
+            const total = tagData['posts-total'];
+            if (totalSpan) totalSpan.textContent = total;
+        } else {
+            onErrors();
+        }
+    }
+
+    getScript(tagUrl, onLoad, onErrors);
+});
+{/block:ifFeaturedTags}
+
+
+// ------------------------------------------------------------- TOOLTIP
 const commonOptions = {
     theme: "custom",
     arrow: false,
@@ -1683,6 +3402,25 @@ const commonOptions = {
     touch: "hold",
     animation: 'smooth-fade',
 };
+
+// Here is the tooltips for tag, like and reblog.
+// pref with info-only-icons so it only scoops
+// and displays with only icons.
+
+tippy(".info-only-icons .like-tooltip", {
+    ...commonOptions,
+    content: "Like post",
+});
+
+tippy(".info-only-icons .rb-tooltip", {
+    ...commonOptions,
+    content: "Reblog post",
+});
+
+tippy(".info-only-icons .tags-tooltip", {
+    ...commonOptions,
+    content: "Show tags",
+});
 
 tippy("[title]", {
     ...commonOptions,
@@ -1693,41 +3431,64 @@ tippy("[title]", {
     },
 });
 
-// ------------------- toggle dark/light by @mournstera
-const modeButtons = document.querySelectorAll(".theme-toggle");
+// ---------------------------------------------------------------- DARK MODE
+const themeToggleButtons = document.querySelectorAll(".theme-toggle");
 
-modeButtons.forEach((btn) => {
-    const storedTheme = localStorage.getItem("theme") || (window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light");
-    const initialTooltipText = storedTheme === "dark" ? "Toggle light mode" : "Toggle dark mode"; // change tooltip here..
+themeToggleButtons.forEach((btn) => {
+    const storedTheme = localStorage.getItem("theme") ||
+        (window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light");
+
+    const initialTooltipText = storedTheme === "dark" ? "Enable light mode" : "Enable dark mode";
+
+    btn.setAttribute("aria-label", initialTooltipText);
+    btn.setAttribute("aria-pressed", storedTheme === "dark");
+
     tippy(btn, {
         ...commonOptions,
-        content: initialTooltipText, 
+        content: initialTooltipText,
     });
 
-    btn.addEventListener("click", function () { 
+    btn.addEventListener("click", function () {
         const currentTheme = document.documentElement.getAttribute("data-theme");
         const targetTheme = currentTheme === "light" ? "dark" : "light";
-
-        const tooltipText = targetTheme === "dark" ? "Toggle light mode" : "Toggle dark mode"; // ..change tooltip here.
-        btn._tippy.setContent(tooltipText);
 
         document.documentElement.classList.add("theme-transition");
         document.documentElement.setAttribute("data-theme", targetTheme);
         localStorage.setItem("theme", targetTheme);
 
-        setTimeout(function () {
+        const tooltipText = targetTheme === "dark" ? "Enable light mode" : "Enable dark mode";
+        btn._tippy.setContent(tooltipText);
+        btn.setAttribute("aria-label", tooltipText);
+        btn.setAttribute("aria-pressed", targetTheme === "dark");
+
+        setTimeout(() => {
             document.documentElement.classList.remove("theme-transition");
         }, 50);
     });
 });
 
-// ------------------- remove empty p tags
+// ----------------------------------------------------------- WRAP LEGACY ASK IN <p>
+// legacy ask questions did not have any <p> so now it matches npf ask questions
+// and can be styled alike.
+
+  document.querySelectorAll('.ask-body').forEach(q => {
+    if (!q.querySelector('*') && q.textContent.trim()) {
+      const p = document.createElement('p');
+      p.textContent = q.textContent;
+      q.textContent = '';
+      q.appendChild(p);
+    }
+  });
+
+// --------------------------------------------------------- DISPLAY NPF POST
+// reverse-compatible-template.html by @egg.design
+// REMOVE EMPTY p
 for (const p of document.querySelectorAll('p')) {
     if (p.innerHTML.trim() === '') {
        p.remove()
     }
 }
-// ------------------- NPF posts - reverse-compatible-template.html by @egg.design
+
 // create posts array
 let posts = []
 {block:Posts} 
@@ -1754,7 +3515,7 @@ for (const post of posts) {
             case 'image':
                updateTypes('photos', article)
                if (article.querySelector('.npf_row') == null) {
-                  caption.prepend(article.querySelector('figure'))
+                   caption.prepend(article.querySelector('figure'))
                }
                break
             case 'video':
@@ -1804,7 +3565,7 @@ for (const post of posts) {
          
          // clean up any potential stray reblog headers
          let reblogHeader = article.querySelector('.reblog-header')
-         let reblogContent = article.querySelector('.reblog-content')
+         let reblogContent = article.querySelector('.reblog-content') 
          if (reblogHeader?.nextElementSibling === reblogContent && reblogContent?.childElementCount === 0) {
             reblogHeader.remove()
             reblogContent.remove()

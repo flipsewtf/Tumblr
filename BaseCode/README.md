@@ -1,51 +1,71 @@
-# A Rich, jQuery-free Tumblr Basecode template
+# A Rich, jQuery-Free Tumblr Basecode Template
 
-Most of us theme-makers have used jQuery since the beginning of Tumblr because many scripts reqired it, but ~~I'm~~ we're finally at a point where stuff can be done without. This is designed for you to not rely on jQuery at all.
+For a long time, most theme-makers relied on jQuery because Tumblr scripts required it. But now, you can build a fully functional theme **without jQuery**. This basecode is designed to help you do just that.
 
-## Terms of use
+Accessibility (a11y) is always evolving, but I’ve done my best to make this basecode as accessible as possible. I hope you find it useful - the internet is for everyone!
 
--   This is a basecode template, not a full theme, so do not use it as such.
--   Please make significant changes to it, (make literally whatever you want with this), but with a credit link in the code or on your credits page back to mournstera.tumblr.com.
--   I generally do not provide coding support (as per my FAQ,) But I did make this basecode so if you're a theme-maker, do not hesitate to ask.
+---
+
+## Terms of Use
+
+-   This is a **basecode template**, not a full theme. Do not use it as a finished theme.
+-   Feel free to make **literally any modifications** you want, but please include a credit link in your code or on your credits page back to [mournstera.tumblr.com](https://mournstera.tumblr.com).
+-   Use in creating premium/paid themes is allowed.
+
+---
 
 ## Credits
 
-In this basecode I've used the following resources:
+This basecode builds on several resources:
 
-**For displaying tumblr photosets npf:**
+### Tumblr Photosets (NPF)
 
--   [@eggdesign](https://egg.design)'s [reverse compatible template](https://github.com/cornetespoir/npf-theme-base/blob/main/reverse-compatible-template.html)
--   [@eossa](https://eossa.studio)'s [reverse compatible template add-on](https://codepen.io/juliasteiwer/pen/yLGvKjV) _(if you have more than one photoset in a post, wrap photosets in divs)_
+-   [@eggdesign](https://egg.design) — [Reverse Compatible Template](https://github.com/cornetespoir/npf-theme-base/blob/main/reverse-compatible-template.html)
+-   [@eossa](https://eossa.studio) — [Template Add-On](https://codepen.io/juliasteiwer/pen/yLGvKjV)  
+    _(Wrap multiple photosets in `<div>`s if you have more than one per post.)_
 
-**For displaying tumblr photosets legacy:**
+### Tumblr Photosets (Legacy)
 
--   [@Spacetchi](https://spacetchi.tumblr.com)'s [5ppi Flexible (legacy) Photoset](https://github.com/Spacetchi/tumblr-flexible-photoset/tree/master)
+-   [@Spacetchi](https://spacetchi.tumblr.com) — [5ppi Flexible Legacy Photoset](https://github.com/Spacetchi/tumblr-flexible-photoset/tree/master)
 
-**Other**
+### Other Resources
 
--   [Phosphor Icons](https://phosphoricons.com)
--   Tooltips by [Tippy.js](https://atomiks.github.io/tippyjs)
--   Dark mode by me [@mournstera](https://mournstera.tumblr.com) _(a modified version of [this plugin](https://mournstera.tumblr.com/plugins/darkmode))_
--   UnifyAudio by me [@mournstera](https://mournstera.tumblr.com) this [this plugin](https://github.com/flipsewtf/UnifyAudio)
--   Custom like and reblog button, modified vesion of [this](https://stackoverflow.com/questions/21708662/customise-tumblrs-new-like-button-iframe-likebutton/21715659#21715659)
+-   [Phosphor Icons](https://phosphoricons.com) — For icons
+-   [Tippy.js](https://atomiks.github.io/tippyjs) — Tooltips
 
-> [!IMPORTANT]
-> It's vital for me to appreciate @eggdesign and @Spacetchi's work. without it, a jQuery-free theme wouldn't be possible!
+### My Plugins / Resources
 
-## Comments
+-   **Dark Mode** — An accessible, modern dark mode inspired by [this tutorial](https://github.com/flipsewtf/Tumblr/tree/main/Tutorials/DarkMode)
+-   **UnifyAudio** — [Plugin for legacy and NPF audio](https://github.com/flipsewtf/Tumblr/tree/main/Plugins/UnifyAudio)
+-   **UnifyLinks** — [Plugin for NPF and legacy links](https://github.com/flipsewtf/Tumblr/tree/main/Plugins/UnifyLinks)
 
-I've tried to include different kinds of JavaScript snippets such as a slide-down toggle menu, hide tumblr controls behind an icon, an update tab, tags on click, a dark mode toggle and shorten notecount, etc.
+> **Important:** I deeply appreciate the work of @eggdesign and @Spacetchi. Without their templates, creating a jQuery-free theme would not have been possible.
 
-This basecode utilizes [CSS Variables](https://www.w3schools.com/css/css3_variables.asp), (especially for the dark/light mode, and it's also just easier in the long run because it saves time), as well as Tippy.js for the tooltips.
+---
 
-Phosphor Icons has been initialized just as an icon example (especially for custom like and reblog icons).
+## Features & Notes
 
-I've made _a lot_ of comments in this document, I'm sorry if it's a bit much, but I hope it's helpful!
+This basecode includes examples of:
 
-If you don't already, please use chrome devtools or firefox inspect to really get a handle on this basecode, the classes and such.
+-   Slide-down toggle menus
+-   Hiding Tumblr controls behind icons
+-   Update tabs
+-   Tag toggles
+-   Dark mode toggle
+-   Shortened note counts
 
-## Suggestions & help
+It uses:
 
-If you're looking to use [@bychloethemes](https://bychloethemes.tumblr.com/plugins/timeago)'s Timeago plugin, I wrote a jQuery-free one [here](https://github.com/flipsewtf/TimeAgo)
+-   **CSS Variables** — especially for light/dark mode and consistent spacing
+-   **Tippy.js** — for accessible tooltips
+-   **Phosphor Icons** — as examples for custom like/reblog icons, update tab, etc.
 
-Pure Javascript isn't more difficult than jQuery, it just takes a few more lines of code, but on the other hand you don't have to loade an entire library just to make a navigation toggle 😁
+The code is **very** heavily commented. It may be verbose, but it’s meant to help you understand how everything works. Using Chrome DevTools or Firefox Inspector is recommended to explore the structure, classes, and functionality.
+
+---
+
+## Suggestions & Help
+
+If you want a jQuery-free version of [@bychloethemes’s Timeago plugin](https://bychloethemes.tumblr.com/plugins/timeago), I wrote one [here](https://github.com/flipsewtf/TimeAgo).
+
+Pure JavaScript isn’t harder than jQuery — it’s just a few extra lines. The benefit? You **don’t need to load an entire library** for simple tasks like a navigation toggle 😁
