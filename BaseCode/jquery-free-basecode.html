@@ -985,6 +985,7 @@ nav.submenu a[href*="/tagged"],
     a:not([href*="/tagged"]) {
         display:none;
     }
+
     span.total {
         display: flex;
         align-items: center;
@@ -1986,9 +1987,6 @@ header.ask-header {
     }
 }
 
-.question {
-    border-bottom: 0.0625rem solid rgb(var(--color-border));
-}
 
 /* handles photoset in answered asks, but skips inline images in ask/answers */
 :where(.ask-body) img {
@@ -2151,35 +2149,23 @@ figcaption.audio-caption {
 
 /* ------------------------------------------------------  POST TYPE: link */
 .custom-link-block {
-    
+    /* wrapper for link block */
 }
 
 a.link-header {
-    display: flex;
-    flex-direction: row;
+    display: grid;
+    grid-template-columns: 1fr auto;
     align-items: center;
     background: rgb(var(--color-accent));
     color: rgb(var(--color-bg1));
     padding: var(--text-margin);
-    justify-content: space-between;
-    border-radius: var(--round1) var(--round1) 0 0;
-    
-    &:not(:has(+ .link-description)) {
-        border-radius: var(--round1);
-    }
+    border-radius: var(--round) var(--round) 0 0;
 
-    svg.link-icon {
-        --arrow-gap: var(--gap5); /* space between text and arrow */
-        flex-shrink: 0;
-        stroke-width: 3.2;
-        width: 1.8em;
-        height: 1.8em;
-        margin-left: var(--arrow-gap);
-        transition: margin 0.15s ease;
+    &:not(:has(+ .link-description)) {
+        border-radius: var(--round);
     }
 
     .link-title-wrap {
-        flex: 1;
         display: flex;
         flex-direction: column;
         gap: 0.4rem;
@@ -2195,9 +2181,17 @@ a.link-header {
         }
     }
 
+    svg.link-icon {
+        width: 1.8em;
+        height: 1.8em;
+        flex-shrink: 0;
+        stroke-width: 3.2;
+        margin-left: var(--gap5);
+        transition: transform 0.15s ease;
+    }
+
     &:hover svg.link-icon {
-        margin-left: var(--arrow-gap);
-        margin-right: -0.6rem;
+        transform: translateX(0.6rem);
     }
 }
 
@@ -2431,11 +2425,11 @@ button.scroll-to-top {
 
 /* 
    Definite mobile: 
-   For very small screens (<425), hide controls and iframes
+   For very small screens (<425), hide tumblr-controls and its iframes
    since that's not useful for mobile view.
 */
 @media only screen and (max-width: 425px) {
-    button.controls,
+    button.tumblr-controls,
     iframe.tmblr-iframe,
     .tmblr-iframe { 
         display:none;
@@ -2848,12 +2842,12 @@ button.scroll-to-top {
                             <div class="info-right flex wrap align-center">
 
                                 <a class="info-item" href="{Permalink}#note" title="{NoteCountWithLabel}">
-                                    <span class="info-icon" aria-hidden="true"><i class="ph ph-chat-circle"></i></span>
+                                    <span class="info-icon"><i class="ph ph-chat-circle"></i></span>
                                     <span class="info-text notecount" aria-label="{NoteCountWithLabel}">{NoteCount}</span>
                                 </a>
                                 {block:HasTags}
                                     <button class="toggle-tags info-item info-tags" type="button" aria-label="Show or hide tags" aria-expanded="false" aria-controls="tags-container-{PostID}">
-                                        <span class="info-icon" aria-hidden="true"><i class="ph ph-tag"></i></span>
+                                        <span class="info-icon"><i class="ph ph-tag"></i></span>
                                         <span class="info-text">Tags</span>
                                     </button>
                                 {/block:HasTags}
