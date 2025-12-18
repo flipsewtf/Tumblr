@@ -4,7 +4,7 @@
     - Version 3.1.1
     
     RELEASED:   12 November 2022 
-    UPDATED:    04 April 2025
+    UPDATED:    18 December 2025
     
     CREDITS:        mournstera.tumblr.com/credit
     TERMS OF USE:   mournstera.tumblr.com/themes
@@ -3514,21 +3514,26 @@ document.addEventListener("DOMContentLoaded", function () {
     });
     {/block:IndexPage}
     
+    {block:HasPages}
     // ------------------------------------------------- MENU
     const toggleMenuButton = document.querySelector(".toggle-nav");
     const navSpin = document.querySelector(".nav-spin");
     const navWrap = document.querySelector(".nav-wrap");
     
-    toggleMenuButton.addEventListener("click", function () {
-        navSpin.classList.toggle("active");
-        navWrap.classList.toggle("active");
+    if (toggleMenuButton && navSpin && navWrap) {
+        toggleMenuButton.addEventListener("click", function () {
+            navSpin.classList.toggle("active");
+            navWrap.classList.toggle("active");
     
-        if (navWrap.classList.contains("active")) {
-            navWrap.style.maxHeight = navWrap.scrollHeight + "px";
-        } else {
-            navWrap.style.maxHeight = 0;
-        }
-    });
+            if (navWrap.classList.contains("active")) {
+                navWrap.style.maxHeight = navWrap.scrollHeight + "px";
+            } else {
+                navWrap.style.maxHeight = 0;
+            }
+        });
+    }
+
+    {/block:HasPages}
     
     // ------------------------------------------------- MOBILE SIDEBAR
 
