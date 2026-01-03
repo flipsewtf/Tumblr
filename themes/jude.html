@@ -1,10 +1,10 @@
  <!----------------------------------------------------
 
     TUMBLR THEME: Jude - © Flipse / @mournstera
-    - Version 3.1.1
+    - Version 3.2.0
     
     RELEASED:   12 November 2022 
-    UPDATED:    18 December 2025
+    UPDATED:    03 January 2026
     
     CREDITS:        mournstera.tumblr.com/credit
     TERMS OF USE:   mournstera.tumblr.com/themes
@@ -26,7 +26,6 @@
 {NewPostStyles}
 
 <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1">
-
  
 {block:ifDarkMode} 
     <script> 
@@ -39,7 +38,7 @@
  
 {block:Options}
 <meta name="image:Sidebar" content=""/>
-<meta name="image:Dark mode Sidebar" content=""/>
+<meta name="image:Dark mode Sidebar" content=""/> 
 
 <meta name="image:Project 1" content=""/>
 <meta name="image:Project 2" content=""/>
@@ -1628,7 +1627,7 @@ a.more_notes_link {
     margin-bottom: var(--layout-gap);
     text-transform: lowercase;
 } 
-/* ------------------------------------------------------- POST-TYPE: poll */
+/* ------------------------------------------------------- POST-TYPE: poll */ 
 .poll-post a.poll-row {
     color: rgb(var(--c-text));
     line-height: inherit !important;
@@ -2118,7 +2117,7 @@ header.sb {
     nav.mobile-menu {
         margin-top: var(--gap3);
         display: grid;
-        grid-template-columns: 1fr 1fr;
+        grid-template-columns: 1fr {block:AskEnabled}1fr{/block:AskEnabled};
         gap: var(--gap3);
         
         a {
@@ -2255,7 +2254,8 @@ transform: rotate(0) translateY(100%);
     height: calc(100dvh - var(--bar));
     
     nav.menu-mobile {
-        padding: var(--gap4);
+        margin: var(--gap4);
+        padding: 0;
         
         a {
             color: rgb(var(--c-text));
@@ -2264,6 +2264,13 @@ transform: rotate(0) translateY(100%);
             }
         }
     }
+    
+    nav.custom-links {
+        margin: var(--gap4);
+        padding: 0;
+    }
+    
+    
     
     .updates.in-mobile {
         padding: var(--gap4);
@@ -2462,6 +2469,33 @@ transform: rotate(0) translateY(100%);
             {/block:ifArchiveLinkLabel}
         </nav>
         
+        {block:ifCustomLinksTitle}
+            <nav class="custom-links flex gap1 wrap padding">
+            
+                <div class="custom-links-title">{text:Custom Links Title}</div>
+
+                {block:ifLink1Label}
+                    <a href="{text:Link 1 URL}">{text:Link 1 Label}</a>
+                {/block:iflink1Label}
+                
+                {block:ifLink2Label}
+                    <a href="{text:Link 2 URL}">{text:Link 2 Label}</a> 
+                {/block:iflink2Label}
+                    
+                {block:ifLink3Label}
+                    <a href="{text:Link 3 URL}">{text:Link 3 Label}</a>
+                {/block:iflink3Label}
+                    
+                {block:ifLink4Label}
+                    <a href="{text:Link 4 URL}">{text:Link 4 Label}</a>
+                {/block:iflink4Label}
+                    
+                {block:ifLink5Label}
+                    <a href="{text:Link 5 URL}">{text:Link 5 Label}</a>
+                {/block:iflink5Label}
+            </nav>
+            {/block:ifCustomLinksTitle}
+        
         <div class="updates in-mobile">
         
             {block:ifUpdatesText}
@@ -2586,6 +2620,8 @@ transform: rotate(0) translateY(100%);
                 </div>
             </div>
         {/block:if2ndProjectTitle}
+        
+        
         
         
     </div>
