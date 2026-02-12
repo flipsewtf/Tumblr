@@ -396,7 +396,6 @@
 }
 
 :root, html[data-theme='light'] {
-    color-scheme: light;
     
      /* paired with .mode-light {display: var(--mode-light);} 
      and .mode-dark {display: var(--mode-dark);} further down the CSS */
@@ -411,8 +410,6 @@
 }
 
 html[data-theme='dark'] {
-    color-scheme: dark;
-    
      /* paired with .mode-light {display: var(--mode-light);} 
      and .mode-dark {display: var(--mode-dark);} further down the CSS */
     --mode-light: none;
@@ -1067,6 +1064,7 @@ nav.pagi {
         }
     }
 }
+
 
 /* -----------------------------------------------------  SECTION POSTS */
 
@@ -2943,9 +2941,8 @@ button.scroll-to-top {
         
             <!-- Next Day Link -->
             <a 
-                {block:NextDayPage} href="{NextDayPage}" aria-label="Next day {DayOfMonth} {Month}, {Year}" {/block:NextDayPage} 
-                class="flex align-center gap2 {block:NextDayPage}has_{/block:NextDayPage}page" 
-                {block:NoNextDayPage} aria-disabled="true" tabindex="-1" {/block:NoNextDayPage}>
+                {block:NextDayPage} href="{NextDayPage}" aria-label="Next day {DayOfMonth} {Month}, {Year}"{/block:NextDayPage} 
+                class="flex align-center gap2 {block:NextDayPage}has_{/block:NextDayPage}page">
                 <span class="pagi-icon" aria-hidden="true">
                     <i class="ph-bold ph-arrow-left"></i>
                 </span>
@@ -2956,9 +2953,8 @@ button.scroll-to-top {
         
             <!-- Previous Day Link -->
             <a 
-                {block:PreviousDayPage} href="{PreviousDayPage}" aria-label="Previous day {DayOfMonth} {Month}, {Year}" {/block:PreviousDayPage} 
-                class="flex align-center gap2 {block:PreviousDayPage}has_{/block:PreviousDayPage}page" 
-                {block:NoPreviousDayPage} aria-disabled="true" tabindex="-1" {/block:NoPreviousDayPage}>
+                {block:PreviousDayPage} href="{PreviousDayPage}" aria-label="Previous day {DayOfMonth} {Month}, {Year}"{/block:PreviousDayPage} 
+                class="flex align-center gap2 {block:PreviousDayPage}has_{/block:PreviousDayPage}page">
                 {block:PreviousDayPage}
                     <span>{DayOfMonth} {Month} {Year}</span>
                 {/block:PreviousDayPage}
@@ -2986,8 +2982,7 @@ button.scroll-to-top {
             <!-- Next Page Link -->
             <a 
                 {block:NextPage} href="{NextPage}" title="Older posts" aria-label="Older posts" {/block:NextPage} 
-                class="{block:NextPage}has_{/block:NextPage}page" 
-                {block:NoNextPage} aria-disabled="true" tabindex="-1" {/block:NoNextPage}>
+                class="{block:NextPage}has_{/block:NextPage}page">
                 <span class="pagi-icon" aria-hidden="true">
                     <i class="ph-bold ph-arrow-right"></i>
                 </span>
