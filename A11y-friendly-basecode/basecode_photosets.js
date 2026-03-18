@@ -1,4 +1,4 @@
-// Photosets (NPF + legacy), legacy lightbox,
+// Photosets (NPF + legacy), legacy lightbox, aria.
 
 // ********** PHOTOS + PHOTOSETS
 // (HAVE UNIFIED NPF AND LEGACY WITH `unified-photo` CLASS)
