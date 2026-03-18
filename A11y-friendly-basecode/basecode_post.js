@@ -128,14 +128,19 @@ document.querySelectorAll('.count').forEach((el) => {
 (function () {
     'use strict';
 
-    // List of known audio iframe classes to skip.
-    // Some audio players (Spotify, SoundCloud, Bandcamp, Tumblr) are inserted
-    // as iframes, but they are not meant to be resized like video embeds.
-    // Older posts might have Bandcamp iframes inside legacy video blocks,
-    // so we need to detect and skip them.
-    // Direct uploaded Videos are easily handled in CSS.
+    // --- Add `made-responsive` class to native video figures as well
+    document.querySelectorAll('figure:has(video)').forEach((f) => {
+        f.classList.add('made-responsive');
+    });
 
-    const AUDIO_IFRAMES = [
+    // List of known audio iframe classes to skip.
+    // Audio players like Spotify, SoundCloud, Bandcamp, Tumblr are
+    //  inserted as iframes, but they are not meant to be resized like
+    //  video embeds. Older legacy posts have Bandcamp iframes inside
+    // legacy video blocks so we need to detect and skip. Direct
+    // uploaded Videos `.tmblr-full > video` are easily handled in CSS.
+
+    const SKIP_IFRAMES = [
         'spotify_audio_player',
         'soundcloud_audio_player',
         'bandcamp_audio_player',
@@ -151,7 +156,9 @@ document.querySelectorAll('.count').forEach((el) => {
         if (iframe.dataset.responsiveHandled === 'true') return;
 
         // Skip audio iframes
-        if (AUDIO_IFRAMES.some((cls) => iframe.classList.contains(cls))) return;
+        if (SKIP_IFRAMES.some((cls) => iframe.classList.contains(cls))) return;
+
+        if (iframe.src.includes('instagram.com')) return;
 
         // Get iframe dimensions (fallback to data-* attributes)
         let w = parseInt(iframe.getAttribute('width'), 10);
@@ -183,87 +190,106 @@ document.querySelectorAll('.count').forEach((el) => {
     document.querySelectorAll(SELECTOR).forEach(processIframe);
 })();
 
-// ********** UNIFY LINK POSTS
-// will do for now - kinda boring. rewrite it, maybe with `addEventListener`
+//********** UNIFY LINK POSTS
 document.addEventListener('DOMContentLoaded', () => {
     const handleNPFLinks = () => {
         document.querySelectorAll('.npf-link-block').forEach((block) => {
             if (block.dataset.converted) return;
             block.dataset.converted = 'true';
 
-            const link = block.querySelector('a');
-            const href = link?.getAttribute('href') || '#';
-
-            const title =
-                block.querySelector('.title')?.textContent.trim() ||
-                block.querySelector('.link-title')?.textContent.trim() ||
-                '';
-
-            const description = block.querySelector('.description')?.textContent.trim() || '';
-            const siteName = block.querySelector('.site-name')?.textContent.trim() || '';
+            const anchor = block.querySelector('a');
+            if (!anchor) return;
 
             block.classList.remove('npf-link-block');
             block.classList.add('custom-link-block');
 
-            block.innerHTML = '';
-
-            const anchor = document.createElement('a');
-            anchor.className = 'link-header';
-            anchor.href = href;
+            anchor.classList.add('link-header');
             anchor.target = '_blank';
+            anchor.rel = 'noopener noreferrer';
 
-            const titleWrap = document.createElement('div');
-            titleWrap.className = 'link-title-wrap';
+            const oldTitle =
+                block.querySelector('.poster .title') ||
+                block.querySelector('.title') ||
+                block.querySelector('.link-title');
 
-            const titleSpan = document.createElement('span');
-            titleSpan.className = 'link-title';
-            titleSpan.textContent = title;
-            titleWrap.appendChild(titleSpan);
+            const siteName = block.querySelector('.site-name')?.textContent.trim() || '';
 
-            if (siteName) {
-                const hostSpan = document.createElement('span');
-                hostSpan.className = 'site-url';
-                hostSpan.setAttribute('aria-label', `Host: ${siteName}`);
-                hostSpan.textContent = siteName;
-                titleWrap.appendChild(hostSpan);
+            if (oldTitle) {
+                const wrap = document.createElement('div');
+                wrap.className = 'custom-link-meta';
+
+                const titleSpan = document.createElement('span');
+                titleSpan.className = 'link-title';
+                titleSpan.textContent = oldTitle.textContent.trim();
+
+                wrap.appendChild(titleSpan);
+
+                if (siteName) {
+                    const hostSpan = document.createElement('span');
+                    hostSpan.className = 'link-host';
+                    hostSpan.setAttribute('aria-label', `Host: ${siteName}`);
+                    hostSpan.textContent = siteName;
+                    wrap.appendChild(hostSpan);
+                }
+
+                anchor.appendChild(wrap);
+                oldTitle.remove();
             }
-
-            anchor.appendChild(titleWrap);
 
             const svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
             svg.setAttribute('class', 'link-icon');
-            svg.setAttribute('xmlns', 'http://www.w3.org/2000/svg');
             svg.setAttribute('viewBox', '0 0 24 24');
+            svg.setAttribute('fill', 'none');
+            svg.setAttribute('stroke', 'currentColor');
+            svg.setAttribute('stroke-width', '1.75');
+            svg.setAttribute('stroke-linecap', 'round');
+            svg.setAttribute('stroke-linejoin', 'round');
 
-            const path = document.createElementNS('http://www.w3.org/2000/svg', 'path');
-            path.setAttribute('d', 'm9 18 6-6-6-6');
-            svg.appendChild(path);
+            const path1 = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+            path1.setAttribute('stroke', 'none');
+            path1.setAttribute('d', 'M0 0h24v24H0z');
+            path1.setAttribute('fill', 'none');
 
-            anchor.appendChild(svg);
+            const path2 = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+            path2.setAttribute('d', 'M9 15l6 -6');
 
-            block.appendChild(anchor);
+            const path3 = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+            path3.setAttribute('d', 'M11 6l.463 -.536a5 5 0 0 1 7.071 7.072l-.534 .464');
 
-            if (description) {
-                const maxChars = 100;
-                let shortDescription = description;
+            const path4 = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+            path4.setAttribute(
+                'd',
+                'M13 18l-.397 .534a5.068 5.068 0 0 1 -7.127 0a4.972 4.972 0 0 1 0 -7.071l.524 -.463',
+            );
 
-                if (description.length > maxChars) {
-                    shortDescription = description.slice(0, maxChars).trim() + '…';
-                }
+            svg.append(path1, path2, path3, path4);
 
-                const descP = document.createElement('p');
-                descP.className = 'link-description';
-                descP.textContent = shortDescription;
-                block.appendChild(descP);
+            const poster = block.querySelector('.poster');
+            if (poster) {
+                poster.appendChild(svg);
+            } else {
+                anchor.appendChild(svg);
             }
+
+            const desc = block.querySelector('.description');
+            if (desc) {
+                const p = document.createElement('p');
+                p.className = 'link-description';
+
+                const text = desc.textContent.trim();
+                p.textContent = text.length > 100 ? text.slice(0, 100).trim() + '…' : text;
+
+                block.appendChild(p);
+            }
+
+            // clean-up
+            block.querySelector('.bottom')?.remove();
         });
     };
 
     handleNPFLinks();
 
-    const observer = new MutationObserver(() => {
-        handleNPFLinks();
-    });
+    const observer = new MutationObserver(handleNPFLinks);
     observer.observe(document.body, { childList: true, subtree: true });
 });
 
