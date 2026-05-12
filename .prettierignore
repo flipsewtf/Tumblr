@@ -1,7 +1,5 @@
 # Ignore
-themes/
-Plugins/UnifyLinks/unify_links.html
-BaseCode/jquery-free-basecode.html
+*.html
 *.min.js
 
 # Ignore node_modules
@@ -12,6 +10,6 @@ _site/
 dist/
 
 
-# Optional: ignore any temp or log files
+# ignore any temp or log files
 *.log
 *.tmp
