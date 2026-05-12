@@ -12,7 +12,7 @@ TimeAgo Tumblr plugin
             spaces: false,
             words: false,
             prefix: '',
-            suffix: ''
+            suffix: '',
         };
 
         const settings = Object.assign({}, defaults, options);
@@ -121,21 +121,10 @@ TimeAgo Tumblr plugin
                     'sixteen',
                     'seventeen',
                     'eighteen',
-                    'nineteen'
+                    'nineteen',
                 ];
 
-                const tens = [
-                    '',
-                    '',
-                    'twenty',
-                    'thirty',
-                    'forty',
-                    'fifty',
-                    'sixty',
-                    'seventy',
-                    'eighty',
-                    'ninety'
-                ];
+                const tens = ['', '', 'twenty', 'thirty', 'forty', 'fifty', 'sixty', 'seventy', 'eighty', 'ninety'];
 
                 const num = Number(timeString);
 
@@ -153,9 +142,12 @@ TimeAgo Tumblr plugin
                 }
             }
 
-            const result = (unit === 'now') ? unit : (settings.spaces ?
-                settings.prefix + ' ' + timeString + ' ' + unit + ' ' + settings.suffix :
-                settings.prefix + timeString + unit + settings.suffix);
+            const result =
+                unit === 'now'
+                    ? unit
+                    : settings.spaces
+                      ? settings.prefix + ' ' + timeString + ' ' + unit + ' ' + settings.suffix
+                      : settings.prefix + timeString + unit + settings.suffix;
 
             element.textContent = result;
         });
