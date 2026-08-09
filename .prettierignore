@@ -1,15 +1,3 @@
 # Ignore
 *.html
 *.min.js
-
-# Ignore node_modules
-node_modules/
-
-# Ignore build/output folders
-_site/
-dist/
-
-
-# ignore any temp or log files
-*.log
-*.tmp
