@@ -1,104 +1,70 @@
-# Champagne — Tumblr Theme Guide
+# Champagne — Theme Guide
 
-**Champagne** is a responsive, single-column Tumblr theme by [@mournstera](https://mournstera.tumblr.com/).
+Please read this guide carefully before sending me any inquiries. Use the table of contents to navigate through the different sections.
 
-[Give the theme post a reblog](https://mournstera.tumblr.com/post/797948596725153792) if you're going to be using it! ❤️
-
-Please read this guide carefully before sending any inquiries. Use the table of contents to navigate through the different sections.
-
-> **Terms of use**
+> **License & terms**
 >
 > All themes distributed by **Mournstera** are licensed under the [Creative Commons Attribution-NonCommercial-NoDerivatives 4.0 International](https://creativecommons.org/licenses/by-nc-nd/4.0/) licence. Please carefully read my [terms of use](https://mournstera.tumblr.com/themes) before installing a theme.
 
----
+Champagne is a responsive, single-column Tumblr theme with a sticky navigation bar and a choice between header, left sidebar, or right sidebar layouts. Optional dark mode, search bar, featured tags, update tab, and extra post information are included. Full support of NPF posts.
 
-## About
+Options like custom post width, font size and font-families, layout gap, photoset gutter, post information, tag display and style, sidebar width, sidebar image style, and custom navigation links. Optional featured tags and update tab sections, as well as choices between sharp or rounded corners.
 
-Champagne is a responsive, single-column Tumblr theme with:
-
-- A sticky navigation bar
-- A choice between header, left sidebar, or right sidebar layouts
-- Optional dark mode
-- An optional search bar
-- Full support for NPF posts
-- Customisable post width
-- Customisable title and description
-- Customisable font size and font families
-- Custom links
-- An optional featured tags section
-- A choice between sharp or rounded content corners
-- A choice between sharp or rounded photoset corners
-- Customisable sidebar image styles
-- Optional update tab
-- Optional extra post information
-
-The sidebar image can be displayed as a large header image with optional icon links and text, or as a smaller icon-sized image with icon links beneath it.
-
-Browse through the guide to see all available options and customisable functions.
+Browse through the guide to see all options and customizable functions.
 
 ---
 
-### License & terms
+# Getting started
 
-All themes are distributed under the **Creative Commons Attribution-NonCommercial-NoDerivatives 4.0 International** licence. Please read my [Terms of Use](https://mournstera.tumblr.com/themes) before installing.
+Champagne is a responsive theme, so depending on your screen size, the customization window might take up a lot of the space resulting in the theme to look different. Also, the Tumblr preview window rarely displays the exact product, so before messaging me please do the following:
 
----
+- Change and toggle the options in the customization panel.
+- Hit save and go to your blog URL and view it.
 
-## Getting started
+## Mobile theme
 
-Stereo is responsive, so depending on your screen size, the customisation panel may take up a lot of space and cause the theme to render differently while you're editing. The Tumblr preview window also doesn't always reflect the real thing. Before messaging me, please:
+Like previously mentioned, my themes are responsive. Tumblr provides its own mobile theme (looks like the app or dashboard on web browser). If you wish to use this theme for mobile as well, do the following:
 
-- Change and toggle the options in the customisation panel.
-- Hit save, then view your actual blog URL.
-
-### Mobile theme
-
-Tumblr provides its own mobile theme (the one that resembles the app or dashboard). If you'd like Stereo to be used on mobile as well:
-
-1. In the theme editor, scroll to the bottom of the customisation panel and open **Advanced options**.
-2. Toggle off **Use default mobile theme**.
+1. In your theme editor, scroll down to the bottom of the customization panel and click on **Advanced options**.
+2. Toggle off **Use default mobile theme** option.
 
 ---
 
-## Installation
+# Installation
 
-1. Click the link for the code in the theme post. You will be directed to the theme's [GitHub file](https://github.com/flipsewtf/tumblr/blob/main/champagne/champagne.txt).
+1. Click the link for the code in the theme post, and you'll be directed to a GitHub file.
 2. Click the **Copy raw file** button in the top-right area of the GitHub file.
-3. Go to `tumblr.com/customize/[YOUR-BLOG-URL]`. You will be redirected to your blog's customisation page.
+3. Go to `tumblr.com/customize/[YOUR-BLOG-URL]` and you will be redirected to your blog's customization page.
 4. **Please note:** if you have a previous theme's code installed, first reset your theme options by going to Browse themes → Tumblr Official → Use → Save.
-5. Click **Edit HTML**, delete all existing code, then paste in Stereo's code.
-6. Click Update, then Save.
+5. Click **Edit HTML**, delete all existing code, then paste in Champagne's code.
+6. Click **Update**, then **Save**.
 
 ---
 
-## Upload images
+# Upload images
 
-Optional images can be uploaded via the customisation panel:
+Optional images can be uploaded via the customization panel.
 
 If you offer dark mode, there are separate image options for light and dark mode:
 
-- **Sidebar**
-- **Dark mode Sidebar**
+| Image             |
+| ----------------- |
+| Sidebar           |
+| Dark mode Sidebar |
 
 If you want to use the same image in both modes, simply leave **Dark mode Sidebar** empty. The theme will use the regular sidebar image instead.
 
 ---
 
-## Colours
+# Colours
 
-Here you can change the colours of the theme.
+Here you can change the colours of the theme. If you're not offering dark mode, you don't need to worry about the dark mode colours.
 
-If you are not offering dark mode, you do not need to worry about the dark mode colours.
+Click the circles where the colours are displayed to change them, and a box will appear with options to change colours. The 6-digit number with a `#` in front of it is a hex code for colours. As an alternative and more specific colour picker, you can go to a colour picker and choose a colour and copy the numbers. You can even pick from a photo.
 
-Click the colour circles in Tumblr's customisation panel to change a colour. A colour picker will appear.
+Below you can click the colours to copy the original colours for the theme:
 
-The six-digit number preceded by `#` is a hexadecimal colour code.
-
-For a more specific colour picker, you can use [RedKetchup's Color Picker](https://redketchup.io/color-picker). You can choose a colour and copy its hex code, or even pick a colour from a photo.
-
-### Original colours
-
-#### Light mode
+### Light mode
 
 | Option       | Colour    |
 | ------------ | --------- |
@@ -110,7 +76,7 @@ For a more specific colour picker, you can use [RedKetchup's Color Picker](https
 | Accent       | `#d1a983` |
 | Header Text  | `#ffffff` |
 
-#### Dark mode
+### Dark mode
 
 | Option       | Colour    |
 | ------------ | --------- |
@@ -124,36 +90,21 @@ For a more specific colour picker, you can use [RedKetchup's Color Picker](https
 
 ---
 
-## Select options
+# Select options
 
-Here you can select a variety of options from dropdown menus.
+Here you can select a variety of things from dropdown menus.
 
-### Font Size
+## Font Size
 
 Choose between `1.1rem` (11px) and `1.8rem` (18px).
 
-Available sizes:
+## Blog Layout
 
-- `1.1rem`
-- `1.2rem`
-- `1.3rem`
-- `1.4rem`
-- `1.5rem`
-- `1.6rem`
-- `1.7rem`
-- `1.8rem`
+Choose between **Header**, **Left Sidebar**, or **Right Sidebar**.
 
-### Blog Layout
+## Layout Gap
 
-Choose between:
-
-- **Header**
-- **Left Sidebar**
-- **Right Sidebar**
-
-### Layout Gap
-
-Choose the gap/spacing between the sidebar and post column when using a left or right sidebar.
+Choose the gap between the sidebar and post column when using a left or right sidebar.
 
 Available options:
 
@@ -161,65 +112,63 @@ Available options:
 - `60px`
 - `80px`
 
-### Post Width
+## Post Width
 
-Choose between:
-
-- `350px`
-- `400px`
-- `450px`
-- `500px`
-- `540px`
+Choose between `350px`, `400px`, `450px`, `500px`, and `540px`.
 
 `540px` is the standard post width on the Tumblr dashboard.
 
-### Photo Post Padding
+## Photo Post Padding
 
-Choose whether you want padding/spacing between photosets and the post border.
+Choose whether to have padding between photosets and the post border.
 
-- **No**
-- **Yes**
+| **Option** | **Description**                                   |
+| ---------- | ------------------------------------------------- |
+| No         | No padding between the photoset and post border   |
+| Yes        | Adds padding between the photoset and post border |
 
-### Photoset Gutter
+## Photoset Gutter
 
-The gutter is the gap between photos in photosets.
+The gutter is the gap between photos in photosets. Choose between `1px`–`4px`.
 
-Choose between `1px` and `4px`.
+`4px` is the standard size on the dashboard.
 
-`4px` is the standard gutter size on the Tumblr dashboard.
+## Post Info
 
-### Post Info
+Post info involves the dates, note count, and interactives like tags, reblog, and like buttons.
 
-Post info includes dates, note counts, and interactive elements such as tags, reblog, and like buttons.
+| **Option** | **Description**                                                                       |
+| ---------- | ------------------------------------------------------------------------------------- |
+| Standard   | Icons for the different elements, with corresponding text for the note count and date |
+| Icons      | Icons only                                                                            |
+| Text       | Text only                                                                             |
+| Both       | Both icons and text                                                                   |
 
-Choose between:
+## Tags
 
-- **Standard** — icons for the different elements, with corresponding text for the note count and date.
-- **Icons** — icons only.
-- **Text** — text only.
-- **Both** — both icons and text.
+Choose how your tags are displayed.
 
-### Tags
+| **Option**    | **Description**                                                                       |
+| ------------- | ------------------------------------------------------------------------------------- |
+| Display       | Displays all tags                                                                     |
+| Truncated     | Displays the first 3 tags, with the remaining tags hidden behind a **See all** button |
+| Behind Toggle | Hides the tags behind a toggle positioned in the reblog and like section              |
 
-Choose how your tags are displayed:
+## Tags Style
 
-- **Display** — display all tags.
-- **Truncated** — display the first three tags, with the remaining tags hidden behind a **See all** button.
-- **Behind Toggle** — hide the tags behind a toggle positioned in the reblog and like section.
+Choose the text transformation applied to your tags.
 
-### Tags Style
+| **Option** | **Description**            |
+| ---------- | -------------------------- |
+| None       | No text transformation     |
+| Uppercase  | Displays tags in uppercase |
+| Lowercase  | Displays tags in lowercase |
 
-Choose the text transformation applied to your tags:
-
-- **None**
-- **Uppercase**
-- **Lowercase**
-
-### Sidebar Width
+## Sidebar Width
 
 Choose the sidebar width when using either the left or right sidebar layout.
 
-Available widths:
+Available options:
 
 - `200px`
 - `220px`
@@ -227,80 +176,79 @@ Available widths:
 - `260px`
 - `280px`
 
-### Sidebar Image
+## Sidebar Image
 
-Choose between two ways of displaying the sidebar image:
+Choose between two ways of displaying the sidebar image.
 
-- **Header** — a large header image with optional icon links and text.
-- **Icon** — a smaller icon-sized image with icon links beneath it.
+| **Option** | **Description**                                        |
+| ---------- | ------------------------------------------------------ |
+| Header     | A large header image with optional icon links and text |
+| Icon       | A smaller icon-sized image with icon links beneath it  |
 
 The size of the large header image depends on your chosen **Blog Layout**. It uses either the sidebar width or the post width when using the header layout.
 
-### Sidebar Icon Size
+## Sidebar Icon Size
 
-If you choose the **Icon** option above, you can choose its size:
+If you choose **Icon** for the **Sidebar Image**, you can choose its size.
 
-- `60px`
-- `80px`
-- `100px`
-- `120px`
+Choose between `60px`, `80px`, `100px`, or `120px`.
 
-If you choose the **Elongated** shape, the aspect ratio is no longer 1:1 but 2:3.
+## Sidebar Icon Shape
 
-### Sidebar Icon Shape
+Choose between square, rounded, circle, elongated, blob 1, or blob 2.
 
-Choose between:
+If you choose **Elongated**, the image uses a `2:3` aspect ratio instead of the usual square shape.
 
-- **Square**
-- **Rounded**
-- **Circle**
-- **Elongated**
-- **Blob 1**
-- **Blob 2**
+| **Option** | **Description**       |
+| ---------- | --------------------- |
+| Square     | Square image shape    |
+| Rounded    | Rounded image shape   |
+| Circle     | Circular image shape  |
+| Elongated  | Elongated image shape |
+| Blob 1     | Blob 1 image shape    |
+| Blob 2     | Blob 2 image shape    |
 
 ---
 
-## Boolean options
+# Boolean options
 
-Here you can toggle a variety of options on or off.
+Here you can toggle on/off a variety of options.
 
-### Dark Mode
+## Dark Mode
 
-If you decide to offer dark mode, toggle this on.
+If you decide to offer Dark Mode, toggle this on. The Dark Mode detects if the visitor's operating system is on dark mode and displays that choice at first visit, with the option to toggle the other mode on/off.
 
-The dark mode detects whether the visitor's operating system is using dark mode and uses that preference on their first visit. Visitors can then toggle between light and dark mode.
+## Rounded Content Corners
 
-### Rounded Content Corners
+This concerns the content boxes of the theme.
 
-This controls the content boxes throughout the theme.
+- **Off** — square, sharp corners.
+- **On** — rounded, soft corners.
 
-- **Off** — sharp, square corners.
-- **On** — rounded corners.
+## Rounded Photoset Corners
 
-### Rounded Photoset Corners
+This concerns the photos and photosets of the theme.
 
-This controls the corners of photos and photosets.
+- **Off** — square, sharp corners.
+- **On** — rounded, soft corners.
 
-- **Off** — sharp, square corners.
-- **On** — rounded corners.
+## Search Bar
 
-### Search Bar
+Toggle this on to offer a search bar on your blog.
 
-Toggle this on to display a search bar on your blog.
+## Featured Tags
 
-### Featured Tags
+Toggle this on to have tagged pages displayed separately from your regular navigation as a highlighted **Featured Tags** section.
 
-Toggle this on to have `/tagged/your-tag` URLs displayed separately from the main navigation as a highlighted **Featured Tags** section.
+Learn in detail how this works under **Text fields: Navigation**.
 
-See [Text fields: Navigation](#text-fields-navigation) for details on how this works.
+## Update Tab
 
-### Update Tab
+The Update Tab is positioned in the top-right corner of the navigation bar.
 
-The update tab is positioned in the top-right corner of the navigation bar.
+To change the icons, see how under **Change icons**.
 
-See [Change icons](#change-icons) for information about changing its icons.
-
-### Extra Post Info
+## Extra Post Info
 
 When enabled, a small two-dot icon appears opposite the post info.
 
@@ -312,57 +260,41 @@ Clicking it displays:
 
 ---
 
-## Text fields: Customisation
+# Text fields: Customization
 
-The following options are text fields where you type text to change things, or delete text to hide them.
+The following are text fields where you type text to change things or delete text to hide them.
 
-### Body Font
+## Body Font
 
-You can freely choose a Google Font for the main text of your blog.
+You can freely decide on a Google Font of your choice for the main text of your blog. Go to `fonts.google.com` and copy the name of the font you want into the text field.
 
-Go to [fonts.google.com](https://fonts.google.com/) and copy the name of the font you want into the text field.
+Default: `Roboto`
 
-The default font is **Roboto**.
+## Accent Font
 
-### Accent Font
+The accent font concerns a variety of different text like the tooltips, search bar, and post info.
 
-The accent font is used for various elements such as:
+You can freely decide on a Google Font of your choice for these elements. Go to `fonts.google.com` and copy the name of the font you want into the text field.
 
-- Tooltips
-- Search bar
-- Post info
+Default: `Roboto Condensed`
 
-You can freely choose a Google Font for these elements.
+## Post Margin
 
-Go to [fonts.google.com](https://fonts.google.com/) and copy the name of the font you want into the text field.
+The post margin is the gap between posts. Please keep a valid CSS length value in this field. If you don't want any gap, write: `0rem`
 
-The default font is **Roboto Condensed**.
+Default: `15rem`
 
-### Post Margin
-
-The post margin controls the gap between posts.
-
-Keep a valid CSS length value in this field.
-
-If you do not want any gap, enter:
-
-`0rem`
-
-The default is:
-
-`15rem`
-
-### Sidebar Title
+## Sidebar Title
 
 The optional title displayed in the sidebar.
 
-### Sidebar Description
+## Sidebar Description
 
 The optional description text.
 
-HTML is allowed, including links, ~~strikethrough~~, **bold**, <u>underline</u>, and _italic_ text.
+It can contain HTML like links, ~~strikethrough~~, **bold**, <u>underline</u>, and _italic_ text.
 
-### Header Text
+## Header Text
 
 This is only relevant when using the **Header** option for **Sidebar Image**.
 
@@ -370,22 +302,22 @@ It adds optional text inside the header image, opposite the optional icon links.
 
 ---
 
-## Text fields: Navigation
+# Text fields: Navigation
 
-The following text fields concern the navigation links.
+The following are text fields concerning the navigation links.
 
 The two custom icon links are optional. Delete the text in their URL fields to hide them.
 
-### Standard links
+## Standard links
 
-| Field              | Default   |
-| ------------------ | --------- |
-| Home Link Label    | `Home`    |
-| Ask Link Label     | `Ask`     |
-| Archive Link Label | `Archive` |
-| Submit Link Label  | `Submit`  |
+| **Text Field**     | **Default** | **Description**                                 |
+| ------------------ | ----------- | ----------------------------------------------- |
+| Home Link Label    | `Home`      | The label for the link to your blog's home page |
+| Ask Link Label     | `Ask`       | The label for your Ask link                     |
+| Archive Link Label | `Archive`   | The label for your archive link                 |
+| Submit Link Label  | `Submit`    | The label for your Submit link                  |
 
-The **Ask** and **Submit** links will only appear on your blog if you have enabled the corresponding options in your Tumblr blog settings.
+The **Ask** and **Submit** links will only show up on your blog if you have enabled the respective option in your Tumblr blog settings.
 
 Go to:
 
@@ -397,92 +329,90 @@ and enable the options there.
 
 You can configure two custom icon links.
 
-#### Icon Link 1
+### Icon Link 1
 
-- **Icon Link 1 Label** — the accessible label for the link.
-- **Icon Link 1 Icon** — the Phosphor icon name.
-- **Icon Link 1 URL** — the destination URL.
+| **Text Field**    | **Default** | **Description**                   |
+| ----------------- | ----------- | --------------------------------- |
+| Icon Link 1 Label | —           | The accessible label for the link |
+| Icon Link 1 Icon  | —           | The Phosphor icon name            |
+| Icon Link 1 URL   | —           | The destination URL               |
 
-#### Icon Link 2
+### Icon Link 2
 
-- **Icon Link 2 Label** — the accessible label for the link.
-- **Icon Link 2 Icon** — the Phosphor icon name.
-- **Icon Link 2 URL** — the destination URL.
+| **Text Field**    | **Default** | **Description**                   |
+| ----------------- | ----------- | --------------------------------- |
+| Icon Link 2 Label | —           | The accessible label for the link |
+| Icon Link 2 Icon  | —           | The Phosphor icon name            |
+| Icon Link 2 URL   | —           | The destination URL               |
 
 ---
 
-### Adding your own links
+## Adding your own links
+
+Your own links can be added through Tumblr Pages.
 
 Your Tumblr pages and custom links appear in a hidden menu accessed through the three-dot menu in the navigation bar.
 
-For a page to appear on your blog:
+For your links to appear in the navigation, create or edit a Tumblr page and enable **Show a link to this page**, then give it a link title.
 
-1. Edit the Tumblr page.
-2. Enable **Show a link to this page**.
-3. Give the page a link title.
+If you need to link to a Tumblr tag page, or literally anywhere else on the internet, choose **Link** in the page type dropdown and give it a link title.
 
-If you need to link to a Tumblr tag page, or anywhere else on the internet, choose **Link** from the page type dropdown and give it a link title.
+### I have Featured Tags toggled on, now what?
 
-### Featured Tags
+If you link to a tagged page like `/tagged/your-tag`, those specific links will be displayed under the **Featured Tags** section.
 
-If **Featured Tags** is enabled, links to Tumblr tagged pages such as `/tagged/example` are moved out of the main navigation and into the **Featured Tags** section.
+The theme does not discriminate between tagged links, so you can't pick and choose which `/tagged/` links appear there.
 
-The theme does not distinguish between different `/tagged/` links. You cannot manually choose which tagged links belong to which section.
+Featured Tags are displayed in the sidebar or header.
 
-Featured tags are displayed in the sidebar or header.
+The Featured Tags section also displays the number of posts associated with each tag.
 
-If **Featured Tags** is turned off, all links remain in the main navigation.
+If you toggle this feature off, the tagged links will remain in the regular navigation.
 
 ---
 
-## Text fields: Update Tab
+# Text fields: Update Tab
 
-The **Update Text**, activity text fields, and activity icons control the content displayed in the update tab.
+The **Update Text**, activity text fields, and activity icons control the content displayed in the Update Tab.
 
-The update tab is positioned in the top-right corner of the navigation bar.
+The Update Tab is positioned in the top-right corner of the navigation bar.
 
-HTML such as links can be used in the **Update Text** and activity text fields.
+The **Update Text** and activity text fields can contain HTML like links, etc. You can learn about changing the icons under **Change icons**.
 
-See [Change icons](#change-icons) for information about changing the icons.
+## Activities
 
-### Update Text
+| **Text Field**  | **Default**          | **Description**         |
+| --------------- | -------------------- | ----------------------- |
+| Update Text     | `Here is an update.` | you can put whatever    |
+| Activity 1 Icon | `popcorn`            | The icon for Activity 1 |
+| Activity 1      | `watching`           | The text for Activity 1 |
+| Activity 2 Icon | `music-notes`        | The icon for Activity 2 |
+| Activity 2      | `listening`          | The text for Activity 2 |
+| Activity 3 Icon | `books`              | The icon for Activity 3 |
+| Activity 3      | `reading`            | The text for Activity 3 |
+| Activity 4 Icon | `game-controller`    | The icon for Activity 4 |
+| Activity 4      | `playing`            | The text for Activity 4 |
 
-The default text is:
-
-> Here is an update.
-
-### Activities
-
-| Field           | Default           |
-| --------------- | ----------------- |
-| Activity 1 Icon | `popcorn`         |
-| Activity 1      | `watching`        |
-| Activity 2 Icon | `music-notes`     |
-| Activity 2      | `listening`       |
-| Activity 3 Icon | `books`           |
-| Activity 3      | `reading`         |
-| Activity 4 Icon | `game-controller` |
-| Activity 4      | `playing`         |
+You can change both the icon and the text to whatever you want.
 
 ---
 
-## Change icons
+# Change icons
 
-You can change the four activity icons in the update tab.
-
-Champagne uses [Phosphor Icons](https://phosphoricons.com/).
+You're able to change the 4 activity icons in the Update Tab. For this theme, I'm utilizing **Phosphor Icons**.
 
 1. Go to [phosphoricons.com](https://phosphoricons.com/).
 2. Search for the icon you want.
-3. Click your chosen icon to open its information panel.
-4. Copy the icon name.
-5. Paste the name into the corresponding **Activity Icon** text field.
+3. Click on your chosen icon.
+4. Copy the name of the icon.
+5. Copy that into the respective text field.
 
 For example:
 
-```text
-Activity 1 Icon
-television-simple
-```
+`television-simple`
 
----
+or:
+
+`game-controller`
+
+The icon name should be entered into the respective **Activity [#] Icon** field.
