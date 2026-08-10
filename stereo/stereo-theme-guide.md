@@ -1,8 +1,10 @@
 # Stereo — Tumblr Theme Guide
 
-This is a thorough guide for my premium Tumblr theme, **Stereo**. Give [the post](https://mournstera.tumblr.com/post/768597500421668864) a reblog if you're going to be using it! ❤️
+This is the theme guide for my premium Tumblr theme, [Stereo](https://mournstera.tumblr.com/post/768597500421668864). Please read this guide carefully before sending me any inquiries.
 
-Please read this guide carefully before sending me any inquiries.
+> **License & terms**
+>
+> All themes distributed by **Mournstera** are licensed under the [Creative Commons Attribution-NonCommercial-NoDerivatives 4.0 International](https://creativecommons.org/licenses/by-nc-nd/4.0/) licence. Please carefully read my [terms of use](https://mournstera.tumblr.com/themes) before installing a theme.
 
 ## About
 
