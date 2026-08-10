@@ -1,4 +1,4 @@
-# Stereo — Theme Guide
+# Stereo — Tumblr Theme Guide
 
 This is a thorough guide for my premium Tumblr theme, **Stereo**. Give [the post](https://mournstera.tumblr.com/post/768597500421668864) a reblog if you're going to be using it! ❤️
 
@@ -89,7 +89,7 @@ Left or right sidebar.
 
 ### Layout gap
 
-The space between your sidebar and post column. Choose between 48px, 66px, 72px, 80px, 96px, and 112px.
+The space between your sidebar and post column. Choose between 48px, 64px, 72px, 80px, 96px, and 112px.
 
 ### Corners
 
