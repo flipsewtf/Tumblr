@@ -43,7 +43,7 @@ Like previously mentioned, my themes are responsive. Tumblr provides its own mob
 
 # Upload images
 
-Optional images can be uploaded via the customisation panel. If you offer dark mode, there are separate image options for light and dark mode. If you want to use the same image in both modes, simply leave **Dark mode Sidebar** empty. The theme will use the regular sidebar image instead.
+Optional images can be uploaded via the customisation panel. If you offer dark mode, there are separate image options for light and dark mode. If you want to use the same image in both modes, simply upload it twice.
 
 | Sidebar           |
 | ----------------- |

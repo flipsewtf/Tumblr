@@ -1,6 +1,6 @@
 # Dusty — Theme Guide
 
-Please read this guide carefully before sending me any inquiries. Use the table of contents to navigate through the different sections.
+Please read this guide carefully before sending me any inquiries.
 
 > **License & terms**
 >
